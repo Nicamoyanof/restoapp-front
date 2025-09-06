@@ -1,0 +1,115 @@
+<div class="row">
+    <div class="col-lg-6">
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Simple Candlestick Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="simple-candlestick" class="apex-charts">
+                        <apx-chart
+                        [chart]="candlestickChart.chart!"
+                        [plotOptions]="candlestickChart.plotOptions!"
+                        [series]="candlestickChart.series!"
+                        [stroke]="candlestickChart.stroke!"
+                        [xaxis]="candlestickChart.xaxis!"
+                        [grid]="candlestickChart.grid!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Combo Candlestick Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="combo-candlestick" class="apex-charts">
+                        <apx-chart
+                [chart]="comboChart.chart!"
+                [plotOptions]="comboChart.plotOptions!"
+                [series]="comboChart.series!"
+                [xaxis]="comboChart.xaxis!"
+                [grid]="comboChart.grid!"
+              />
+                    </div>
+                    <div id="combo-bar-candlestick" class="apex-charts">
+                        <apx-chart
+                        [chart]="combobarChart.chart!"
+                        [dataLabels]="combobarChart.dataLabels!"
+                        [plotOptions]="combobarChart.plotOptions!"
+                        [series]="combobarChart.series!"
+                        [xaxis]="combobarChart.xaxis!"
+                        [yaxis]="combobarChart.yaxis!"
+                        [grid]="combobarChart.grid!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Category X-Axis</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="x-axis-candlestick" class="apex-charts">
+                        <apx-chart
+                        [series]="xaxiscandlestickChart.series!"
+                        [chart]="xaxiscandlestickChart.chart!"
+                        [title]="xaxiscandlestickChart.title!"
+                        [grid]="xaxiscandlestickChart.grid!"
+                        [annotations]="xaxiscandlestickChart.annotations!"
+                        [plotOptions]="xaxiscandlestickChart.plotOptions!"
+                        [tooltip]="xaxiscandlestickChart.tooltip!"
+                        [colors]="xaxiscandlestickChart.colors!"
+                        [xaxis]="xaxiscandlestickChart.xaxis!"
+                        [yaxis]="xaxiscandlestickChart.yaxis!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+    <div class="col-lg-6">
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Candlestick with Line</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="candlestick-with-line" class="apex-charts">
+                        <apx-chart
+                        [series]="linecandlestickChart.series!"
+                        [chart]="linecandlestickChart.chart!"
+                        [title]="linecandlestickChart.title!"
+                        [stroke]="linecandlestickChart.stroke!"
+                        [legend]="linecandlestickChart.legend!"
+                        [grid]="linecandlestickChart.grid!"
+                        [colors]="linecandlestickChart.colors!"
+                        [plotOptions]="linecandlestickChart.plotOptions!"
+                        [tooltip]="linecandlestickChart.tooltip!"
+                        [xaxis]="linecandlestickChart.xaxis!"
+                      ></apx-chart>
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div> <!-- end col -->
+</div>

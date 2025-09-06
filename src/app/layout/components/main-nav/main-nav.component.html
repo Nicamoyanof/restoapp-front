@@ -1,0 +1,111 @@
+<div class="main-nav">
+    <!-- Sidebar Logo -->
+    <app-logo-box />
+
+    <ngx-simplebar class="h-100">
+        <ul class="navbar-nav" id="navbar-nav">
+            @for (item of menuItems; track item.label; let first = $first) {
+            @if (item.isTitle) {
+            <li class="menu-title">{{item.label}}</li>
+                }@else if (hasSubmenu(item)) {
+                <ng-container *ngTemplateOutlet="
+                        MenuItemWithChildren;
+                        context: {
+                          menu: item,
+                          linkClassName: 'menu-link menu-arrow nav-link-ref',
+                          subMenuClassNames: 'sub-menu-nav',
+                          itemClassName: 'menu-item',
+                        }
+                      ">
+                </ng-container>
+                } @else {
+                <ng-container *ngTemplateOutlet="
+                        MenuItem;
+                        context: {
+                          menu: item,
+                          linkClassName: 'menu-link nav-link-ref',
+                          itemClassName: 'menu-item',
+                        }
+                      ">
+                </ng-container>
+                }
+                }
+
+        </ul>
+    </ngx-simplebar>
+</div>
+
+
+<ng-template #MenuItemWithChildren let-menu="menu" let-itemClassName="itemClassName" let-linkClassName="linkClassName"
+    let-subMenuClassNames="subMenuClassNames">
+    <li [class]="itemClassName" [ngClass]="{ active: activeMenuItems.includes(menu.key) }">
+        <a [class]="linkClassName" (click)="toggleMenuItem(menu, collapse)" role="button"
+            [attr.aria-expanded]="!menu.collapsed" aria-controls="sidebarDashboards" [attr.aria-controls]="menu.key">
+            @if (menu.icon) {
+            <span class="nav-icon">
+                <i class="{{ menu.icon }}"></i>
+            </span>
+            }
+            <span class="nav-text"> {{ menu.label }} </span>
+        </a>
+        <div #collapse="ngbCollapse" [(ngbCollapse)]="menu.collapsed" class="collapse" id="sidebarDashboards">
+            <ul [class]="subMenuClassNames">
+                @for (child of menu.submenu; track child.label) {
+                @if (hasSubmenu(child)) {
+                <ng-container *ngTemplateOutlet="
+                MenuItemWithChildren;
+                context: {
+                  menu: child,
+                  linkClassName: 'sub-menu-link nav-link-ref',
+                  itemClassName: 'sub-menu-item',
+                  subMenuClassNames: 'sub-menu-nav',
+                }
+              ">
+                </ng-container>
+                } @else {
+                <ng-container *ngTemplateOutlet="
+                MenuItem;
+                context: {
+                  menu: child,
+                  linkClassName: 'sub-menu-link nav-link-ref',
+                  itemClassName: 'sub-menu-item',
+                }
+              ">
+                </ng-container>
+                }
+                }
+            </ul>
+        </div>
+    </li>
+</ng-template>
+
+<ng-template #MenuItem let-menu="menu" let-linkClassName="linkClassName" let-itemClassName="itemClassName">
+    <li [class]="itemClassName" [ngClass]="{ active: activeMenuItems.includes(menu.key) }">
+        <ng-container *ngTemplateOutlet="
+        MenuItemLink;
+        context: { menu: menu, className: linkClassName }
+      ">
+        </ng-container>
+    </li>
+</ng-template>
+
+<ng-template #MenuItemLink let-menu="menu" let-className="className">
+    <a [routerLink]="menu.link" [class]="className" [ngClass]="{
+      active: activeMenuItems.includes(menu.key),
+      disabled: menu.isDisabled,
+    }" [attr.aria-controls]="menu.key">
+        @if (menu.icon) {
+        <span class="nav-icon">
+            <i class="{{ menu.icon }}"></i>
+        </span>
+        <span class="nav-text">{{ menu.label }}</span>
+        } @else {
+        {{ menu.label }}
+        }
+        @if (menu.badge) {
+        <span class="badge text-end bg-{{ menu.badge.variant }}">{{
+            menu.badge.text
+            }}</span>
+        }
+    </a>
+</ng-template>

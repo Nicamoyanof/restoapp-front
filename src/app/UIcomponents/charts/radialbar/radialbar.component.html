@@ -1,0 +1,171 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Basic RadialBar Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="basic-radialbar" class="apex-charts">
+                        <apx-chart
+                        [chart]="basicRadialBarChart.chart!"
+                        [plotOptions]="basicRadialBarChart.plotOptions!"
+                        [series]="basicRadialBarChart.series!"
+                        [colors]="basicRadialBarChart.colors!"
+                        [labels]="basicRadialBarChart.labels!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Multiple RadialBars</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="multiple-radialbar" class="apex-charts">
+                        <apx-chart
+                        [chart]="multipleRadialBarsChart.chart!"
+                        [plotOptions]="multipleRadialBarsChart.plotOptions!"
+                        [colors]="multipleRadialBarsChart.colors!"
+                        [series]="multipleRadialBarsChart.series!"
+                        [labels]="multipleRadialBarsChart.labels!"
+                       
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Circle Chart - Custom Angle</h4>
+            </div>
+            <div class="card-body">
+                <div class="text-center" dir="ltr">
+                    <div id="circle-angle-radial" class="apex-charts">
+                        <apx-chart
+                        [chart]="circleChart.chart!"
+                        [plotOptions]="circleChart.plotOptions!"
+                        [colors]="circleChart.colors!"
+                        [series]="circleChart.series!"
+                        [labels]="circleChart.labels!"
+                        [responsive]="circleChart.responsive!"
+                        [legend]="circleChart.legend!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Circle Chart with Image</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="image-radial" class="apex-charts">
+                        <apx-chart
+                        [chart]="circleImageChart.chart!"
+                        [plotOptions]="circleImageChart.plotOptions!"
+                        [colors]="circleImageChart.colors!"
+                        [series]="circleImageChart.series!"
+                        [labels]="circleImageChart.labels!"
+                        [responsive]="circleImageChart.responsive!"
+                        [fill]="circleImageChart.fill!"
+                        [stroke]="circleImageChart.stroke!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Stroked Circular Gauge</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="stroked-guage-radial" class="apex-charts">
+                        <apx-chart
+            [chart]="strokedCircularChart.chart!"
+            [plotOptions]="strokedCircularChart.plotOptions!"
+            [colors]="strokedCircularChart.colors!"
+            [series]="strokedCircularChart.series!"
+            [labels]="strokedCircularChart.labels!"
+            [responsive]="strokedCircularChart.responsive!"
+            [fill]="strokedCircularChart.fill!"
+            [stroke]="strokedCircularChart.stroke!"
+          />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-4 anchor" id="gradient">Gradient Circular Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="gradient-chart" class="apex-charts">
+                        <apx-chart
+                        [chart]="gradientCircularChart.chart!"
+                        [plotOptions]="gradientCircularChart.plotOptions!"
+                        [colors]="gradientCircularChart.colors!"
+                        [series]="gradientCircularChart.series!"
+                        [labels]="gradientCircularChart.labels!"
+                        [responsive]="gradientCircularChart.responsive!"
+                        [fill]="gradientCircularChart.fill!"
+                        [stroke]="gradientCircularChart.stroke!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+
+    <div class="col-lg-6"> 
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-4 anchor" id="semi-circle">Semi Circle Gauge</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="semi-circle-gauge" class="apex-charts">
+                        <apx-chart
+                        [chart]="semiCircleChart.chart!"
+                        [plotOptions]="semiCircleChart.plotOptions!"
+                        [colors]="semiCircleChart.colors!"
+                        [series]="semiCircleChart.series!"
+                        [labels]="semiCircleChart.labels!"
+                        [grid]="semiCircleChart.grid!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div> <!-- end col -->
+</div>

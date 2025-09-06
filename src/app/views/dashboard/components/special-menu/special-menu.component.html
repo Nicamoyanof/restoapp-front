@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="card-header d-flex align-items-center justify-content-between">
+        <div>
+            <h4 class="card-title mb-0">Special Menu</h4>
+        </div>
+        <div>
+            <a href="javascript:void(0);" class="text-dark btn btn-sm btn-link text-uppercase fw-semibold px-0">View
+                Menu <i class="ri-arrow-right-line"></i></a>
+        </div>
+    </div>
+    <ngx-simplebar style="height: 375px;">
+        @for (item of specialMenu; track $index) {
+        <div class="d-flex flex-wrap align-items-center gap-2 border-bottom p-3">
+            <div>
+                <img [src]="item.image" alt="" class="avatar-lg">
+            </div>
+            <div>
+                <a href="javascript:void(0);" class="text-dark fs-15 fw-medium">{{item.name}}</a>
+                <p class="mb-2">{{item.options}}</p>
+                <p class="mb-0 fw-semibold"><i class="ri-star-fill text-warning me-1 fs-15"></i>{{item.rating}}</p>
+            </div>
+        </div>
+        }
+    </ngx-simplebar>
+</div>

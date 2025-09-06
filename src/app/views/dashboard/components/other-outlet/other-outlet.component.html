@@ -1,0 +1,39 @@
+<div class="card">
+    <div class="card-header d-flex align-items-center justify-content-between">
+        <div>
+            <h4 class="card-title mb-0">Other Outlets</h4>
+        </div>
+        <div class="dropdown" ngbDropdown>
+            <a href="javascript:void(0);" ngbDropdownToggle class="dropdown-toggle rounded arrow-none"
+                data-bs-toggle="dropdown" aria-expanded="true">
+                <i class="ri-edit-box-line fs-20"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+                <!-- item-->
+                <a href="javascript:void(0);" class="dropdown-item">Create New Outet</a>
+                <!-- item-->
+                <a href="javascript:void(0);" class="dropdown-item">New Areas</a>
+            </div>
+        </div>
+    </div>
+    <ngx-simplebar style="height: 333px;">
+        @for (item of outlet; track $index) {
+        <div class="border-bottom p-3">
+            <div>
+                <h6 class="text-uppercase fw-bold">{{item.city}}-{{item.country}} <span class="ms-auto fw-medium float-end"> <i
+                            class="ri-star-fill text-warning"></i> {{item.rating}}</span></h6>
+                <span class="fw-medium fs-18"><i class="ri-map-pin-range-line"></i></span>
+                <span class="fw-medium ms-1">{{item.address}}</span>
+                <div class="mt-1">
+                    <span class="fw-medium fs-18"><i class="ri-phone-line"></i></span>
+                    <a href="javascript:void(0);" class="fw-medium link-primary ms-1">{{item.phone}}</a>
+                </div>
+            </div>
+        </div>
+        }
+    </ngx-simplebar>
+    <div class="card-footer border-top text-center p-3">
+        <a href="javascript:void(0);" class="link-primary text-decoration-underline fw-medium">Show More <i
+                class="ri-arrow-right-up-line"></i></a>
+    </div>
+</div>

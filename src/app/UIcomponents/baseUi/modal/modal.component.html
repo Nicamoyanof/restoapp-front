@@ -1,0 +1,559 @@
+<div class="card">
+    <div class="card-body">
+        <!-- start modal -->
+        <div class="row g-5">
+
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    Default Modals
+                </h5>
+
+                <!-- Button trigger modal -->
+                <button type="button" (click)="open(content)" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                    Launch demo modal
+                </button>
+
+                <!-- Modal -->
+                <ng-template #content let-modal class="modal fade" id="exampleModal" tabindex="-1"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" (click)="modal.close('click')" class="btn-close"
+                                data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Woo-hoo, you're reading this text in a modal!</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" (click)="modal.close('click')" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    Static Backdrop
+                </h5>
+
+                <!-- Button trigger modal -->
+                <button (click)="staticBackdrop(static)" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">
+                    Launch static backdrop modal
+                </button>
+
+                <!-- Modal -->
+                <ng-template let-modal #static class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                (click)="modal.close('click')" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>I will not close if you click outside of me. Don't even try to press escape key.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" (click)="modal.close('click')" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Understood</button>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4 ">
+                    Scrolling Long Content
+                </h5>
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary me-2" (click)="openModal(scroll, { scrollable: false })"
+                    data-bs-toggle="modal" data-bs-target="#exampleModalLong">
+                    Launch demo modal
+                </button>
+
+                <!-- Modal -->
+                <ng-template #scroll let-modal class="modal fade" id="exampleModalLong" tabindex="-1"
+                    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                (click)="modal.close('click')"></button>
+                        </div>
+                        <div class="modal-body" style="min-height: 1500px">
+                            <p>This is some placeholder content to show the scrolling behavior for modals. Instead
+                                of repeating
+                                the text the modal, we use an inline style set a minimum height, thereby extending
+                                the length of
+                                the overall modal and demonstrating the overflow scrolling. When content becomes
+                                longer than the
+                                height of the viewport, scrolling will move the modal as needed.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" (click)="modal.close('click')" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </ng-template>
+
+
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" (click)="openModal(scrollable, { scrollable: true })"
+                    data-bs-toggle="modal" data-bs-target="#exampleModalScrollable">
+                    Launch demo modal
+                </button>
+            </div>
+            <!-- Modal -->
+            <ng-template #scrollable let-modal class="modal fade" id="exampleModalScrollable" tabindex="-1"
+                aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            (click)="modal.close('click')"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>This is some placeholder content to show the scrolling behavior for modals. We use
+                            repeated line
+                            breaks to demonstrate how content can exceed minimum inner height, thereby showing
+                            inner
+                            scrolling. When content becomes longer than the predefined max-height of modal,
+                            content will be
+                            cropped and scrollable within the modal.</p>
+                        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                        <p>This content should appear at the bottom after you scroll.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" (click)="modal.close('click')" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </ng-template>
+
+
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    Modal Position
+                </h5>
+                <div class="d-flex flex-wrap gap-2">
+                    <!-- Button trigger modal -->
+                    <button type="button" (click)="openModal(centered, { centered: true })" class="btn btn-primary"
+                        data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                        Vertically centered modal
+                    </button>
+
+                    <!-- Modal -->
+                    <ng-template #centered let-modal class="modal fade" id="exampleModalCenter" tabindex="-1"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                <button type="button" (click)="modal.close('click')" class="btn-close"
+                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>This is a vertically centered modal.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                    (click)="modal.close('click')">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </ng-template>
+
+
+                    <!-- Button trigger modal -->
+                    <button type="button" (click)="
+                    openModal(centerScroll, { scrollable: true, centered: true })
+                  " class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenteredScrollable">
+                        Vertically centered scrollable modal
+                    </button>
+
+                    <!-- Modal -->
+                    <ng-template #centerScroll let-modal class="modal fade" id="exampleModalCenteredScrollable"
+                        tabindex="-1" aria-labelledby="exampleModalCenteredScrollableTitle" aria-hidden="true">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenteredScrollableTitle">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                    (click)="modal.close('click')"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>This is some placeholder content to show a vertically centered modal. We've added
+                                    some extra
+                                    copy
+                                    here to show how vertically centering the modal works when combined with
+                                    scrollable modals.
+                                    We
+                                    also use some repeated line breaks to quickly extend the height of the content,
+                                    thereby
+                                    triggering the scrolling. When content becomes longer than the predefined
+                                    max-height of
+                                    modal,
+                                    content will be cropped and scrollable within the modal.</p>
+                                <br><br><br><br><br><br><br><br><br><br>
+                                <p>Just like that.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                    (click)="modal.close('click')">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    Toggle Between Modals
+                </h5>
+
+                <!-- Button trigger modal -->
+                <a class="btn btn-primary" (click)="openModal(firstModal, { centered: true })" data-bs-toggle="modal"
+                    href="#exampleModalToggle" role="button">Open first
+                    modal</a>
+
+                <!-- First Modal -->
+                <ng-template #firstModal let-modal class="modal fade" id="exampleModalToggle" aria-hidden="true"
+                    aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                (click)="modal.close('click')"></button>
+                        </div>
+                        <div class="modal-body">
+                            Show a second modal and hide this one with the button below.
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" (click)="openModal(secondModal, { centered: true })"
+                                data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open
+                                second modal</button>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <!-- Second Modal -->
+                <ng-template #secondModal let-modal class="modal fade" id="exampleModalToggle2" aria-hidden="true"
+                    aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                (click)="modal.close('click')"></button>
+                        </div>
+                        <div class="modal-body">
+                            Hide this modal and show the first with the button below.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" (click)="modal.close('click')"
+                                data-bs-dismiss="modal">Close</button>
+                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle"
+                                data-bs-toggle="modal">Back
+                                to
+                                first</button>
+                        </div>
+                    </div>
+                </ng-template>
+
+            </div>
+
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    Optional Sizes
+                </h5>
+                <div class="hstack gap-2">
+                    <!-- Button trigger modal -->
+                    <button type="button" (click)="openModal(exampleXl, { size: 'xl' })" class="btn btn-primary"
+                        data-bs-toggle="modal" data-bs-target="#exampleModalXl">Extra
+                        large modal</button>
+                    <button type="button" (click)="openModal(exampleLg, { size: 'lg' })" class="btn btn-primary"
+                        data-bs-toggle="modal" data-bs-target="#exampleModalLg">Large
+                        modal</button>
+                    <button type="button" (click)="openModal(exampleSm, { size: 'sm' })" class="btn btn-primary"
+                        data-bs-toggle="modal" data-bs-target="#exampleModalSm">Small
+                        modal</button>
+                </div>
+
+                <!-- Modal -->
+                <ng-template #exampleXl let-modal class="modal fade" id="exampleModalXl" tabindex="-1"
+                    aria-labelledby="exampleModalXlLabel" aria-hidden="true">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title h4" id="exampleModalXlLabel">Extra large modal</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                (click)="modal.close('click')"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template let-modal #exampleLg class="modal fade" id="exampleModalLg" tabindex="-1"
+                    aria-labelledby="exampleModalLgLabel" aria-hidden="true">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title h4" id="exampleModalLgLabel">Large modal</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                (click)="modal.close('click')"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template let-modal #exampleSm class="modal fade" id="exampleModalSm" tabindex="-1"
+                    aria-labelledby="exampleModalSmLabel" aria-hidden="true">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title h4" id="exampleModalSmLabel">Small modal</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                (click)="modal.close('click')"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    Fullscreen Modal
+                </h5>
+
+                <div class="hstack flex-wrap gap-2">
+                    <!-- Button trigger modal -->
+                    <button type="button" (click)="openModal(fullscreen, { fullscreen: true })" class="btn btn-primary"
+                        data-bs-toggle="modal" data-bs-target="#exampleModalFullscreen">Full
+                        screen</button>
+                    <button type="button" (click)="openModal(fullscreenSm, { fullscreen: 'sm' })"
+                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalFullscreenSm">Full
+                        screen below sm</button>
+                    <button type="button" (click)="openModal(fullscreenMd, { fullscreen: 'md' })"
+                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalFullscreenMd">Full
+                        screen below md</button>
+                    <button type="button" (click)="openModal(fullscreenLg, { fullscreen: 'lg' })"
+                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalFullscreenLg">Full
+                        screen below lg</button>
+                    <button type="button" (click)="openModal(fullscreenXl, { fullscreen: 'xl' })"
+                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalFullscreenXl">Full
+                        screen below xl</button>
+                    <button type="button" (click)="openModal(fullscreenXxl, { fullscreen: 'xxl' })"
+                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalFullscreenXxl">Full
+                        screen below xxl</button>
+                </div>
+
+                <!-- Modal -->
+                <ng-template #fullscreen let-modal class="modal fade" id="exampleModalFullscreen" tabindex="-1"
+                    aria-labelledby="exampleModalFullscreenLabel" aria-hidden="true">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title h4" id="exampleModalFullscreenLabel">Full screen modal</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                (click)="modal.close('click')"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" (click)="modal.close('click')" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <ng-template #fullscreenSm let-modal class="modal fade" id="exampleModalFullscreenSm" tabindex="-1"
+                    aria-labelledby="exampleModalFullscreenSmLabel" aria-hidden="true">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title h4" id="exampleModalFullscreenSmLabel">Full screen below sm</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                (click)="modal.close('click')"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" (click)="modal.close('click')" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <ng-template #fullscreenMd let-modal class="modal fade" id="exampleModalFullscreenMd" tabindex="-1"
+                    aria-labelledby="exampleModalFullscreenMdLabel" aria-hidden="true">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title h4" id="exampleModalFullscreenMdLabel">Full screen below md</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                (click)="modal.close('click')"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" (click)="modal.close('click')" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <ng-template #fullscreenLg let-modal class="modal fade" id="exampleModalFullscreenLg" tabindex="-1"
+                    aria-labelledby="exampleModalFullscreenLgLabel" aria-hidden="true">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title h4" id="exampleModalFullscreenLgLabel">Full screen below lg</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                (click)="modal.close('click')"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <ng-template #fullscreenXl let-modal class="modal fade" id="exampleModalFullscreenXl" tabindex="-1"
+                    aria-labelledby="exampleModalFullscreenXlLabel" aria-hidden="true">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title h4" id="exampleModalFullscreenXlLabel">Full screen below xl</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                (click)="modal.close('click')"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" (click)="modal.close('click')" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <ng-template #fullscreenXxl let-modal class="modal fade" id="exampleModalFullscreenXxl" tabindex="-1"
+                    aria-labelledby="exampleModalFullscreenXxlLabel" aria-hidden="true">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title h4" id="exampleModalFullscreenXxlLabel">Full screen below xxl
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                (click)="modal.close('click')"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" (click)="modal.close('click')" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    Modal Based Alerts
+                </h5>
+
+                <div class="hstack flex-wrap gap-2">
+                    <button type="button" (click)="openModal(primary, { size: 'sm' })" class="btn btn-primary"
+                        data-bs-toggle="modal" data-bs-target="#primaryAlertModal">Primary Alert</button>
+                    <button type="button" (click)="openModal(secondary, { size: 'sm' })" class="btn btn-secondary"
+                        data-bs-toggle="modal" data-bs-target="#secondaryAlertModal">Secondary Alert</button>
+                    <button type="button" (click)="openModal(success, { size: 'sm' })" class="btn btn-success"
+                        data-bs-toggle="modal" data-bs-target="#successAlertModal">Success Alert</button>
+                    <button type="button" (click)="openModal(info, { size: 'sm' })" class="btn btn-info"
+                        data-bs-toggle="modal" data-bs-target="#infoALertModal">Info
+                        Alert</button>
+                </div>
+
+                <!-- Primary Alert Modal -->
+                <ng-template let-modal #primary id="primaryAlertModal" class="modal fade" tabindex="-1" role="dialog"
+                    aria-hidden="true">
+                    <div class="modal-filled bg-primary">
+                        <div class="modal-body">
+                            <div class="text-center">
+                                <i class="bx bx-check-double display-6 mt-0 text-white"></i>
+                                <h4 class="mt-3 text-white">Well Done!</h4>
+                                <p class="mt-3">Cras mattis consectetur purus sit amet fermentum. Cras justo
+                                    odio,
+                                    dapibus ac facilisis in, egestas eget quam.</p>
+                                <button type="button" class="btn btn-light mt-3"
+                                    data-bs-dismiss="modal"  (click)="modal.dismiss()">Continue</button>
+                            </div>
+                        </div> <!-- end modal body -->
+                    </div><!-- end modal content -->
+                </ng-template>
+
+                <!-- Secondary Alert Modal -->
+                <ng-template let-modal #secondary id="secondaryAlertModal" class="modal fade" tabindex="-1"
+                    role="dialog" aria-hidden="true">
+                    <div class=" modal-filled bg-secondary">
+                        <div class="modal-body">
+                            <div class="text-center">
+                                <i class="bx bx-check-double display-6 mt-0 text-white"></i>
+                                <h4 class="mt-3 text-white">Well Done!</h4>
+                                <p class="mt-3">Cras mattis consectetur purus sit amet fermentum. Cras justo
+                                    odio,
+                                    dapibus ac facilisis in, egestas eget quam.</p>
+                                <button type="button" class="btn btn-light mt-3" data-bs-dismiss="modal"
+                                    (click)="modal.dismiss()">Continue</button>
+                            </div>
+                        </div> <!-- end modal body -->
+                    </div><!-- end modal content -->
+                </ng-template> <!-- end modal -->
+
+                <!-- Success Alert Modal -->
+                <ng-template let-modal #success id="successAlertModal" class="modal fade" tabindex="-1" role="dialog"
+                    aria-hidden="true">
+                    <div class="modal-filled bg-success">
+                        <div class="modal-body">
+                            <div class="text-center">
+                                <i class="bx bx-check-double display-6 mt-0 text-white"></i>
+                                <h4 class="mt-3 text-white">Well Done!</h4>
+                                <p class="mt-3">Cras mattis consectetur purus sit amet fermentum. Cras justo
+                                    odio,
+                                    dapibus ac facilisis in, egestas eget quam.</p>
+                                <button type="button" class="btn btn-light mt-3" data-bs-dismiss="modal"
+                                    (click)="modal.dismiss()">Continue</button>
+                            </div>
+                        </div> <!-- end modal body -->
+                    </div><!-- end modal content -->
+                </ng-template> <!-- end modal -->
+
+                <!-- Info Alert Modal -->
+                <ng-template let-modal #info id="infoALertModal" class="modal fade" tabindex="-1" role="dialog"
+                    aria-hidden="true">
+                    <div class=" modal-filled bg-info">
+                        <div class="modal-body">
+                            <div class="text-center">
+                                <i class="bx bx-check-double display-6 mt-0 text-white"></i>
+                                <h4 class="mt-3 text-white">Well Done!</h4>
+                                <p class="mt-3">Cras mattis consectetur purus sit amet fermentum. Cras justo
+                                    odio,
+                                    dapibus ac facilisis in, egestas eget quam.</p>
+                                <button type="button" class="btn btn-light mt-3" data-bs-dismiss="modal"
+                                    (click)="modal.dismiss()">Continue</button>
+                            </div>
+                        </div> <!-- end modal body -->
+                    </div><!-- end modal content -->
+                </ng-template> <!-- end modal -->
+            </div>
+        </div> <!-- end row -->
+    </div>
+</div>

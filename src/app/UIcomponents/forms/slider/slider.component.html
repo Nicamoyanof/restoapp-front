@@ -1,0 +1,62 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row g-5">
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    Basic Range Slider
+                </h5>
+                <div id="rangeslider_basic">
+                    <nouislider class="m-0" [config]="basicSliderconfig" [ngModel]="[124, 200]"></nouislider>
+                </div>
+
+            </div>
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">Vertical Range Slider</h5>
+                <div>
+                    <nouislider class="mx-auto" [config]="verticalRangeSlider1" [ngModel]="[10, 60]"></nouislider>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4 ">
+                    Multi Elements Range
+                </h5>
+                <div id="rangeslider_multielement">
+                    <nouislider class="m-0" [config]="basicSliderconfig" [ngModel]="[50, 200]"></nouislider>
+                </div>
+            </div>
+
+
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    Tooltip
+                </h5>
+                <div class="p-3 pt-5">
+                    <div class="slider" id="slider-merging-tooltips">
+                        <nouislider class="m-0" [config]="{
+              tooltips: true,
+              connect: true,
+              range: {
+                min: [0],
+                max: [255],
+              },
+            }" [ngModel]="[30, 100]"></nouislider>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    Soft Limits
+                </h5>
+
+                <div class="pb-5">
+                    <div class="slider" id="soft">
+                        <nouislider class="m-0" [config]="softSliderConfig" [(ngModel)]="range"></nouislider>
+                    </div>
+                </div>
+            </div> <!-- end card -->
+
+        </div> <!-- end row -->
+    </div>
+</div>

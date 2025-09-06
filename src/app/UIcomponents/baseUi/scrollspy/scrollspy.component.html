@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <nav id="navbar-example2" class="navbar bg-light px-3 mb-3">
+                    <a class="navbar-brand" href="javascript:void(0);">Navbar</a>
+                    <ul class="nav nav-pills" [ngbScrollSpyMenu]="spy">
+                        <li class="nav-item">
+                            <a class="nav-link" ngbScrollSpyItem="scrollspyHeading1">First</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" ngbScrollSpyItem="scrollspyHeading2">Second</a>
+                        </li>
+                        <li class="nav-item dropdown" ngbDropdown>
+                            <a class="nav-link dropdown-toggle" ngbDropdownToggle data-bs-toggle="dropdown" href="javascript:void(0);"
+                                role="button" aria-expanded="false">Dropdown</a>
+                            <ul class="dropdown-menu" ngbDropdownMenu>
+                                <li><a class="dropdown-item" ngbScrollSpyItem="scrollspyHeading3">Third</a></li>
+                                <li><a class="dropdown-item" ngbScrollSpyItem="scrollspyHeading4">Fourth</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item"  ngbScrollSpyItem="scrollspyHeading5">Fifth</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <div #spy="ngbScrollSpy" ngbScrollSpy class="scrollspy-example bg-light bg-opacity-50 p-3 rounded-2"
+                    data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%"
+                    data-bs-smooth-scroll="true" tabindex="0">
+                    <h4 id="scrollspyHeading1" ngbScrollSpyFragment="scrollspyHeading1">First heading</h4>
+                    <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page,
+                        the
+                        appropriate navigation link is highlighted. It's repeated throughout the component example. We
+                        keep adding
+                        some more example copy here to emphasize the scrolling and highlighting.</p>
+                    <h4 id="scrollspyHeading2" ngbScrollSpyFragment="scrollspyHeading2">Second heading</h4>
+                    <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page,
+                        the
+                        appropriate navigation link is highlighted. It's repeated throughout the component example. We
+                        keep adding
+                        some more example copy here to emphasize the scrolling and highlighting.</p>
+                    <h4 id="scrollspyHeading3" ngbScrollSpyFragment="scrollspyHeading3">Third heading</h4>
+                    <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page,
+                        the
+                        appropriate navigation link is highlighted. It's repeated throughout the component example. We
+                        keep adding
+                        some more example copy here to emphasize the scrolling and highlighting.</p>
+                    <h4 id="scrollspyHeading4" ngbScrollSpyFragment="scrollspyHeading4">Fourth heading</h4>
+                    <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page,
+                        the
+                        appropriate navigation link is highlighted. It's repeated throughout the component example. We
+                        keep adding
+                        some more example copy here to emphasize the scrolling and highlighting.</p>
+                    <h4 id="scrollspyHeading5" ngbScrollSpyFragment="scrollspyHeading5">Fifth heading</h4>
+                    <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page,
+                        the
+                        appropriate navigation link is highlighted. It's repeated throughout the component example. We
+                        keep adding
+                        some more example copy here to emphasize the scrolling and highlighting.</p>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div> <!-- end col -->
+</div>

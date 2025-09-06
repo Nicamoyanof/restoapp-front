@@ -1,0 +1,62 @@
+<div class="card">
+    <div class="card-body">
+
+
+        <!-- start progress -->
+        <div class="row g-5">
+
+            <div class="col-lg-6">
+                <h5 class="card-title mb-4">
+                    How it works
+                </h5>
+                <ngb-progressbar class="mb-2" [value]="0" />
+                <ngb-progressbar class="mb-2" [value]="35" />
+                <ngb-progressbar class="mb-2" [value]="50" />
+                <ngb-progressbar class="mb-2" [value]="75" />
+                <ngb-progressbar [value]="25" [showValue]="true" />
+
+            </div>
+
+            <div class="col-lg-6">
+                <h5 class="card-title mb-4">
+                    Backgrounds Color
+                </h5>
+                <ngb-progressbar class="mb-2" [value]="25" type="primary"/>
+                <ngb-progressbar class="mb-2" [value]="50" type="secondary"/>
+                <ngb-progressbar class="mb-2" [value]="75" type="success"/>
+                <ngb-progressbar class="mb-2" [value]="100" type="info"/>
+                <ngb-progressbar-stacked>
+                    <ngb-progressbar type="peimary" [value]="15"></ngb-progressbar>
+                    <ngb-progressbar type="secondary" [value]="30"></ngb-progressbar>
+                    <ngb-progressbar type="success" [value]="20"></ngb-progressbar>
+                </ngb-progressbar-stacked>
+
+            </div>
+
+            <div class="col-lg-6">
+                <h5 class="card-title mb-4">
+                    Striped Progress Bar
+                </h5>
+                <ngb-progressbar class="mb-2" type="primary" [value]="25" [striped]="true"></ngb-progressbar>
+                <ngb-progressbar class="mb-2" type="secondary" [value]="50" [striped]="true"></ngb-progressbar>
+                <ngb-progressbar class="mb-2" type="success" [value]="75" [striped]="true"></ngb-progressbar>
+                <ngb-progressbar class="mb-2" type="info" [value]="65" [striped]="true" [animated]="true"></ngb-progressbar>
+                <ngb-progressbar class="mb-2" type="warning" [value]="100" [striped]="true" [animated]="true"></ngb-progressbar>
+
+             
+            </div>
+
+            <div class="col-lg-6">
+                <h5 class="card-title mb-4">
+                    Height
+                </h5>
+                <ngb-progressbar class="mb-2" type="primary" [value]="25" height="1px"></ngb-progressbar>
+                <ngb-progressbar class="mb-2" type="secondary" [value]="50" height="5px"></ngb-progressbar>
+                <ngb-progressbar class="mb-2" type="success" [value]="75" height="8px"></ngb-progressbar>
+                <ngb-progressbar class="mb-2" type="info" [value]="35" height="12px"></ngb-progressbar>
+                <ngb-progressbar class="mb-2" type="warning" [value]="60" height="15px"></ngb-progressbar>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+        <!-- end progress -->
+    </div>
+</div>

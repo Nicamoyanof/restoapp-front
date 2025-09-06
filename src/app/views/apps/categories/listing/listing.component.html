@@ -1,0 +1,7 @@
+<!-- <app-categories-listing /> -->
+<div class="row">
+  <div class="col-xl-12">
+    <app-total-categories [totalCategories]="totalCategories" [totalItems]="totalCategories.length"
+      (reload)="reload($event)" />
+  </div>
+</div>

@@ -1,0 +1,100 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row g-5">
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    Basic Rater Example
+                </h5>
+                <div id="basic-rater" dir="ltr">
+                    <ngb-rating [(rate)]="basicRating" [starTemplate]="t" [max]="5" />
+                    <ng-template #t let-fill="fill">
+                        @if (fill > 0) {
+                        <i class="ri-star-fill fs-3" style="color: #f1c947;" [style.width.%]="fill"></i>
+                        } @else {
+                        <i class="ri-star-fill text-muted opacity-25 fs-3"> </i>
+                        }
+                    </ng-template>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    Rater with Step Example
+                </h5>
+                <div id="rater-step" dir="ltr"> <ngb-rating [(rate)]="rating" [starTemplate]="t" [max]="5" /></div>
+            </div>
+
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    Custom Messages Example
+                </h5>
+                <div id="rater-message" dir="ltr"> <ng-template #t let-fill="fill">
+                        @if (fill > 0) {
+                        <i class="ri-star-fill fs-3" style="color: #f1c947;" [style.width.%]="fill"></i>
+                        } @else {
+                        <i class="ri-star-fill text-muted opacity-25 fs-3"> </i>
+                        }
+                    </ng-template>
+                    <ngb-rating [(rate)]="stepRating" [starTemplate]="t" [max]="5" />
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    ReadOnly Example
+                </h5>
+                <div id="rater-unlimitedstar" dir="ltr"> <ng-template #step let-fill="fill">
+                        @if (fill > 0) {
+                        <i class="ri-star-fill fs-3"style="color: #f1c947;" [style.width.%]="fill"></i>
+                        } @else {
+                        <i class="ri-star-fill text-muted opacity-25 fs-3"> </i>
+                        }
+                    </ng-template>
+                    <ngb-rating [(rate)]="readonly" [readonly]="true" [starTemplate]="step" [max]="5" />
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    On Hover Event Example
+                </h5>
+                <div dir="ltr">
+                    <div id="rater-onhover" class="align-middle"> <ng-template #tem let-fill="fill">
+                            @if (fill > 0) {
+                            <i class="ri-star-fill  fs-3" style="color: #f1c947;" [style.width.%]="fill"></i>
+                            } @else {
+                            <i class="ri-star-fill text-muted opacity-25 fs-3"> </i>
+                            }
+                        </ng-template>
+                        <ngb-rating [(rate)]="hoverSelected" [starTemplate]="tem" (hover)="hovered = $event"
+                            (leave)="hovered = 0" [max]="5" />
+                   
+                    <span class="ratingnum badge bg-info align-middle ms-2">{{
+                        hoverSelected
+                        }}</span>
+                </div>
+            </div>
+            </div>
+
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    Clear/Reset Rater Example
+                </h5>
+                <div dir="ltr">
+                    <div id="raterreset" class="align-middle"> <ng-template #tem let-fill="fill">
+                            @if (fill > 0) {
+                            <i class="ri-star-fill fs-3" style="color: #f1c947;" [style.width.%]="fill"></i>
+                            } @else {
+                            <i class="ri ri-star-line text-muted opacity-25 fs-3"> </i>
+                            }
+                        </ng-template>
+                        <ngb-rating [formControl]="ctrl" [starTemplate]="tem" [max]="5" />
+                        <span class="clear-rating"></span>
+                        <button id="raterreset-button" class="btn btn-light btn-sm ms-2"
+                            (click)="ctrl.setValue(null)">Reset</button>
+                    </div>
+                </div>
+            </div> <!-- end row -->
+        </div>
+    </div>
+</div>

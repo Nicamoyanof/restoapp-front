@@ -1,0 +1,53 @@
+<div class="card">
+     <div class="card-header d-flex align-items-center justify-content-between">
+          <div>
+               <h4 class="card-title mb-0">Delivered Status</h4>
+          </div>
+          <div class="dropdown" ngbDropdown>
+               <a href="javascript:void(0)" ngbDropdownToggle
+                    class="dropdown-toggle text-dark btn btn-sm btn-link text-uppercase fw-semibold px-0"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Daily
+               </a>
+               <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+                    <!-- item-->
+                    <a href="javascript:void(0)" class="dropdown-item">Week</a>
+                    <!-- item-->
+                    <a href="javascript:void(0)" class="dropdown-item">Months</a>
+                    <!-- item-->
+                    <a href="javascript:void(0)" class="dropdown-item">Years</a>
+               </div>
+          </div>
+     </div>
+
+     <div class="card-body p-0">
+          <div class="table-responsive">
+               <table class="table table-sm table-hover mb-0">
+                    <thead>
+                         <tr>
+                              <th>Date</th>
+                              <th>Payment Via</th>
+                              <th>Status</th>
+                              <th>Amount ($)</th>
+                         </tr>
+                    </thead>
+
+                    <tbody>
+                         @for (item of deliveredStatus; track $index) {
+                         <tr>
+                              <td>{{item.date}}</td>
+                              <td>{{item.method}}</td>
+                              <td><span class="badge badge-soft-{{item.variant }}">{{item.status }}</span></td>
+                              <td>{{item.amount}}</td>
+                         </tr>
+                         }
+                    </tbody>
+               </table>
+          </div>
+     </div>
+
+     <div class="card-footer border-top text-center p-3">
+          <a href="javascript:void(0)" class="link-primary text-decoration-underline fw-medium">Show More <i
+                    class="ri-arrow-right-up-line"></i></a>
+     </div>
+</div>

@@ -1,0 +1,229 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Simple line chart</h4>
+                </div>
+                <div class="card-body">
+                    <div dir="ltr">
+                        <div id="line-chart" class="apex-charts">
+                            <apx-chart [chart]="simpleLineChartOpts.chart!"
+                                [dataLabels]="simpleLineChartOpts.dataLabels!" [colors]="simpleLineChartOpts.colors!"
+                                [series]="simpleLineChartOpts.series!" [title]="simpleLineChartOpts.title!"
+                                [grid]="simpleLineChartOpts.grid!" [labels]="simpleLineChartOpts.labels!"
+                                [xaxis]="simpleLineChartOpts.xaxis!" />
+                        </div>
+                    </div>
+                </div>
+                <!-- end card body-->
+            </div>
+            <!-- end card -->
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Line with Data Labels</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="line-chart-datalabel" class="apex-charts">
+                        <apx-chart [chart]="lineWithDataChartOpts.chart!"
+                            [dataLabels]="lineWithDataChartOpts.dataLabels!" [stroke]="lineWithDataChartOpts.stroke!"
+                            [colors]="lineWithDataChartOpts.colors!" [series]="lineWithDataChartOpts.series!"
+                            [title]="lineWithDataChartOpts.title!" [grid]="lineWithDataChartOpts.grid!"
+                            [markers]="lineWithDataChartOpts.markers!" [labels]="lineWithDataChartOpts.labels!"
+                            [xaxis]="lineWithDataChartOpts.xaxis!" [yaxis]="lineWithDataChartOpts.yaxis!"
+                            [legend]="lineWithDataChartOpts.legend!" />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Zoomable Timeseries</h4>
+                <div class="card-body">
+                    <div dir="ltr">
+                        <div id="line-chart-zoomable" class="apex-charts">
+                            <apx-chart [chart]="zoomableTimeseriesChartOpts.chart!"
+                                [dataLabels]="zoomableTimeseriesChartOpts.dataLabels!"
+                                [stroke]="zoomableTimeseriesChartOpts.stroke!"
+                                [colors]="zoomableTimeseriesChartOpts.colors!"
+                                [series]="zoomableTimeseriesChartOpts.series!"
+                                [title]="zoomableTimeseriesChartOpts.title!" [grid]="zoomableTimeseriesChartOpts.grid!"
+                                [markers]="zoomableTimeseriesChartOpts.markers!"
+                                [labels]="zoomableTimeseriesChartOpts.labels!"
+                                [xaxis]="zoomableTimeseriesChartOpts.xaxis!"
+                                [yaxis]="zoomableTimeseriesChartOpts.yaxis!"
+                                [legend]="zoomableTimeseriesChartOpts.legend!" />
+                        </div>
+                    </div>
+                </div>
+                <!-- end card body-->
+            </div>
+            <!-- end card -->
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Line Chart with Annotations</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="line-chart-annotations" class="apex-charts">
+                        <apx-chart [chart]="annotationsChartOpts.chart!" [dataLabels]="annotationsChartOpts.dataLabels!"
+                            [annotations]="annotationsChartOpts.annotations!" [stroke]="annotationsChartOpts.stroke!"
+                            [colors]="annotationsChartOpts.colors!" [series]="annotationsChartOpts.series!"
+                            [title]="annotationsChartOpts.title!" [grid]="annotationsChartOpts.grid!"
+                            [labels]="annotationsChartOpts.labels!" [xaxis]="annotationsChartOpts.xaxis!" />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Syncing charts</h4>
+            </div>
+            <div class="card-body">
+                <div id="line-chart-syncing2">
+                    <apx-chart [chart]="syncingChartOpts2.chart!" [dataLabels]="syncingChartOpts2.dataLabels!"
+                        [stroke]="syncingChartOpts2.stroke!" [colors]="syncingChartOpts2.colors!"
+                        [series]="syncingChartOpts2.series!" [fill]="syncingChartOpts2.fill!"
+                        [title]="syncingChartOpts2.title!" [grid]="syncingChartOpts2.grid!"
+                        [xaxis]="syncingChartOpts2.xaxis!" [legend]="syncingChartOpts2.legend!" />
+                </div>
+                <div dir="ltr">
+                    <div id="line-chart-syncing" class="apex-charts">
+                        <apx-chart [chart]="syncingChartOpts.chart!" [dataLabels]="syncingChartOpts.dataLabels!"
+                            [stroke]="syncingChartOpts.stroke!" [colors]="syncingChartOpts.colors!"
+                            [series]="syncingChartOpts.series!" [fill]="syncingChartOpts.fill!"
+                            [title]="syncingChartOpts.title!" [grid]="syncingChartOpts.grid!"
+                            [xaxis]="syncingChartOpts.xaxis!" [legend]="syncingChartOpts.legend!" />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Gradient Line Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="line-chart-gradient" class="apex-charts">
+                        <apx-chart [chart]="gradientLineChartOpts.chart!" [stroke]="gradientLineChartOpts.stroke!"
+                            [colors]="gradientLineChartOpts.colors!" [fill]="gradientLineChartOpts.fill!"
+                            [series]="gradientLineChartOpts.series!" [title]="gradientLineChartOpts.title!"
+                            [grid]="gradientLineChartOpts.grid!" [labels]="gradientLineChartOpts.labels!"
+                            [xaxis]="gradientLineChartOpts.xaxis!" />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Missing / Null values</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="line-chart-missing" class="apex-charts">
+                        <apx-chart [chart]="missingNullValuesChartOpts.chart!"
+                            [stroke]="missingNullValuesChartOpts.stroke!" [colors]="missingNullValuesChartOpts.colors!"
+                            [fill]="missingNullValuesChartOpts.fill!" [series]="missingNullValuesChartOpts.series!"
+                            [title]="missingNullValuesChartOpts.title!" [grid]="missingNullValuesChartOpts.grid!"
+                            [labels]="missingNullValuesChartOpts.labels!" [xaxis]="missingNullValuesChartOpts.xaxis!" />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Dashed Line Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="line-chart-dashed" class="apex-charts">
+                        <apx-chart [chart]="dashedLineChartOpts.chart!" [stroke]="dashedLineChartOpts.stroke!"
+                            [colors]="dashedLineChartOpts.colors!" [fill]="dashedLineChartOpts.fill!"
+                            [series]="dashedLineChartOpts.series!" [title]="dashedLineChartOpts.title!"
+                            [grid]="dashedLineChartOpts.grid!" [labels]="dashedLineChartOpts.labels!"
+                            [xaxis]="dashedLineChartOpts.xaxis!" />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Stepline Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="line-chart-stepline" class="apex-charts">
+                        <apx-chart [chart]="stepLineChartOpts.chart!" [stroke]="stepLineChartOpts.stroke!"
+                            [colors]="stepLineChartOpts.colors!" [fill]="stepLineChartOpts.fill!"
+                            [series]="stepLineChartOpts.series!" [title]="stepLineChartOpts.title!"
+                            [grid]="stepLineChartOpts.grid!" [labels]="stepLineChartOpts.labels!"
+                            [xaxis]="stepLineChartOpts.xaxis!" />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Brush Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="chart-line2" class="apex-charts">
+                        <apx-chart [series]="brushChartOpts.series!" [chart]="brushChartOpts.chart!"
+                            [colors]="brushChartOpts.colors!" [stroke]="brushChartOpts.stroke!"
+                            [dataLabels]="brushChartOpts.dataLabels!" [fill]="brushChartOpts.fill!"
+                            [markers]="brushChartOpts.markers!" [xaxis]="brushChartOpts.xaxis!" />
+                    </div>
+                    <div id="chart-line" class="apex-charts">
+                        <apx-chart [chart]="brushChartOpts2.chart!" [colors]="brushChartOpts2.colors!"
+                            [fill]="brushChartOpts2.fill!" [series]="brushChartOpts2.series!"
+                            [xaxis]="brushChartOpts2.xaxis!" [yaxis]="brushChartOpts2.yaxis!" />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+</div>

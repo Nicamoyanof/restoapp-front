@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+@use "../public/assets/scss/app.scss";
+@use "../public/assets/scss/icons.scss";
+@import "nouislider/dist/nouislider.css";
+@import "swiper/swiper-bundle.css";
+@import "../node_modules/glightbox/dist/css/glightbox.min.css";
+@import "../node_modules/gridjs/dist/theme/mermaid.min.css";
+@import "flatpickr/dist/flatpickr.css";
+@import "quill/dist/quill.snow.css";
+@import "quill/dist/quill.bubble.css";
+
+.arrow-none {
+  &:after {
+    display: none !important;
+  }
+
+  &:before {
+    display: none !important;
+  }
+}
+
+.filled {
+  color: rgba(var(--bs-warning-rgb)) !important;
+  font-size: 0.875em;
+  overflow: hidden;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+}
+.btn-invalid {
+  cursor: not-allowed !important;
+}

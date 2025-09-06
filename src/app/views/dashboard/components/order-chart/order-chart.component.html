@@ -1,0 +1,34 @@
+<div class="card">
+    <div class="card-header d-flex align-items-center justify-content-between">
+        <div>
+            <h4 class="card-title mb-0">Order Chart</h4>
+        </div>
+        <div class="dropdown" ngbDropdown>
+            <a href="#" ngbDropdownToggle class="dropdown-toggle btn btn-sm btn-link text-uppercase fw-semibold"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Weekly
+            </a>
+            <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+                <!-- item-->
+                <a href="javascript:void(0);" class="dropdown-item">Week</a>
+                <!-- item-->
+                <a href="javascript:void(0);" class="dropdown-item">Months</a>
+                <!-- item-->
+                <a href="javascript:void(0);" class="dropdown-item">Years</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="text-center">
+            <p class="text-muted mb-0">Yeah! You have received <span class="text-success fw-bold">+33</span> new orders
+                today</p>
+        </div>
+        <div id="datalabels-column2" class="apex-charts" data-colors="#604ae3">
+            <apx-chart [series]="orderChart.series!" [chart]="orderChart.chart!" [colors]="orderChart.colors!"
+                [tooltip]="orderChart.tooltip!" [title]="orderChart.title!" [markers]="orderChart.markers!"
+                [stroke]="orderChart.stroke!" [plotOptions]="orderChart.plotOptions!"
+                [dataLabels]="orderChart.dataLabels!" [grid]="orderChart.grid!" [yaxis]="orderChart.yaxis!"
+                [legend]="orderChart.legend!" [series]="orderChart.series!" [xaxis]="orderChart.xaxis!"></apx-chart>
+        </div>
+    </div>
+</div>

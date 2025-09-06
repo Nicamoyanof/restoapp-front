@@ -1,0 +1,102 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row g-5">
+            <div class="col-lg-6">
+                <h5 class="card-title mb-4">Live demo</h5>
+
+                <button type="button" class="btn btn-danger" data-bs-toggle="popover" popoverTitle="Popover title"
+                    ngbPopover="And here's some amazing content. It's very engaging. Right?">Click to toggle
+                    popover</button>
+            </div>
+
+            <div class="col-lg-6">
+                <h5 class="card-title mb-4">Popover Directions</h5>
+
+                <div class="d-flex flex-wrap gap-2">
+                    <!-- Top Position -->
+                    <button type="button" class="btn btn-primary" container="body" data-bs-toggle="popover"
+                        placement="top" ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                        Popover on top
+                    </button>
+
+                    <!-- Bottom Position -->
+                    <button type="button" class="btn btn-primary" container="body" data-bs-toggle="popover"
+                        placement="bottom" ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                        Popover on bottom
+                    </button>
+
+                    <!-- Left Position -->
+                    <button type="button" class="btn btn-primary" container="body" data-bs-toggle="popover"
+                        placement="left" ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."
+                        popoverTitle="Popover title">
+                        Popover on left
+                    </button>
+
+                    <!-- Right Position -->
+                    <button type="button" class="btn btn-primary" container="body" data-bs-toggle="popover"
+                        placement="right" ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                        Popover on right
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <h5 class="card-title mb-4">Dismiss on Next Click</h5>
+
+                <button type="button" tabindex="0" class="btn btn-success" data-bs-toggle="popover" triggers="focus"
+                    ngbPopover="And here's some amazing content. It's very engaging. Right?"
+                    popoverTitle="Dismissible popover">
+                    Dismissible popover
+                </button>
+            </div>
+
+            <div class="col-lg-6">
+                <h5 class="card-title mb-4">Hover</h5>
+
+                <button type="button" tabindex="0" class="btn btn-dark" data-bs-toggle="popover" triggers="hover"
+                    ngbPopover="And here's some amazing content. It's very engaging. Right?" popoverTitle="Ohh Wow !">
+                    Please Hover Me
+                </button>
+            </div>
+
+            <div class="col-lg-6">
+                <h5 class="card-title mb-4">Custom Popovers</h5>
+
+                <div class="button-list">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="popover" placement="top"
+                        popoverClass="primary-popover" popoverTitle="Primary popover"
+                        ngbPopover="This popover is themed via CSS variables.">
+                        Primary popover
+                    </button>
+
+                    <button type="button" class="btn btn-success" data-bs-toggle="popover" placement="top"
+                        popoverClass="success-popover" popoverTitle="Success popover"
+                        ngbPopover="This popover is themed via CSS variables.">
+                        Success popover
+                    </button>
+
+                    <button type="button" class="btn btn-danger" data-bs-toggle="popover" placement="top"
+                        popoverClass="danger-popover" popoverTitle="Danger popover"
+                        ngbPopover="This popover is themed via CSS variables.">
+                        Danger popover
+                    </button>
+
+                    <button type="button" class="btn btn-info" data-bs-toggle="popover" placement="top"
+                        popoverClass="info-popover" popoverTitle="Info popover"
+                        ngbPopover="This popover is themed via CSS variables.">
+                        Info popover
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <h5 class="card-title mb-4">Disabled Elements</h5>
+
+                <span class="d-inline-block" data-bs-toggle="popover" triggers="hover" ngbPopover="Disabled popover">
+                    <button class="btn btn-primary" style="pointer-events: none;" type="button" disabled>Disabled
+                        button</button>
+                </span>
+            </div> <!-- end card -->
+        </div> <!-- end row -->
+    </div>
+</div>

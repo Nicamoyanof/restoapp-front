@@ -1,0 +1,96 @@
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+            <p class="card-title mb-0">Orders Summary</p>
+        </div>
+        <div class="d-flex gap-3">
+            <a href="javascript:void(0)" class="btn btn-sm btn-primary">Create Order</a>
+            <div class="dropdown" ngbDropdown>
+                <a href="javascript:void(0)" ngbDropdownToggle
+                    class="dropdown-toggle btn btn-sm btn-outline-light rounded" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Reports
+                </a>
+                <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+                    <!-- item-->
+                    <a href="javascript:void(0)" class="dropdown-item">Export</a>
+                    <!-- item-->
+                    <a href="javascript:void(0)" class="dropdown-item">Import</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="">
+        <div class="table-responsive">
+            <table class="table align-middle mb-0 table-hover table-centered">
+                <thead class="bg-light-subtle fs-12 text-uppercase">
+                    <tr>
+                        <th>Order No.</th>
+                        <th>Customer</th>
+                        <th>Items Name</th>
+                        <th>Quantity</th>
+                        <th>Price Per Item</th>
+                        <th>Total Price</th>
+                        <th>Payment Method</th>
+                        <th>Order Date & Time</th>
+                        <th>Address</th>
+                        <th>Delivery Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (order of ordersData; track $index) {
+                    <tr>
+                        <td>{{order.orderNo}}</td>
+                        <td>
+                            <a href="javascript:void(0)" class="link-primary fw-medium">{{order.customer}} </a>
+                        </td>
+                        <td>
+                            @for (item of order.items; track $index) {
+                            <p class="mb-1"><span class="fw-semibold text-dark me-1">{{$index+1}}.</span>{{item.name}}
+                            </p>
+                            }
+                        </td>
+                        <td>
+                            @for (item of order.items; track $index) {
+                            <p class="mb-1">{{item.quantity}}</p>}
+                        </td>
+                        <td>
+                            @for (item of order.items; track $index) {
+                            <p class="mb-1">${{item.pricePerItem}}</p>
+                            }
+                        </td>
+                        <td>${{ order.totalPrice | number:'1.2-2'}}</td>
+                        <td>{{ order.paymentMethod }}<i [class]="order.icon"></i></td>
+                        <td>{{ order.orderDateTime }}</td>
+                        <td>{{ order.address }}</td>
+                        <td> <span class="badge px-2 py-1 fs-11 border"
+                                [ngClass]="getBadgeClasses(order.deliveryStatus)">
+                                {{ order.deliveryStatus }}
+                            </span></td>
+                        <td>
+                            <div class="d-flex gap-3">
+                                <a href="javascript:void(0)" class="text-muted"><i
+                                        class="ri-eye-line align-middle fs-20"></i></a>
+                                <a href="javascript:void(0)" class="link-dark"><i
+                                        class="ri-edit-line align-middle fs-20"></i></a>
+                                <a href="javascript:void(0)" class="link-danger"><i
+                                        class="ri-delete-bin-5-line align-middle fs-20"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- end table-responsive -->
+    </div>
+    <div class="card-footer border-0">
+        <ngb-pagination class="pagination justify-content-end mb-0" [collectionSize]="totalItems" [(page)]="currentPage"
+            [pageSize]="pageSize" [maxSize]="maxSize" [rotate]="true" [ellipses]="false" [boundaryLinks]="false"
+            aria-label="Page navigation example">
+            <ng-template ngbPaginationPrevious> <i class="ri-arrow-left-s-line"></i></ng-template>
+            <ng-template ngbPaginationNext> <i class="ri-arrow-right-s-line"></i></ng-template>
+        </ngb-pagination>
+    </div>
+</div>

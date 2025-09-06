@@ -1,0 +1,32 @@
+<div class="card">
+    <div class="card-header d-flex align-items-center justify-content-between">
+        <div>
+            <h4 class="card-title mb-0">Daily Delivery Chart</h4>
+        </div>
+        <div class="dropdown" ngbDropdown>
+            <a href="javascript:void(0);" ngbDropdownToggle
+                class="dropdown-toggle btn btn-sm btn-link text-uppercase fw-semibold" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Weekly
+            </a>
+            <div ngbDropdownMenu class="dropdown-menu dropdown-menu-end">
+                <!-- item-->
+                <a href="javascript:void(0);" class="dropdown-item">Week</a>
+                <!-- item-->
+                <a href="javascript:void(0);" class="dropdown-item">Months</a>
+                <!-- item-->
+                <a href="javascript:void(0);" class="dropdown-item">Years</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body ps-0">
+        <div class="text-center">
+            <p class="text-muted mb-0">Yeah! You have delivered <span class="text-primary fw-bold">910</span> orders
+                today</p>
+        </div>
+        <div id="basic-heatmap" class="apex-charts">
+            <apx-chart [series]="basicHeatmap.series!" [chart]="basicHeatmap.chart!" [colors]="basicHeatmap.colors!"
+                [xaxis]="basicHeatmap.xaxis!" [dataLabels]="basicHeatmap.dataLabels!"></apx-chart>
+        </div>
+    </div>
+</div>

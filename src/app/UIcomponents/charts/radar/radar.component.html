@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Basic Radar Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="basic-radar" class="apex-charts">
+                        <apx-chart
+                        [chart]="basicRadarChartOpts.chart!"
+                        [series]="basicRadarChartOpts.series!"
+                        [colors]="basicRadarChartOpts.colors!"
+                        [labels]="basicRadarChartOpts.labels!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Radar with Polygon-fill</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="radar-polygon" class="apex-charts">
+                        <apx-chart
+            [chart]="polygonRadarChartOpts.chart!"
+            [series]="polygonRadarChartOpts.series!"
+            [colors]="polygonRadarChartOpts.colors!"
+            [labels]="polygonRadarChartOpts.labels!"
+            [plotOptions]="polygonRadarChartOpts.plotOptions!"
+            [markers]="polygonRadarChartOpts.markers!"
+            [tooltip]="polygonRadarChartOpts.tooltip!"
+            [yaxis]="polygonRadarChartOpts.yaxis!"
+          />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+
+
+    <div class="col-lg-6">                       
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Radar – Multiple Series</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="radar-multiple-series" class="apex-charts">
+                        <apx-chart
+                        [chart]="multipleSeriesOpts.chart!"
+                        [series]="multipleSeriesOpts.series!"
+                        [colors]="multipleSeriesOpts.colors!"
+                        [labels]="multipleSeriesOpts.labels!"
+                        [fill]="multipleSeriesOpts.fill!"
+                        [markers]="multipleSeriesOpts.markers!"
+                        [stroke]="multipleSeriesOpts.stroke!"
+                        [legend]="multipleSeriesOpts.legend!"
+                      />
+                    </div>
+                    <div class="text-center mt-2">
+                        <button (click)="changeTraffic()" class="btn btn-sm btn-primary">Update</button>
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div> <!-- end col -->
+</div>

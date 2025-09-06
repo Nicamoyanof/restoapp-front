@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-lg-6">
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Simple Bubble Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="simple-bubble" class="apex-charts">
+                        <apx-chart
+                        [chart]="bubbleChart.chart!"
+                        [dataLabels]="bubbleChart.dataLabels!"
+                        [series]="bubbleChart.series!"
+                        [fill]="bubbleChart.fill!"
+                        [colors]="bubbleChart.colors!"
+                        [xaxis]="bubbleChart.xaxis!"
+                        [yaxis]="bubbleChart.yaxis!"
+                        [grid]="bubbleChart.grid!"
+                        [legend]="bubbleChart.legend!"
+                      >
+                      </apx-chart>
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">                    
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">3D Bubble Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="second-bubble" class="apex-charts">
+                        <apx-chart
+                        [chart]="secondbubbleChart.chart!"
+                        [dataLabels]="secondbubbleChart.dataLabels!"
+                        [series]="secondbubbleChart.series!"
+                        [fill]="secondbubbleChart.fill!"
+                        [colors]="secondbubbleChart.colors!"
+                        [xaxis]="secondbubbleChart.xaxis!"
+                        [yaxis]="secondbubbleChart.yaxis!"
+                        [grid]="secondbubbleChart.grid!"
+                        [legend]="secondbubbleChart.legend!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+</div>

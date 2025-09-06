@@ -1,0 +1,79 @@
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title mb-0">Recently Assigned</h5>
+    </div>
+    <div class="card-body">
+        @for (task of recentlyAssigned; track $index) {
+        <div class="mb-1 border rounded mt-3">
+            <div class="p-2">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-md-7">
+                        <div class="d-flex align-items-center justify-content-start gap-2">
+                            <input type="checkbox" class="form-check-input rounded-circle mt-0 fs-16"
+                                [id]="'task-' + task.id">
+                            <a href="javascript:void(0);" class="link-dark fw-medium">
+                                <span class="text-primary fw-semibold">{{ task.title }} :</span> {{ task.description }}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="d-flex align-items-center gap-3 justify-content-md-end">
+                            <div class="flex-shrink-0">
+                                @if(task.status === 'New'){
+                                <span class="badge badge-outline-warning">New</span>
+                                }@else if(task.status === 'Old'){
+                                <span class="badge badge-outline-danger">Old</span>
+                                }
+                            </div>
+
+                            <ul class="list-inline fs-13 text-end flex-shrink-0 mb-0">
+                                <li class="list-inline-item">
+                                    <span class="fw-semibold">{{ task.date || '/' }}</span>
+                                </li>
+                            </ul>
+
+                            <div class="flex-shrink-0">
+                                <span class="badge p-1" [ngClass]="{
+                    'badge-soft-danger': task.priority === 'High' || task.priority === 'Urgent',
+                    'badge-soft-success': task.priority === 'Low'
+                  }">
+                                    @if(task.priority === 'Urgent'){
+                                    <i class="bx bxs-circle fs-10 me-1"></i>
+                                    }{{ task.priority }}</span>
+                            </div>
+                            @if(task.avatars?.length){
+                            <div class="avatar-group ps-3">
+                                @for (avatar of task.avatars; track $index) {
+                                <div class="avatar h-auto w-auto">
+                                    <img [src]="avatar" alt=""
+                                        class="rounded-circle avatar-sm border border-light border-2">
+                                </div>
+                                }
+                            </div>
+                            }
+
+                            <div class="dropdown dropend" ngbDropdown>
+                                <a href="javascript:void(0);" ngbDropdownToggle class="ps-1 arrow-none"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bx bx-dots-vertical-rounded fs-18"></i>
+                                </a>
+                                <div class="dropdown-menu" ngbDropdownMenu>
+                                    <a class="dropdown-item" href="javascript:void(0);">
+                                        <i class="bx bx-edit-alt me-2"></i>Edit
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:void(0);">
+                                        <i class="bx bx-detail me-2"></i>View Tasks
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:void(0);">
+                                        <i class="bx bx-trash me-2"></i>Delete
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>

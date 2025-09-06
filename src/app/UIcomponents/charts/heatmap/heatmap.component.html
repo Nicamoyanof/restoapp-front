@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col-lg-6">
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Basic Heatmap - Single Series</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="basic-heatmap" class="apex-charts">
+                        <apx-chart [chart]="basicHeatmapChart.chart!" [dataLabels]="basicHeatmapChart.dataLabels!"
+                            [colors]="basicHeatmapChart.colors!" [series]="basicHeatmapChart.series!"
+                            [xaxis]="basicHeatmapChart.xaxis!" />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Heatmap - Multiple Series</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="multiple-series-heatmap" class="apex-charts">
+                        <apx-chart [chart]="multipleSeriesHeatmapChart.chart!"
+                            [plotOptions]="multipleSeriesHeatmapChart.plotOptions!"
+                            [stroke]="multipleSeriesHeatmapChart.stroke!"
+                            [dataLabels]="multipleSeriesHeatmapChart.dataLabels!"
+                            [colors]="multipleSeriesHeatmapChart.colors!" [series]="multipleSeriesHeatmapChart.series!"
+                            [xaxis]="multipleSeriesHeatmapChart.xaxis!" [grid]="multipleSeriesHeatmapChart.grid!" />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Heatmap - Color Range</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="color-range-heatmap" class="apex-charts">
+                        <apx-chart [chart]="HeatmapColorRangeChart.chart!"
+                            [plotOptions]="multipleSeriesHeatmapChart.plotOptions!"
+                            [stroke]="multipleSeriesHeatmapChart.stroke!"
+                            [dataLabels]="HeatmapColorRangeChart.dataLabels!" [colors]="HeatmapColorRangeChart.colors!"
+                            [series]="HeatmapColorRangeChart.series!" />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Heatmap - Range without Shades</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="rounded-heatmap" class="apex-charts">
+                        <apx-chart [chart]="HeatmapRangeShadesChart.chart!"
+                            [dataLabels]="HeatmapRangeShadesChart.dataLabels!"
+                            [colors]="HeatmapRangeShadesChart.colors!" [series]="HeatmapRangeShadesChart.series!"
+                            [xaxis]="HeatmapRangeShadesChart.xaxis!"
+                            [plotOptions]="multipleSeriesHeatmapChart.plotOptions!"
+                            [stroke]="multipleSeriesHeatmapChart.stroke!" [grid]="multipleSeriesHeatmapChart.grid!" />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+
+    </div> <!-- end col -->
+</div>

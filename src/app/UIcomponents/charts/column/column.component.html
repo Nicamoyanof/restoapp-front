@@ -1,0 +1,324 @@
+<div class="row">
+    <div class="col-lg-6">
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Basic Column Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="basic-column" class="apex-charts">
+                        <apx-chart
+                        [chart]="basicColumnChart.chart!"
+                        [plotOptions]="basicColumnChart.plotOptions!"
+                        [dataLabels]="basicColumnChart.dataLabels!"
+                        [stroke]="basicColumnChart.stroke!"
+                        [colors]="basicColumnChart.colors!"
+                        [series]="basicColumnChart.series!"
+                        [xaxis]="basicColumnChart.xaxis!"
+                        [legend]="basicColumnChart.legend!"
+                        [yaxis]="basicColumnChart.yaxis!"
+                        [fill]="basicColumnChart.fill!"
+                        [grid]="basicColumnChart.grid!"
+                        [tooltip]="basicColumnChart.tooltip!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Column Chart with Datalabels</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="datalabels-column" class="apex-charts">
+                        <apx-chart
+                        [chart]="datalabelsColumnChart.chart!"
+                        [plotOptions]="datalabelsColumnChart.plotOptions!"
+                        [dataLabels]="datalabelsColumnChart.dataLabels!"
+                        [colors]="datalabelsColumnChart.colors!"
+                        [legend]="datalabelsColumnChart.legend!"
+                        [series]="datalabelsColumnChart.series!"
+                        [xaxis]="datalabelsColumnChart.xaxis!"
+                        [fill]="datalabelsColumnChart.fill!"
+                        [yaxis]="datalabelsColumnChart.yaxis!"
+                        [grid]="datalabelsColumnChart.grid!"
+                        [title]="datalabelsColumnChart.title!"
+                      >
+                      </apx-chart>
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Stacked Column Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="stacked-column" class="apex-charts">
+                        <apx-chart
+                        [chart]="stackedColumnChart.chart!"
+                        [plotOptions]="stackedColumnChart.plotOptions!"
+                        [series]="stackedColumnChart.series!"
+                        [xaxis]="stackedColumnChart.xaxis!"
+                        [colors]="stackedColumnChart.colors!"
+                        [fill]="stackedColumnChart.fill!"
+                        [legend]="stackedColumnChart.legend!"
+                        [grid]="stackedColumnChart.grid!"
+                      >
+                      </apx-chart>
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">100% Stacked Column Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="full-stacked-column" class="apex-charts">
+                        <apx-chart
+                [chart]="fullstackedColumnChart.chart!"
+                [plotOptions]="fullstackedColumnChart.plotOptions!"
+                [series]="fullstackedColumnChart.series!"
+                [xaxis]="fullstackedColumnChart.xaxis!"
+                [fill]="fullstackedColumnChart.fill!"
+                [colors]="fullstackedColumnChart.colors!"
+                [legend]="fullstackedColumnChart.legend!"
+                [grid]="fullstackedColumnChart.grid!"
+              />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Column with Markers</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="column-with-markers" class="apex-charts">
+                        <apx-chart
+                        [chart]="markersColumnChart.chart!"
+                        [plotOptions]="markersColumnChart.plotOptions!"
+                        [colors]="markersColumnChart.colors!"
+                        [dataLabels]="markersColumnChart.dataLabels!"
+                        [series]="markersColumnChart.series!"
+                        [legend]="markersColumnChart.legend!"
+                      >
+                      </apx-chart>
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Column with Group Label</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="column-with-group-label" class="apex-charts">
+                        <apx-chart
+                        [chart]="groupColumnChart.chart!"
+                        [plotOptions]="groupColumnChart.plotOptions!"
+                        [colors]="groupColumnChart.colors!"
+                        [series]="groupColumnChart.series!"
+                        [xaxis]="groupColumnChart.xaxis!"
+                      >
+                      </apx-chart>
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Column Chart with rotated labels & Annotations</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="rotate-labels-column" class="apex-charts">
+                        <apx-chart
+                        [annotations]="rotatelabelColumnChart.annotations!"
+                        [chart]="rotatelabelColumnChart.chart!"
+                        [plotOptions]="rotatelabelColumnChart.plotOptions!"
+                        [dataLabels]="rotatelabelColumnChart.dataLabels!"
+                        [stroke]="rotatelabelColumnChart.stroke!"
+                        [colors]="rotatelabelColumnChart.colors!"
+                        [series]="rotatelabelColumnChart.series!"
+                        [grid]="rotatelabelColumnChart.grid!"
+                        [xaxis]="rotatelabelColumnChart.xaxis!"
+                        [yaxis]="rotatelabelColumnChart.yaxis!"
+                        [fill]="rotatelabelColumnChart.fill!"
+                      >
+                      </apx-chart>
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Column Chart with negative values</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="negative-value-column" class="apex-charts">
+                        <apx-chart
+                        [chart]="negativeColumnChart.chart!"
+                        [plotOptions]="negativeColumnChart.plotOptions!"
+                        [dataLabels]="negativeColumnChart.dataLabels!"
+                        [colors]="negativeColumnChart.colors!"
+                        [series]="negativeColumnChart.series!"
+                        [grid]="negativeColumnChart.grid!"
+                        [xaxis]="negativeColumnChart.xaxis!"
+                        [yaxis]="negativeColumnChart.yaxis!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Distributed Column Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="distributed-column" class="apex-charts">
+                        <apx-chart
+                        [chart]="distributedChart.chart!"
+                        [colors]="distributedChart.colors!"
+                        [plotOptions]="distributedChart.plotOptions!"
+                        [dataLabels]="distributedChart.dataLabels!"
+                        [series]="distributedChart.series!"
+                        [xaxis]="distributedChart.xaxis!"
+                        [grid]="distributedChart.grid!"
+                        [legend]="distributedChart.legend!"
+                      >
+                      </apx-chart>
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Range Column Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="range-column" class="apex-charts">
+                        <apx-chart
+                        [chart]="rangeColumnChart.chart!"
+                        [plotOptions]="rangeColumnChart.plotOptions!"
+                        [dataLabels]="rangeColumnChart.dataLabels!"
+                        [legend]="rangeColumnChart.legend!"
+                        [colors]="rangeColumnChart.colors!"
+                        [series]="rangeColumnChart.series!"
+                      >
+                      </apx-chart>
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header d-flex">
+                <h4 class="card-title anchor flex-grow-1" id="dynamic">Dynamic Loaded Chart</h4>
+                <div class="flex-shrink-0">
+                    <select id="model"  (change)="updateQuarter()" class="form-select form-select-sm">
+                        <option value="iphone5">iPhone 5</option>
+                        <option value="iphone6">iPhone 6</option>
+                        <option value="iphone7">iPhone 7</option>
+                    </select>
+                </div>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div id="chart-year">
+                                <apx-chart
+                                [chart]="yearColumnChart.chart!"
+                                [series]="yearColumnChart.series!"
+                                [plotOptions]="yearColumnChart.plotOptions!"
+                                [dataLabels]="yearColumnChart.dataLabels!"
+                                [legend]="yearColumnChart.legend!"
+                                [colors]="yearColumnChart.colors!"
+                                [states]="yearColumnChart.states!"
+                                [tooltip]="yearColumnChart.tooltip!"
+                                [title]="yearColumnChart.title!"
+                                [subtitle]="yearColumnChart.subtitle!"
+                                [yaxis]="yearColumnChart.yaxis!"
+                              >
+                              </apx-chart>
+                            </div>
+                            
+                            <div id="chart-quarter">
+                                <apx-chart
+                                [chart]="quarterChart.chart!"
+                                [plotOptions]="quarterChart.plotOptions!"
+                                [dataLabels]="quarterChart.dataLabels!"
+                                [legend]="quarterChart.legend!"
+                                [grid]="quarterChart.grid!"
+                                [series]="quarterChart.series!"
+                                [xaxis]="quarterChart.xaxis!"
+                                [yaxis]="quarterChart.yaxis!"
+                                [title]="quarterChart.title!"
+                                [tooltip]="quarterChart.tooltip!"
+                              >
+                              </apx-chart>
+                            </div>
+                        </div>
+                    </div> <!-- end row-->
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div> <!-- end col -->
+</div>

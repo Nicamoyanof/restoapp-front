@@ -1,0 +1,44 @@
+<div class="card">
+    <div class="card-header d-flex align-items-center justify-content-between">
+        <div>
+            <h4 class="card-title mb-0">Revenue Summary</h4>
+        </div>
+        <div class="dropdown" ngbDropdown>
+            <a href="javascript:void(0);" ngbDropdownToggle class="dropdown-toggle btn btn-sm btn-outline-light rounded"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Monthly
+            </a>
+            <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+                <!-- item-->
+                <a href="javascript:void(0);" class="dropdown-item">Week</a>
+                <!-- item-->
+                <a href="javascript:void(0);" class="dropdown-item">Months</a>
+                <!-- item-->
+                <a href="javascript:void(0);" class="dropdown-item">Years</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row align-items-center g-0">
+            <div class="col-lg-6">
+                <div id="order_summary" class="apex-charts">
+                    <apx-chart [chart]="orderSummary.chart!" [fill]="orderSummary.fill!" [series]="orderSummary.series!"
+                        [colors]="orderSummary.colors!" [tooltip]="orderSummary.tooltip!" [title]="orderSummary.title!"
+                        [markers]="orderSummary.markers!" [stroke]="orderSummary.stroke!" [labels]="orderSummary.labels!"
+                        [plotOptions]="orderSummary.plotOptions!"></apx-chart>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="ps-lg-3">
+                    <h2 class="fw-bold text-primary mt-2 d-flex align-items-center gap-3">$56184.22 <span
+                            class="badge text-success bg-success-subtle fs-12"><i
+                                class="ri-arrow-up-line"></i>31.08%</span></h2>
+                    <p class="mb-2 fw-medium">From $600,765.00</p>
+                    <p class="mb-3 fw-medium">❋❋❋</p>
+                    <p>Restaurant has successfully completed a substantial number of orders, totaling 4,500 orders.</p>
+                    <a href="javascript:void(0);" class="btn btn-dark btn-sm mt-3">View Reports</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

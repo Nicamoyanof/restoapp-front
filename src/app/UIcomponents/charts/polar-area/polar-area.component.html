@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-lg-6">
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Basic Polar Area Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="basic-polar-area" class="apex-charts">
+                        <apx-chart
+                        [chart]="basicPolarChartOpts.chart!"
+                        [series]="basicPolarChartOpts.series!"
+                        [stroke]="basicPolarChartOpts.stroke!"
+                        [fill]="basicPolarChartOpts.fill!"
+                        [labels]="basicPolarChartOpts.labels!"
+                        [legend]="basicPolarChartOpts.legend!"
+                        [colors]="basicPolarChartOpts.colors!"
+                        [responsive]="basicPolarChartOpts.responsive!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Monochrome Polar Area</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="monochrome-polar-area" class="apex-charts">
+                        <apx-chart
+                        [chart]="MonochromePolarChartOpts.chart!"
+                        [series]="MonochromePolarChartOpts.series!"
+                        [stroke]="MonochromePolarChartOpts.stroke!"
+                        [fill]="MonochromePolarChartOpts.fill!"
+                        [labels]="MonochromePolarChartOpts.labels!"
+                        [legend]="MonochromePolarChartOpts.legend!"
+                        [colors]="MonochromePolarChartOpts.colors!"
+                        [plotOptions]="MonochromePolarChartOpts.plotOptions!"
+                        [theme]="MonochromePolarChartOpts.theme!"
+                        [yaxis]="MonochromePolarChartOpts.yaxis!"
+                        [legend]="MonochromePolarChartOpts.legend!"
+                      />
+                    </div>
+                </div>
+            </div>                                                                                                      
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div> <!-- end col -->
+</div> 

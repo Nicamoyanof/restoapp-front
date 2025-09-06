@@ -1,0 +1,83 @@
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Scatter (XY) Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="basic-scatter" class="apex-charts">
+                        <apx-chart
+                        [chart]="scatterChartOpts.chart!"
+                        [series]="scatterChartOpts.series!"
+                        [xaxis]="scatterChartOpts.xaxis!"
+                        [yaxis]="scatterChartOpts.yaxis!"
+                        [colors]="scatterChartOpts.colors!"
+                        [grid]="scatterChartOpts.grid!"
+                        [legend]="scatterChartOpts.legend!"
+                        [responsive]="scatterChartOpts.responsive!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Scatter Chart - Datetime</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="datetime-scatter" class="apex-charts">
+                        <apx-chart
+                        [chart]="dateTimeScatterChartOpts.chart!"
+                        [series]="dateTimeScatterChartOpts.series!"
+                        [dataLabels]="dateTimeScatterChartOpts.dataLabels!"
+                        [xaxis]="dateTimeScatterChartOpts.xaxis!"
+                        [yaxis]="dateTimeScatterChartOpts.yaxis!"
+                        [colors]="dateTimeScatterChartOpts.colors!"
+                        [grid]="dateTimeScatterChartOpts.grid!"
+                        [legend]="dateTimeScatterChartOpts.legend!"
+                        [responsive]="dateTimeScatterChartOpts.responsive!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+
+    <div class="col-lg-6"> 
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Scatter - Images</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="scatter-images" class="apex-charts scatter-images-chart">
+                        <apx-chart
+                        [chart]="scatterImagesChartOpts.chart!"
+                        [series]="scatterImagesChartOpts.series!"
+                        [markers]="scatterImagesChartOpts.markers!"
+                        [xaxis]="scatterImagesChartOpts.xaxis!"
+                        [yaxis]="scatterImagesChartOpts.yaxis!"
+                        [colors]="scatterImagesChartOpts.colors!"
+                        [grid]="scatterImagesChartOpts.grid!"
+                        [legend]="scatterImagesChartOpts.legend!"
+                        [markers]="scatterImagesChartOpts.markers!"
+                        [fill]="scatterImagesChartOpts.fill!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div> <!-- end col -->
+</div>

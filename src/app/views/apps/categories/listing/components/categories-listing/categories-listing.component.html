@@ -1,0 +1,22 @@
+<div class="row">
+    @for (item of categoryListData; track $index) {
+    <div class="col-md-6 col-xl-3">
+        <div class="card">
+            <div class="card-body ">
+                <div class="d-flex align-items-center gap-3">
+                    <img [src]="item.image" alt="" class="img-fluid">
+                    <div>
+                        <a href="javascript:void(0);" class="fw-semibold text-dark fs-18">{{item.name}}</a>
+                        <p class="mb-0">{{item.description}}</p>
+                    </div>
+                    <div class="ms-auto">
+                        <a href="javascript:void(0);"
+                            class="btn btn-primary avatar-sm rounded-circle d-flex align-items-center justify-content-center"><i
+                                class="ri-eye-line align-middle fs-16 text-white"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>

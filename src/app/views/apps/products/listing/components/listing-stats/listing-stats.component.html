@@ -1,0 +1,30 @@
+<div class="row">
+    @for (item of listingStats; track $index) {
+    <div class="col-md-6 col-xl-3">
+        <div class="card card-full-height">
+            <div class="card-body ">
+                <div class="d-flex align-items-center gap-3">
+                    <img [src]="item.imgSrc" alt="" class="img-fluid">
+                    <div>
+                        <a href="javascript:void(0)" class="fw-bold text-dark fs-15">{{item.title}}</a>
+                        <p>{{item.itemsAvailable}} Items Available</p>
+                        @if(item.menuOptions && item.menuOptions.length){
+                        @if(item.menuOptions[0] === 'Veg'){
+                        <span class="text-success me-2"><i class="ri-circle-fill fs-10"></i> Veg</span>
+                        }@if(item.menuOptions.length > 1 && item.menuOptions[1] === 'Non Veg'){
+                        <span class="text-danger me-1"><i class="ri-circle-fill fs-10"></i> Non Veg</span>
+
+                        }
+                        }
+                    </div>
+                    <div class="ms-auto">
+                        <a href="javascript:void(0)"
+                            class="btn btn-primary avatar-sm rounded-circle d-flex align-items-center justify-content-center"><i
+                                class="ri-eye-line align-middle fs-16 text-white"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>

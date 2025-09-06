@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="card-title mb-0">Media</p>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle btn btn-sm btn-outline-light rounded" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Reports
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item">Export</a>
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item">Import</a>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0 table-hover table-centered">
+                        <thead class="bg-light-subtle">
+                            <tr>
+                                <th class="w-25">Photo</th>
+                                <th>Media Typee</th>
+                                <th>File Name</th>
+                                <th>Path</th>
+                                <th>Size</th>
+                                <th>Upload Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (item of mediaData; track $index) {
+                            <tr>
+                                <td>
+                                    <a [href]="item.photo">
+                                        <img 
+                                        [src]="item.photo" 
+                                        alt="" 
+                                        [ngClass]="{
+                                          'avatar-md': item.fileName === 'favicon.ico',
+                                          'img-fluid w-25': item.fileName === 'logo-white.png' || item.fileName === 'logo-dark.png',
+                                          'img-fluid w-50': item.fileName !== 'favicon.ico' && item.fileName !== 'logo-white.png' && item.fileName !== 'logo-dark.png'
+                                        }"
+                                      />
+                                    </a>
+                                </td>
+                                <td>{{item.mediaType}}</td>
+                                <td>{{item.fileName}}</td>
+                                <td>{{item.path}}</td>
+                                <td> {{item.size}}</td>
+                                <td>{{item.uploadDate}}</td>
+                                <td>
+                                    <div class="d-flex gap-3">
+                                        <a href="javascript:void(0);" class="text-muted"><i
+                                                class="ri-eye-line align-middle fs-20"></i></a>
+                                        <a href="javascript:void(0);" class="link-dark"><i
+                                                class="ri-edit-line align-middle fs-20"></i></a>
+                                        <a href="javascript:void(0);" class="link-danger"><i
+                                                class="ri-delete-bin-5-line align-middle fs-20"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end table-responsive -->
+            </div>
+            <div class="card-footer border-0">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end mb-0">
+                        <li class="page-item"><a class="page-link" href="javascript:void(0);"><i
+                                    class="ri-arrow-left-s-line"></i></a></li>
+                        <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
+                        <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+                        <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                        <li class="page-item"><a class="page-link" href="javascript:void(0);"><i
+                                    class="ri-arrow-right-s-line"></i></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+</div>

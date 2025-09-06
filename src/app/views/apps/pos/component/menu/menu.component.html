@@ -1,0 +1,30 @@
+<div class="card">
+    <div class="card-header d-flex align-items-center justify-content-between border-0">
+        <h4 class="card-title mb-0">Explore Our Best Menu</h4>
+        <div>
+            <a href="javascript:void(0);" class="btn btn-primary btn-sm"><i class="ri-eye-line"></i> View All</a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    @for (item of posHome; track $index) {
+    <div class="col-xl-3 col-lg-4 col-md-4">
+        <div class="card">
+            <div class="card-body p-2">
+                <div class="d-flex align-items-center justify-content-between gap-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <div
+                            class="rounded bg-warning-subtle border-warning-subtle border avatar d-flex align-items-center justify-content-center">
+                            <img [src]="item.image" alt="" class="">
+                        </div>
+                        <span class="fw-semibold text-dark fs-16">{{item.name}}</span>
+                    </div>
+                    <div>
+                        <a href="javascript:void(0);" class="d-flex align-items-center justify-content-center"><i
+                                class="ri-eye-line align-middle fs-16"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>}
+</div>

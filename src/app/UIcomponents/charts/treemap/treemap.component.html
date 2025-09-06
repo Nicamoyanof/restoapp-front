@@ -1,0 +1,95 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Basic Treemap</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="basic-treemap" class="apex-charts">
+                        <apx-chart
+                        [chart]="basicTreemapChart.chart!"
+                        [series]="basicTreemapChart.series!"
+                        [colors]="basicTreemapChart.colors!"
+                        [legend]="basicTreemapChart.legend!"
+                        [title]="basicTreemapChart.title!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Treemap Multiple Series</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="multiple-treemap" class="apex-charts">
+                        <apx-chart
+                        [chart]="multipleTreemapChart.chart!"
+                        [series]="multipleTreemapChart.series!"
+                        [colors]="multipleTreemapChart.colors!"
+                        [legend]="multipleTreemapChart.legend!"
+                        [title]="multipleTreemapChart.title!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Distributed Treemap</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="distributed-treemap" class="apex-charts">
+                        <apx-chart
+                        [chart]="distributedTreemapChart.chart!"
+                        [series]="distributedTreemapChart.series!"
+                        [colors]="distributedTreemapChart.colors!"
+                        [legend]="distributedTreemapChart.legend!"
+                        [title]="distributedTreemapChart.title!"
+                        [plotOptions]="distributedTreemapChart.plotOptions!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+
+
+    <div class="col-lg-6">                    
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title anchor" id="color-range">Color Range Treemap</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="color-range-treemap" class="apex-charts">
+                        <apx-chart
+                        [chart]="colorTreemapChart.chart!"
+                        [series]="colorTreemapChart.series!"
+                        [colors]="colorTreemapChart.colors!"
+                        [legend]="colorTreemapChart.legend!"
+                        [title]="colorTreemapChart.title!"
+                        [plotOptions]="colorTreemapChart.plotOptions!"
+                        [dataLabels]="colorTreemapChart.dataLabels!"
+                      />
+                    </div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div> <!-- end col -->
+</div>

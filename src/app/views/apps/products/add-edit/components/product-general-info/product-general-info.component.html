@@ -1,0 +1,64 @@
+<div class="card">
+  <div class="card-header">
+    <h4 class="card-title mb-0">{{ isEdit ? 'Editar' : 'Agregar' }} Producto</h4>
+  </div>
+  <form [formGroup]="formGroup">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="mb-3">
+            <label for="product-name" class="form-label">Nombre del Producto</label>
+            <input type="text" id="product-name" class="form-control" placeholder="Nombre del producto"
+              formControlName="name">
+          </div>
+
+        </div>
+
+        @if (categories.length > 0) {
+        <div class="col-lg-6">
+          <div class="mb-3">
+            <label for="category" class="form-label">Categoría</label>
+            <select selectFormInput class="form-control" id="category" data-choices data-choices-groups
+              data-placeholder="Select Category" formControlName="categoryId">
+              @for (item of categories; track $index) {
+              <option [value]="item.categoryId">{{ item.name }}</option>
+              }
+            </select>
+          </div>
+        </div>
+        }
+        <div class="">
+          <div class="mb-3">
+            <label for="description" class="form-label">Descripción</label>
+            <textarea class="form-control bg-light-subtle" id="description" rows="5"
+              placeholder="Descripción del producto" formControlName="description"></textarea>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="product-id" class="form-label">Precio</label>
+            <input type="text" id="product-id" class="form-control" placeholder="0,00" formControlName="price">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="product-stock" class="form-label">Stock</label>
+            <input type="text" id="product-stock" class="form-control" placeholder="0" formControlName="stock">
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="p-3 mb-3 rounded">
+  <div class="row justify-content-end g-2">
+    <div class="col-lg-3">
+      <div class="btn btn-outline-secondary w-100"><i class="ri-close-circle-line"
+          [routerLink]="['/products/listing']"></i> Cancelar</div>
+    </div>
+    <div class="col-lg-4" (click)="save()">
+      <div class="btn btn-primary w-100" [ngClass]="formGroup.invalid ? 'btn-invalid' : ''"><i class="ri-save-line"></i>
+        Guardar Cambios</div>
+    </div>
+  </div>
+</div>

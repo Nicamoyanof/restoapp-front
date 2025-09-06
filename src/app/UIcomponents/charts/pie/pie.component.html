@@ -1,0 +1,154 @@
+<div class="row">
+    <div class="col-lg-6">
+    
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Simple Pie Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="simple-pie" class="apex-charts">  <apx-chart
+                        [chart]="simplePieChart.chart!"
+                        [series]="simplePieChart.series!"
+                        [labels]="simplePieChart.labels!"
+                        [colors]="simplePieChart.colors!"
+                        [legend]="simplePieChart.legend!"
+                      /></div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Simple Donut Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="simple-donut" class="apex-charts"> <apx-chart
+                        [chart]="simpleDonutChart.chart!"
+                        [series]="simpleDonutChart.series!"
+                        [labels]="simpleDonutChart.labels!"
+                        [colors]="simpleDonutChart.colors!"
+                        [legend]="simpleDonutChart.legend!"
+                      /></div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Monochrome Pie Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="monochrome-pie" class="apex-charts"> <apx-chart
+                        [chart]="monochromePieChart.chart!"
+                        [series]="monochromePieChart.series!"
+                        [labels]="monochromePieChart.labels!"
+                        [colors]="monochromePieChart.colors!"
+                        [legend]="monochromePieChart.legend!"
+                        [theme]="monochromePieChart.theme!"
+                      /></div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-3 anchor" id="gradient">Gradient Donut Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="gradient-donut" class="apex-charts"> <apx-chart
+                        [chart]="gradientDonutChart.chart!"
+                        [series]="gradientDonutChart.series!"
+                        [labels]="gradientDonutChart.labels!"
+                        [colors]="gradientDonutChart.colors!"
+                        [legend]="gradientDonutChart.legend!"
+                        [fill]="gradientDonutChart.fill!"
+                      /></div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-3 anchor" id="patterned">Patterned Donut Chart</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="patterned-donut" class="apex-charts"> <apx-chart
+                        [chart]="patternedDonutChart.chart!"
+                        [series]="patternedDonutChart.series!"
+                        [dataLabels]="patternedDonutChart.dataLabels!"
+                        [labels]="patternedDonutChart.labels!"
+                        [colors]="patternedDonutChart.colors!"
+                        [legend]="patternedDonutChart.legend!"
+                        [states]="patternedDonutChart.states!"
+                        [fill]="patternedDonutChart.fill!"
+                      /></div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Pie Chart with Image fill</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="image-pie" class="apex-charts"><apx-chart
+                        [chart]="imagePieChart.chart!"
+                        [series]="imagePieChart.series!"
+                        [dataLabels]="imagePieChart.dataLabels!"
+                        [labels]="imagePieChart.labels!"
+                        [colors]="imagePieChart.colors!"
+                        [legend]="imagePieChart.legend!"
+                        [states]="imagePieChart.states!"
+                        [fill]="imagePieChart.fill!"
+                        [stroke]="imagePieChart.stroke!"
+                      /></div>
+                </div>
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div>
+    <div class="col-lg-6">                
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Donut Update</h4>
+            </div>
+            <div class="card-body">
+                <div dir="ltr">
+                    <div id="update-donut" class="apex-charts"></div>
+                </div>
+
+                <div class="text-center mt-2">
+                    <button class="btn btn-sm btn-primary me-2" id="randomize" (click)="randomizeChart()">RANDOMIZE</button>
+                    <button class="btn btn-sm btn-primary me-2" id="add" (click)="addData()">ADD</button>
+                    <button class="btn btn-sm btn-primary me-2" id="remove" (click)="removeData()">REMOVE</button>
+                    <button class="btn btn-sm btn-primary me-2" id="reset" (click)="resetChart()">RESET</button>
+                </div>
+
+            </div>
+            <!-- end card body-->
+        </div>
+        <!-- end card -->
+    </div> <!-- end col -->
+</div> 

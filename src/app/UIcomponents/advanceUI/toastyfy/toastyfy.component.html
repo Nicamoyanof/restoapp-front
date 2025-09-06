@@ -1,0 +1,103 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row g-5">
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    Basic Toastify JS Example
+                </h5>
+                <div class="hstack flex-wrap gap-2">
+                    <button type="button" appToastify [toastMessage]="'Welcome Back! This is a Toast Notification'"
+                        [toastGravity]="'top'" [toastPosition]="'right'" [toastClassName]="'bg-primary'"
+                        [toastDuration]="3000" [toastClose]="true" [toastStyle]="''" data-toast-close="close"
+                        data-toast-style="style" class="btn btn-light w-xs">
+                        Default
+                    </button>
+
+                    <button type="button" appToastify data-toast toastMessage="Your application was successfully sent"
+                        [toastGravity]="'top'" toastPosition="center" [toastClassName]="'bg-success'"
+                        [toastDuration]="3000" class="btn btn-light w-xs">
+                        Success
+                    </button>
+
+                    <button type="button" appToastify data-toast toastMessage="Warning ! Something went wrong try again"
+                        [toastGravity]="'top'" toastPosition="center" [toastClassName]="'bg-warning'"
+                        [toastDuration]="3000" class="btn btn-light w-xs">
+                        Warning
+                    </button>
+
+                    <button type="button" appToastify data-toast toastMessage="Error ! An error occurred." [toastGravity]="'top'"
+                        toastPosition="center" [toastClassName]="'bg-danger'" [toastDuration]="3000"
+                        class="btn btn-light w-xs">
+                        Error
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    Display Position Example
+                </h5>
+                <div class="hstack flex-wrap gap-2">
+                    <button type="button" appToastify data-toast toastMessage="Welcome Back ! This is a Toast Notification"
+                        [toastGravity]="'top'" toastPosition="left" [toastDuration]="3000" data-toast-close="close"
+                        class="btn btn-light w-xs">
+                        Top Left
+                    </button>
+
+                    <button type="button" appToastify data-toast toastMessage="Welcome Back ! This is a Toast Notification"
+                        [toastGravity]="'top'" toastPosition="center" [toastDuration]="3000" data-toast-close="close"
+                        class="btn btn-light w-xs">
+                        Top Center
+                    </button>
+
+                    <button type="button" appToastify data-toast toastMessage="Welcome Back ! This is a Toast Notification"
+                        [toastGravity]="'top'" toastPosition="right" [toastDuration]="3000" data-toast-close="close"
+                        class="btn btn-light w-xs">
+                        Top Right
+                    </button>
+
+                    <button type="button" appToastify data-toast toastMessage="Welcome Back ! This is a Toast Notification"
+                        [toastGravity]="'bottom'" toastPosition="left" [toastDuration]="3000" data-toast-close="close"
+                        class="btn btn-light w-xs">
+                        Bottom Left
+                    </button>
+
+                    <button type="button" appToastify data-toast toastMessage="Welcome Back ! This is a Toast Notification"
+                        [toastGravity]="'bottom'" toastPosition="center" [toastDuration]="3000" data-toast-close="close"
+                        class="btn btn-light w-xs">
+                        Bottom Center
+                    </button>
+
+                    <button type="button" appToastify data-toast toastMessage="Welcome Back ! This is a Toast Notification"
+                        [toastGravity]="'bottom'" toastPosition="right" [toastDuration]="3000" data-toast-close="close"
+                        class="btn btn-light w-xs">
+                        Bottom Right
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <h5 class="card-title mb-4">
+                    Offset, Close Button & Duration Example
+                </h5>
+                <div class="d-flex align-items-center flex-wrap gap-2">
+                    <button type="button" appToastify data-toast toastMessage="Welcome Back ! This is a Toast Notification"
+                        [toastGravity]="'top'" toastPosition="right" [toastDuration]="3000" data-toast-offset
+                        data-toast-close="close" class="btn btn-light w-xs">
+                        Offset Position
+                    </button>
+
+                    <button type="button"appToastify data-toast toastMessage="Welcome Back ! This is a Toast Notification"
+                        toastPosition="right" [toastDuration]="3000" data-toast-close="close" class="btn btn-light w-xs">
+                        Close icon Display
+                    </button>
+
+                    <button type="button" appToastify data-toast toastMessage="Toast Duration 5s" [toastGravity]="'top'"
+                        toastPosition="right" [toastDuration]="5000" class="btn btn-light w-xs">
+                        Duration
+                    </button>
+                </div>
+            </div><!-- end col -->
+        </div> <!-- end row -->
+    </div>
+</div>
