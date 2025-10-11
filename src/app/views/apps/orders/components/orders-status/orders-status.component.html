@@ -1,20 +1,22 @@
 <div class="row">
-    @for (item of orderStatusData; track $index) {
-    <div class="col-md-6 col-xl-3">
-         <div class="card card-full-height">
-              <div class="card-body ">
-                   <div class="d-flex align-items-center gap-3">
-                        <img [src]="item.icon" alt="" class="img-fluid">
-                        <div>
-                             <p class="text-dark fw-semibold fs-26 mb-1">{{item.count}}</p>
-                             <p class="card-title mb-0">{{item.title}}</p>
-                        </div>
-                        <div class="ms-auto">
-                             <a href="javascript:void(0)" class="btn btn-primary avatar-sm rounded-circle d-flex align-items-center justify-content-center"><i class="ri-eye-line align-middle fs-16 text-white"></i></a>
-                        </div>
-                   </div>
-              </div>
-         </div>
+  @for (item of orderStatusData; track $index) {
+  <div class="col-md-6 col-xl-3">
+    <div class="card card-full-height container" [ngClass]="{'active': selectedStatus.includes(item.id)}">
+      <div class="card-body ">
+        <div class="d-flex align-items-center gap-3">
+          <img [src]="item.icon" alt="" class="img-fluid">
+          <div>
+            <p class="text-dark fw-semibold fs-26 mb-1">{{item.count}}</p>
+            <p class="card-title mb-0">{{item.title}}</p>
+          </div>
+          <div class="ms-auto">
+            <a (click)="onStatusChange(item.id, !selectedStatus.includes(item.id))"
+              class="btn btn-primary avatar-sm rounded-circle d-flex align-items-center justify-content-center"><i
+                class="ri-eye-line align-middle fs-16 text-white"></i></a>
+          </div>
+        </div>
+      </div>
     </div>
-}
+  </div>
+  }
 </div>

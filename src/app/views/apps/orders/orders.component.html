@@ -1,7 +1,12 @@
-<app-orders-status />
+<app-orders-status [orderStatusData]="orderStatusData" (statusChange)="onStatusChange($event)" />
 
 <div class="row">
-    <div class="col-xl-12">
-        <app-orders-summary />
-    </div>
+  <div class="col-xl-12">
+    @if (orders?.length === 0) {
+    <p>No hay pedidos activos</p>
+    } @else {
+    <app-orders-summary [ordersData]="orders" (changeStatus)="onChangeStatus($event)"
+      (refreshOrder)="onRefreshOrder()" />
+    }
+  </div>
 </div>

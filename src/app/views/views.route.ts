@@ -14,7 +14,6 @@ import { RidersComponent } from './apps/riders/riders.component';
 import { OffersComponent } from './apps/offers/offers.component';
 import { LocationsComponent } from './apps/locations/locations.component';
 import { MediaComponent } from './apps/media/media.component';
-import { StoreSettingComponent } from './apps/store-setting/store-setting.component';
 import { TodoComponent } from './apps/todo/todo.component';
 import { ManageAppsComponent } from './apps/manage-apps/manage-apps.component';
 import { OnvoiceComponent } from './apps/invoices/onvoice/onvoice.component';
@@ -25,82 +24,64 @@ import { FaqsComponent } from './pages/faqs/faqs.component';
 import { GalleryComponent } from './pages/gallery/gallery.component';
 import { TimelineComponent } from './pages/timeline/timeline.component';
 import { PricingComponent } from './pages/pricing/pricing.component';
+import { RestaurantTablesComponent } from './apps/restaurant-tables/restaurant-tables.component';
+import { PaymentMethodsComponent } from './apps/payment-methods/payment-methods.component';
+import { HistoricalOrdersComponent } from './apps/historical-orders/historical-orders.component';
+import { clientGuard } from '../guards/client.guard';
+import { EditOrderComponent } from './apps/edit-order/edit-order.component';
+import { KitchenSettingsComponent } from './apps/settings/kitchen-settings/kitchen-settings.component';
+import { IngredientsComponent } from './apps/ingredients/ingredients.component';
+import { AddIngredientsComponent } from './apps/ingredients/add-ingredients/add-ingredients.component';
+import { StoreSettingComponent } from './apps/settings/store-setting/store-setting.component';
 
 export const VIEWS_ROUTES: Route[] = [
   {
     path: 'index',
     component: DashboardComponent,
     data: { title: 'Dashboard' },
+    canActivate: [clientGuard],
   },
   {
     path: 'orders',
     component: OrdersComponent,
     data: { title: 'Order' },
+    canActivate: [clientGuard],
   },
   {
     path: 'product/listing',
     component: ListingComponent,
     data: { title: 'Product Listing' },
+    canActivate: [clientGuard],
   },
   {
-    path: 'product/add-edit',
+    path: 'product/add',
     component: AddEditComponent,
     data: { title: 'Product Add Edit' },
+    canActivate: [clientGuard],
+  },
+  {
+    path: 'product/edit/:id',
+    component: AddEditComponent,
+    data: { title: 'Product Add Edit' },
+    canActivate: [clientGuard],
   },
   {
     path: 'categories/listing',
     component: CategoryListingComponent,
     data: { title: 'Category Listing' },
+    canActivate: [clientGuard],
   },
   {
     path: 'categories/add-edit',
     component: CategoryAddEditComponent,
     data: { title: 'Category Add Edit' },
+    canActivate: [clientGuard],
   },
   {
     path: 'categories/edit/:id',
     component: CategoryAddEditComponent,
     data: { title: 'Category Add Edit' },
-  },
-  {
-    path: 'customers',
-    component: CustomersComponent,
-    data: { title: 'Customers' },
-  },
-  {
-    path: 'menu-cards',
-    component: MenuCardsComponent,
-    data: { title: 'Menu Cards' },
-  },
-  {
-    path: 'pos',
-    component: PosComponent,
-    data: { title: 'POS' },
-  },
-  {
-    path: 'reports',
-    component: ReportsComponent,
-    data: { title: 'Report' },
-  },
-  {
-    path: 'riders',
-    component: RidersComponent,
-    data: { title: 'Rider' },
-  },
-  {
-    path: 'offers',
-    component: OffersComponent,
-    data: { title: 'Offer' },
-  },
-  {
-    path: 'locations',
-    component: LocationsComponent,
-    data: { title: 'Location' },
-  },
-  {
-    path: 'media',
-    component: MediaComponent,
-    data: { title: 'Media' },
+    canActivate: [clientGuard],
   },
   {
     path: 'settings',
@@ -108,53 +89,51 @@ export const VIEWS_ROUTES: Route[] = [
     data: { title: 'Media' },
   },
   {
-    path: 'todo',
-    component: TodoComponent,
-    data: { title: 'Todo' },
+    path: 'restaurant-tables',
+    component: RestaurantTablesComponent,
+    data: { title: 'Restaurant Tables' },
+    canActivate: [clientGuard],
   },
   {
-    path: 'manage-apps',
-    component: ManageAppsComponent,
-    data: { title: 'Manage Apps' },
+    path: 'payment-methods',
+    component: PaymentMethodsComponent,
+    data: { title: 'Payment Methods' },
+    canActivate: [clientGuard],
   },
   {
-    path: 'invoices',
-    component: OnvoiceComponent,
-    data: { title: 'Invoices' },
+    path: 'order-historical',
+    component: HistoricalOrdersComponent,
+    data: { title: 'Order Historical' },
+    canActivate: [clientGuard],
   },
   {
-    path: 'invoice-details',
-    component: OnvoiceDetailComponent,
-    data: { title: 'Invoices Detail' },
+    path: 'edit-order/:id',
+    component: EditOrderComponent,
+    data: { title: 'Editar Pedido' },
+    canActivate: [clientGuard],
   },
   {
-    path: 'pages/starter',
-    component: WelcomeComponent,
-    data: { title: 'Welcome' },
+    path: 'settings/kitchen',
+    component: KitchenSettingsComponent,
+    data: { title: 'Configuración de Cocina' },
+    canActivate: [clientGuard],
   },
   {
-    path: 'pages/profile',
-    component: ProfileComponent,
-    data: { title: 'Profile' },
+    path: 'ingredients/listing',
+    component: IngredientsComponent,
+    data: { title: 'Listado de Ingredientes' },
+    canActivate: [clientGuard],
   },
   {
-    path: 'pages/faqs',
-    component: FaqsComponent,
-    data: { title: 'FAQs' },
+    path: 'ingredients/add',
+    component: AddIngredientsComponent,
+    data: { title: 'Agregar Ingrediente' },
+    canActivate: [clientGuard],
   },
   {
-    path: 'pages/gallery',
-    component: GalleryComponent,
-    data: { title: 'Gallery' },
-  },
-  {
-    path: 'pages/timeline',
-    component: TimelineComponent,
-    data: { title: 'Timeline' },
-  },
-  {
-    path: 'pages/pricing',
-    component: PricingComponent,
-    data: { title: 'Pricing' },
+    path: 'ingredients/edit/:id',
+    component: AddIngredientsComponent,
+    data: { title: 'Agregar Ingrediente' },
+    canActivate: [clientGuard],
   },
 ];

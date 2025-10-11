@@ -1,96 +1,148 @@
 <div class="card">
-    <div class="card-header d-flex justify-content-between align-items-center">
-        <div>
-            <p class="card-title mb-0">Orders Summary</p>
-        </div>
-        <div class="d-flex gap-3">
-            <a href="javascript:void(0)" class="btn btn-sm btn-primary">Create Order</a>
-            <div class="dropdown" ngbDropdown>
-                <a href="javascript:void(0)" ngbDropdownToggle
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <div>
+      <p class="card-title mb-0">Resumen de Pedidos</p>
+    </div>
+    <div class="d-flex gap-3">
+      <!-- <div class="btn btn-sm btn-primary">Crear Pedido</div> -->
+      <!-- <div class="dropdown" ngbDropdown>
+                <div ngbDropdownToggle
                     class="dropdown-toggle btn btn-sm btn-outline-light rounded" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    Reports
-                </a>
-                <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
-                    <!-- item-->
-                    <a href="javascript:void(0)" class="dropdown-item">Export</a>
-                    <!-- item-->
-                    <a href="javascript:void(0)" class="dropdown-item">Import</a>
+                    Reportes
                 </div>
-            </div>
-        </div>
+                <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+
+                    <div class="dropdown-item">Export</div>
+
+                    <div class="dropdown-item">Import</div>
+                </div>
+            </div> -->
     </div>
-    <div class="">
-        <div class="table-responsive">
-            <table class="table align-middle mb-0 table-hover table-centered">
-                <thead class="bg-light-subtle fs-12 text-uppercase">
-                    <tr>
-                        <th>Order No.</th>
-                        <th>Customer</th>
-                        <th>Items Name</th>
-                        <th>Quantity</th>
-                        <th>Price Per Item</th>
-                        <th>Total Price</th>
-                        <th>Payment Method</th>
-                        <th>Order Date & Time</th>
-                        <th>Address</th>
-                        <th>Delivery Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (order of ordersData; track $index) {
-                    <tr>
-                        <td>{{order.orderNo}}</td>
-                        <td>
-                            <a href="javascript:void(0)" class="link-primary fw-medium">{{order.customer}} </a>
-                        </td>
-                        <td>
-                            @for (item of order.items; track $index) {
-                            <p class="mb-1"><span class="fw-semibold text-dark me-1">{{$index+1}}.</span>{{item.name}}
-                            </p>
-                            }
-                        </td>
-                        <td>
-                            @for (item of order.items; track $index) {
-                            <p class="mb-1">{{item.quantity}}</p>}
-                        </td>
-                        <td>
-                            @for (item of order.items; track $index) {
-                            <p class="mb-1">${{item.pricePerItem}}</p>
-                            }
-                        </td>
-                        <td>${{ order.totalPrice | number:'1.2-2'}}</td>
-                        <td>{{ order.paymentMethod }}<i [class]="order.icon"></i></td>
-                        <td>{{ order.orderDateTime }}</td>
-                        <td>{{ order.address }}</td>
-                        <td> <span class="badge px-2 py-1 fs-11 border"
-                                [ngClass]="getBadgeClasses(order.deliveryStatus)">
-                                {{ order.deliveryStatus }}
-                            </span></td>
-                        <td>
-                            <div class="d-flex gap-3">
-                                <a href="javascript:void(0)" class="text-muted"><i
-                                        class="ri-eye-line align-middle fs-20"></i></a>
-                                <a href="javascript:void(0)" class="link-dark"><i
-                                        class="ri-edit-line align-middle fs-20"></i></a>
-                                <a href="javascript:void(0)" class="link-danger"><i
-                                        class="ri-delete-bin-5-line align-middle fs-20"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <!-- end table-responsive -->
+  </div>
+  <div class="">
+    <div class="table-responsive">
+      <table class="table align-middle mb-0 table-hover table-centered">
+        <thead class="bg-light-subtle fs-12 text-uppercase">
+          <tr>
+            <th>Nro de Orden</th>
+            <!-- <th>Cliente</th> -->
+            <th>Nombre de los Artículos</th>
+            <th>Mesa</th>
+            <th>Cantidad</th>
+            <!-- <th>Precio por Artículo</th> -->
+            <th>Precio Total</th>
+            <!-- <th>Método de Pago</th> -->
+            <th>Tiempo de Espera</th>
+            <th>Estado de Entrega</th>
+            <th>Notas</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (order of ordersData; track $index) {
+          <tr>
+            <td>#ORD-{{order.orderId}}</td>
+            <!-- <td>
+              <div class="link-primary fw-medium">{{order.customer}} </div>
+            </td> -->
+            <td>
+              <p class="mb-1">{{order.product}}
+              </p>
+            </td>
+            <td>{{order.tableNumber}}</td>
+            <td>
+              <p class="mb-1">{{order.quantity}}</p>
+            </td>
+            <!-- <td>
+              @for (item of order.items; track $index) {
+              <p class="mb-1">${{item.pricePerItem}}</p>
+              }
+            </td> -->
+            <td style="text-align: end;">${{ order.subtotal | number:'1.2-2'}}</td>
+            <!-- <td>{{ order.paymentMethod }}<i [class]="order.icon"></i></td> -->
+            <td>{{ order.tsCreated | timeAgo }}</td>
+            <!-- <td>{{ order.address }}</td> -->
+            <td> <span class="badge px-2 py-1 fs-11 border" [ngClass]="getBadgeClasses(order.status)">
+                {{ getStatusText(order.status) }}
+              </span></td>
+            <td>
+              @if (order.notes) {
+              <button class="btn btn-link" (click)="openNotesModal(notesModal, order)">Ver Notas</button>
+              }
+            </td>
+            <td>
+              <div class="d-flex gap-3">
+                <div class="text-muted" ngbTooltip="Ver Pedido" style="cursor: pointer;"
+                  (click)="openModal(centered, { centered: true }, order)"><i
+                    class="ri-eye-line align-middle fs-20"></i></div>
+                <!-- agregar boton segun estado, si esta pendiente -> pasar a en preparacion si esta en preparacion a entregado para el boton de marcar como en preparacion quiero un icono mas representativo-->
+                @if (order.status == 0) {
+                <span class="bg-primary text-light badge px-2 py-1 fs-11 border"
+                  style="display: flex; align-items: center; cursor: pointer;" ngbTooltip="Marcar como En Preparación"
+                  (click)="updateOrderStatus(order.orderId, order.itemId, 1)">Cambiar a En Preparación
+                </span>
+                }@else if (order.status == 1) {
+                <span class="bg-success text-light badge px-2 py-1 fs-11 border"
+                  style="display: flex; align-items: center; cursor: pointer;" ngbTooltip="Marcar como Entregado"
+                  (click)="updateOrderStatus(order.orderId, order.itemId, 2)">Cambiar a Entregado</span>
+                }
+
+                <!-- <div class="link-dark"><i class="ri-edit-line align-middle fs-20"></i></div>
+                <div class="link-danger"><i
+                    class="ri-delete-bin-5-line align-middle fs-20"></i></div> -->
+              </div>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
     </div>
-    <div class="card-footer border-0">
-        <ngb-pagination class="pagination justify-content-end mb-0" [collectionSize]="totalItems" [(page)]="currentPage"
-            [pageSize]="pageSize" [maxSize]="maxSize" [rotate]="true" [ellipses]="false" [boundaryLinks]="false"
-            aria-label="Page navigation example">
-            <ng-template ngbPaginationPrevious> <i class="ri-arrow-left-s-line"></i></ng-template>
-            <ng-template ngbPaginationNext> <i class="ri-arrow-right-s-line"></i></ng-template>
-        </ngb-pagination>
-    </div>
+    <!-- end table-responsive -->
+  </div>
+  <!-- <div class="card-footer border-0">
+    <ngb-pagination class="pagination justify-content-end mb-0" [collectionSize]="totalItems" [(page)]="currentPage"
+      [pageSize]="pageSize" [maxSize]="maxSize" [rotate]="true" [ellipses]="false" [boundaryLinks]="false"
+      aria-label="Page navigation example">
+      <ng-template ngbPaginationPrevious> <i class="ri-arrow-left-s-line"></i></ng-template>
+      <ng-template ngbPaginationNext> <i class="ri-arrow-right-s-line"></i></ng-template>
+    </ngb-pagination>
+  </div> -->
 </div>
+
+<!-- crea un modal para mostrar toda la info mas detallada  de la orden-->
+<ng-template #centered let-modal class="modal fade" id="exampleModalCenter" tabindex="-1"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalCenterTitle">Detalle del Pedido</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <ul>
+        <li><strong>Nombre:</strong> {{ orderSelected.product }}</li>
+        <br>
+        <li><strong>Cantidad:</strong> {{ orderSelected.quantity }}</li>
+        <br>
+        <li><strong>Notas:</strong> {{ orderSelected.notes }}</li>
+        <br>
+        <li><strong>Precio Total:</strong> ${{ orderSelected.subtotal | number:'1.2-2' }}</li>
+        <br>
+        <li><strong>Tiempo de Espera:</strong> {{ orderSelected.tsCreated | timeAgo }} </li>
+      </ul>
+
+    </div>
+  </div>
+</ng-template>
+<ng-template #notesModal let-modal class="modal fade" id="notesModal" tabindex="-1" aria-labelledby="notesModalTitle"
+  aria-hidden="true">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="notesModalTitle">Notas del Pedido</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <p>{{ orderSelected.notes }}</p>
+    </div>
+  </div>
+</ng-template>

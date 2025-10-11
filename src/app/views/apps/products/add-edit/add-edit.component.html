@@ -3,6 +3,8 @@
         <app-product-photo />
     </div> -->
   <div class="">
-    <app-product-general-info [categories]="categories" />
+    @if (categories) {
+    <app-product-general-info />
+    }
   </div>
 </div>

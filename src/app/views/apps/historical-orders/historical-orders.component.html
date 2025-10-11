@@ -1,0 +1,199 @@
+<div class="row">
+  @for (item of orderStatusData; track $index) {
+  <div class="col-md-6 col-xl-3">
+    <div class="card card-full-height">
+      <div class="card-body ">
+        <div class="d-flex align-items-center gap-3">
+          <img [src]="item.icon" alt="" class="img-fluid">
+          <div>
+            <p class="text-dark fw-semibold fs-26 mb-1">{{item.count}}</p>
+            <p class="card-title mb-0">{{item.title}}</p>
+          </div>
+          <div class="ms-auto">
+            <a href="javascript:void(0)"
+              class="btn btn-primary avatar-sm rounded-circle d-flex align-items-center justify-content-center"><i
+                class="ri-eye-line align-middle fs-16 text-white"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+<div class="row">
+  <div class="col-xl-12">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+          <p class="card-title mb-0">Pedidos Históricos</p>
+        </div>
+        <!-- <div class="d-flex gap-3">
+          <div class="dropdown" ngbDropdown>
+            <a href="javascript:void(0)" ngbDropdownToggle class="dropdown-toggle btn btn-sm btn-outline-light rounded"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Reports
+            </a>
+            <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+
+              <a href="javascript:void(0)" class="dropdown-item">Export</a>
+              <a href="javascript:void(0)" class="dropdown-item">Import</a>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <div class="">
+        <div class="table-responsive">
+          <table class="table align-middle mb-0 table-hover table-centered">
+            <thead class="bg-light-subtle fs-12 text-uppercase">
+              <tr>
+                <th>Pedido No.</th>
+                <th>Mesa</th>
+                <th>Estado</th>
+                <th>Total</th>
+                <th>Método de Pago</th>
+                <th>Fecha del Pedido</th>
+                <th>Fecha de Cierre</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (order of ordersData | slice: (currentPage-1) * pageSize : currentPage * pageSize; track $index) {
+              <tr>
+                <td>#{{order.id}}</td>
+                <td>
+                  <p class="mb-1">{{
+                    getTableName(order.tableId)
+                    }}</p>
+                </td>
+                <td>
+                  <span class="badge" [ngClass]="{
+    'bg-secondary-subtle text-secondary': order.status === 0,
+    'bg-warning-subtle text-warning': order.status === 1,
+    'bg-info-subtle text-info': order.status === 2,
+    'bg-success-subtle text-success': order.status === 3,
+    'bg-danger-subtle text-danger': order.status === 4,
+    'bg-dark-subtle text-dark': order.status === 5
+  }">
+                    {{ getOrderStatusName(order.status) }}
+                  </span>
+                </td>
+                <td>${{ order.total | number:'1.2-2'}}</td>
+                <td>{{ getPaymentMethodName(order.paymentMethod) }}<i [class]="order.icon"></i></td>
+                <td>{{ order.createdAt | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+                <td>{{ (order.closedAt | date:'dd/MM/yyyy HH:mm:ss') ?? '-' }}</td>
+                <td>
+                  <div class="d-flex gap-3">
+                    <div class="text-muted" style="cursor: pointer;"
+                      (click)="openModal(centered, { centered: true }, order)">
+                      <i class="ri-eye-line align-middle fs-20"></i>
+                    </div>
+                    <a [routerLink]="['/edit-order', order.id]" class="link-dark"><i
+                        class="ri-edit-line align-middle fs-20"></i></a>
+                    <a href="javascript:void(0)" class="link-danger"><i
+                        class="ri-delete-bin-5-line align-middle fs-20"></i></a>
+                  </div>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+        <!-- end table-responsive -->
+      </div>
+      <div class="card-footer border-0">
+        <ngb-pagination class="pagination justify-content-end mb-0" [collectionSize]="totalItems" [(page)]="currentPage"
+          [pageSize]="pageSize" [maxSize]="maxSize" [rotate]="true" [ellipses]="false" [boundaryLinks]="false"
+          aria-label="Page navigation example">
+          <ng-template ngbPaginationPrevious> <i class="ri-arrow-left-s-line"></i></ng-template>
+          <ng-template ngbPaginationNext> <i class="ri-arrow-right-s-line"></i></ng-template>
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #centered let-modal class="modal fade" id="exampleModalCenter" tabindex="-1"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <!-- quiero qu este modal muestre toda la info del order  public class Order
+ {
+     public int Id { get; private set; }
+     public long CreatedAt { get; private set; } = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+     public long? ClosedAt { get; private set; }
+     public OrderType Type { get; private set; }
+     public OrderStatus Status { get; private set; } = OrderStatus.Created;
+     public int? Covers { get; private set; }
+     public int? TableId { get; private set; }
+     public string? CustomerName { get; private set; }
+     public int ClientId { get; set; }
+     public decimal Total => Items.Where(i => !i.IsCanceled).Sum(i => i.Subtotal);
+     public int PaymentMethod { get; set; }
+     public decimal Discount { get; set; }
+     private readonly List<OrderDetail> _items = new();
+     public IReadOnlyCollection<OrderDetail> Items => _items.AsReadOnly();    public class OrderDetail
+    {
+        public int Id { get; private set; }
+        public int OrderId { get; private set; }
+        public int ProductId { get; private set; }
+        public decimal UnitPrice { get; private set; }
+        public int Quantity { get; private set; }
+        public string? Notes { get; private set; }
+        public bool IsCanceled { get; private set; } = false;
+        public long TsDelivered { get; set; }
+        public long TsCreated { get; private set; } = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        public OrderDetailStatusEnum Status { get; set; }
+
+        public decimal Subtotal => UnitPrice * Quantity; -->
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Detalles del Pedido</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Aquí puedes mostrar toda la información del pedido -->
+        <p>ID del Pedido: {{ selectedOrder?.id }}</p>
+        <p>Mesa: {{ getTableName(selectedOrder?.tableId) }}</p>
+        <p>Estado: <span class="badge" [ngClass]="{
+    'bg-secondary-subtle text-secondary': selectedOrder?.status === 0,
+    'bg-warning-subtle text-warning': selectedOrder?.status === 1,
+    'bg-info-subtle text-info': selectedOrder?.status === 2,
+    'bg-success-subtle text-success': selectedOrder?.status === 3,
+    'bg-danger-subtle text-danger': selectedOrder?.status === 4,
+    'bg-dark-subtle text-dark': selectedOrder?.status === 5
+  }">
+            {{ getOrderStatusName(selectedOrder?.status) }}
+          </span></p>
+        <strong>Total: ${{ selectedOrder?.total | number:'1.2-2' }}</strong>
+        <br>
+        <br>
+        <h6>Detalles del Pedido:</h6>
+        <div style="max-height: 300px; overflow-y: auto;">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of selectedOrder?.items">
+                <td>{{ getProductName(item.productId) }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.unitPrice | number:'1.2-2' }}</td>
+                <td>${{ item.subtotal | number:'1.2-2' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- imprimir ticket -->
+        <button type="button" class="btn btn-primary" (click)="printTicket()">Imprimir Ticket</button>
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Cerrar</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</ng-template>

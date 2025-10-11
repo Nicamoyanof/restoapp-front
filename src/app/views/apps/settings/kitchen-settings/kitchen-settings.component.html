@@ -1,0 +1,59 @@
+<div class="card">
+  <div class="card-header">
+    <h4 class="card-title mb-0">Configuración de Cocinas</h4>
+  </div>
+  <div class="card-body">
+    <!-- quiero un boton para agregar una nueva configuración de cocina, un titulo, un boton de agregar, una tabla donde solo va a tener el nombre, la acción (eliminar), un modal para agregar una nueva cocina (nombre) -->
+    <button class="btn btn-primary mb-3" (click)="openModal(centered, { centered: true })">Agregar Cocina</button>
+    <table class="table">
+      <thead>
+        <tr class="row col-12">
+          <th class="col-10">Nombre</th>
+          <th class="col-2">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (kitchens && kitchens.length) {
+        @for (kitchen of kitchens; track kitchen.id; let i = $index) {
+        <tr class="row col-12">
+          <td class="col-10">{{kitchen.name}}</td>
+          <td class="col-2">
+            <button class="btn btn-danger" (click)="deleteKitchen(kitchen.kitchenId)">Eliminar</button>
+          </td>
+        </tr>
+        }
+        } @else {
+        <tr>
+          <td colspan="2" class="text-center">No hay cocinas configuradas.</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    <!-- Modal -->
+  </div>
+</div>
+
+<ng-template #centered let-modal class="modal fade" id="exampleModalCenter" tabindex="-1"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalCenterTitle">Agregar Mesa</h5>
+      <button type="button" (click)="modal.close('click')" class="btn-close" data-bs-dismiss="modal"
+        aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="formGroup">
+        <div class="mb-3">
+          <label for="kitchenName" class="col-form-label">Nombre de la Cocina:</label>
+          <input type="text" class="form-control" id="kitchenName" formControlName="name"
+            placeholder="Ej: Cocina Principal">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+        (click)="modal.close('click')">Cancelar</button>
+      <button type="button" class="btn btn-primary" (click)="createKitchen()">Agregar</button>
+    </div>
+  </div>
+</ng-template>

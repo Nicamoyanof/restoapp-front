@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import type { Observable } from 'rxjs';
 import { User } from '@/app/helper/fake-backend';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -12,7 +13,11 @@ export class AuthenticationService {
 
   public readonly authSessionKey = '_HIGHDMIN_AUTH_SESSION_KEY_';
 
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService,
+    private auth: AuthService
+  ) {}
 
   login(email: string, password: string): Observable<User> {
     return this.http.post<User>(`/api/login`, { email, password }).pipe(
@@ -31,9 +36,11 @@ export class AuthenticationService {
     this.user = null;
   }
 
-  get session(): string {
-    return this.cookieService.get(this.authSessionKey);
-  }
+  // get session(): string {
+  //   this.auth.getAccessTokenSilently().subscribe(token => {
+  //     this.saveSession(token);
+  //   });
+  // }
 
   saveSession(token: string): void {
     this.cookieService.set(this.authSessionKey, token);

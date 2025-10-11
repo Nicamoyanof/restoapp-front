@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-header">
+    <h4 class="card-title mb-0">Métodos de Pago</h4>
+  </div>
+  <div class="card-body">
+    @if (formArray && formArray.length) {
+    <div class="row">
+      @for (item of formArray.controls; track item.value.id; let i = $index) {
+      <div class="col-lg-4">
+        <form>
+          <div class="mb-3">
+            <!-- efectivo, mostrar nombre, codigo y la posibilidad de cambiar el descueto, si el descuento se modifico agregar guardar sino sin botones -->
+            <label for="cash-name" class="form-label">Nombre</label>
+            <input type="text" id="cash-name" class="form-control" placeholder="Enter Name"
+              [formControl]="item.get('name')">
+            <br>
+            <label for="cash-code" class="form-label">Código</label>
+            <input type="text" id="cash-code" class="form-control" placeholder="Enter Code"
+              [formControl]="item.get('code')">
+            <br>
+            <label for="cash-discount" class="form-label">Descuento (%)</label>
+            <input type="number" id="cash-discount" class="form-control" placeholder="Enter Discount"
+              [formControl]="item.get('discountPercent')">
+            <button type="submit" class="btn btn-primary mt-2" (click)="onSave(i)">Guardar</button>
+          </div>
+        </form>
+
+      </div>
+      }
+    </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title mb-0">Configuración de la Tienda</h4>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="storeName" class="form-label">Nombre de la Tienda</label>
+            <input type="text" class="form-control" id="storeName" placeholder="Ingrese el nombre de la tienda"
+              [(ngModel)]="storeName">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- boton para guardar cambios -->
+  <div class="card-footer">
+    <button class="btn btn-primary" (click)="saveChanges()" [disabled]="!storeName">Guardar Cambios</button>
+  </div>
+</div>

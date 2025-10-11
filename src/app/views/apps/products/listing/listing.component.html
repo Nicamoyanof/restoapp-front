@@ -1,7 +1,28 @@
-<app-listing-stats />
+<!-- <app-listing-stats /> -->
+<!-- agregar un card para filtros -->
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Filtros</h5>
+    <form [formGroup]="formGroup" class="row g-3">
+      <div class="mb-3 col-4">
+        <label for="productName" class="form-label">Nombre del Producto</label>
+        <input type="text" id="productName" class="form-control" placeholder="Buscar por nombre" formControlName="name">
+      </div>
+      <div class="mb-3 col-4">
+        <label for="category" class="form-label">Categoría</label>
+        <select id="category" class="form-select" formControlName="categoryId">
+          <option value="">Todas</option>
+          <option *ngFor="let category of categories" [value]="category.categoryId">{{ category.name }}</option>
+        </select>
+      </div>
+    </form>
+    <button type="submit" class="btn btn-primary col-2">Aplicar Filtros</button>
+  </div>
+</div>
 
 <div class="row">
   <div class="col-xl-12">
-    <app-menu-product [menuProductData]="products" [totalItems]="products.length" (reload)="reload()" />
+    <app-menu-product [menuProductData]="filteredProducts" [totalItems]="filteredProducts.length" (reload)="reload()"
+      (delete)="deleteProduct($event)" />
   </div>
 </div>

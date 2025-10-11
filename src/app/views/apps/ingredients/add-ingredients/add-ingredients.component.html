@@ -1,0 +1,91 @@
+<div class="card">
+  <div class="card-header">
+    <h4 class="card-title mb-0">{{ isEdit ? 'Editar' : 'Agregar' }} Ingrediente</h4>
+  </div>
+  <form [formGroup]="formGroup">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="mb-3">
+            <label for="ingredient-name" class="form-label">Nombre del Ingrediente</label>
+            <input type="text" id="ingredient-name" class="form-control" placeholder="Nombre del ingrediente"
+              formControlName="name">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="mb-3">
+            <label for="category" class="form-label">Categoría</label>
+            <input type="text" id="category" class="form-control" placeholder="Nombre de la categoría"
+              formControlName="category">
+          </div>
+        </div>
+        <div class="col-sm-3 col-6">
+          <div class="mb-3">
+            <label for="base-unit" class="form-label">Unidad</label>
+            <select selectFormInput [tigerValue]="resetEmitter" class="form-control" id="base-unit" data-choices
+              data-choices-groups data-placeholder="Select Base Unit" formControlName="baseUnitId">
+              @for (item of baseUnits; track $index) {
+              <option [value]="item.id">{{ item.name }}</option>
+              }
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-3 col-6">
+          <div class="mb-3">
+            <label for="cost" class="form-label">Costo</label>
+            <input type="text" class="form-control" mask="separator" [thousandSeparator]="'.'" [decimalMarker]="','"
+              id="cost" class="form-control" placeholder="0,00" formControlName="cost">
+          </div>
+        </div>
+        <div class="col-lg-6 d-flex flex-column gap-2 justify-content-center">
+          <p class="form-label">Controlar Stock</p>
+
+          <div class="d-flex  gap-4">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Sí, controlar el stock
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+                No, no controlar el stock
+              </label>
+            </div>
+          </div>
+        </div>
+        <!-- allowSellWithoutStock similar a controlar stock -->
+        <div class="col-lg-6 d-flex flex-column gap-2 justify-content-center">
+          <p class="form-label">Permitir vender sin stock</p>
+          <div class="d-flex  gap-4">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault3">
+              <label class="form-check-label" for="flexRadioDefault3">
+                Sí, permitir vender sin stock
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault4" checked>
+              <label class="form-check-label" for="flexRadioDefault4">
+                No, no permitir vender sin stock
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="p-3 mb-3 rounded">
+  <div class="row justify-content-end g-2">
+    <div class="col-lg-3">
+      <div class="btn btn-outline-secondary w-100"><i class="ri-close-circle-line"
+          [routerLink]="['/products/listing']"></i> Cancelar</div>
+    </div>
+    <div class="col-lg-4" (click)="save()">
+      <div class="btn btn-primary w-100" [ngClass]="formGroup.invalid ? 'btn-invalid' : ''"><i class="ri-save-line"></i>
+        Guardar Cambios</div>
+    </div>
+  </div>
+</div>

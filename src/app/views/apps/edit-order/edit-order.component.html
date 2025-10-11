@@ -1,0 +1,3 @@
+<app-order-summary [categoriesProducts]="categoriesProducts" [products]="products" [order]="order"
+  (addItemEvent)="handleAddItem($event)" (updateItemInOrder)="handleUpdateItem($event)"
+  [paymentMethods]="paymentMethods" (refreshOrder)="onRefreshOrder()" [isEditing]="true"></app-order-summary>

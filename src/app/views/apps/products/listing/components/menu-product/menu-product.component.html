@@ -51,7 +51,7 @@
             </td>
             <td>{{item.description ? item.description : 'Sin descripción'}} </td>
             <!-- <td>{{item.ingredients}}</td> -->
-            <td><strong>{{item.price | currency:'USD':'symbol':'1.2-2'}}</strong></td>
+            <td><strong>${{item.price | number:'1.2-2'}}</strong></td>
             <!-- <td>
               <p class="mb-0"><i class="ri-star-fill text-warning me-1 fs-16"></i>{{item.rating}}</p>
             </td> -->
@@ -67,9 +67,11 @@
             <td>
               <div class="d-flex gap-3">
                 <a href="javascript:void(0);" class="text-muted"><i class="ri-eye-line align-middle fs-20"></i></a>
-                <a href="javascript:void(0);" class="link-dark"><i class="ri-edit-line align-middle fs-20"></i></a>
-                <a href="javascript:void(0);" class="link-danger"><i
-                    class="ri-delete-bin-5-line align-middle fs-20"></i></a>
+                <div style="cursor: pointer;" routerLink="../edit/{{item.productId}}" class="link-dark"><i
+                    class="ri-edit-line align-middle fs-20"></i>
+                </div>
+                <div style="cursor: pointer;" class="link-danger" (click)="deleteProduct(item.productId)"><i
+                    class="ri-delete-bin-5-line align-middle fs-20"></i></div>
               </div>
             </td>
           </tr>

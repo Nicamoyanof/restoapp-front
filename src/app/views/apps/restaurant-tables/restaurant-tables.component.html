@@ -1,0 +1,132 @@
+<div class="card">
+  <div class="card-header row">
+    <h4 class="card-title col-6 mb-0 d-flex align-items-center">Gestión de Mesas</h4>
+    <div class="col-6">
+      <div class="card-tools float-end">
+        <button class="btn btn-primary btn-sm" (click)="openModal(centered, { centered: true })">Agregar
+          Mesa</button>
+      </div>
+    </div>
+  </div>
+  <!-- dibujame mesas y segun el estado el color sin tabla un listado de mesas-->
+  <div class="card-body">
+    <div class="row">
+      @for (table of tables; track $index) {
+      <div class="col-md-3 mb-4" (click)="openEnd(rightOffcanvas, table)">
+        <div class="card text-center table-card" [ngClass]="{
+       'bg-success':   table.status === 0,
+       'bg-warning':   table.status === 1,
+       'bg-danger':    table.status === 2,
+       'bg-info':      table.status === 3,
+       'bg-secondary': table.status === 4,
+        'bg-dark':      table.status === 5,
+       'text-white':   table.status !== 1,
+       'text-dark':    table.status === 1,
+     }">
+          <div class="card-body">
+            <h5 class="card-title">Mesa {{ table.number }}</h5>
+            <p class="card-text">Capacidad: {{ table.capacity }}</p>
+            @if (table.section) {
+            <p class="card-text">Sección: {{ table.section }}</p>
+            }
+            <p class="card-text">Estado: {{
+              table.status === 0 ? 'Libre' :
+              table.status === 1 ? 'Reservada' :
+              table.status === 2 ? 'Ocupada' :
+              table.status === 3 ? 'Esperando Pago' :
+              table.status === 4 ? 'Pagada pero Ocupada' :
+              'Fuera de Servicio'
+              }}</p>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+
+  </div>
+  <ng-template #centered let-modal class="modal fade" id="exampleModalCenter" tabindex="-1"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Agregar Mesa</h5>
+        <button type="button" (click)="modal.close('click')" class="btn-close" data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formGroup">
+          <div class="mb-3">
+            <label for="tableNumber" class="col-form-label">Número de Mesa:</label>
+            <input type="number" class="form-control" id="tableNumber" formControlName="number" placeholder="Ej: 1">
+          </div>
+          <div class="mb-3">
+            <label for="seatingCapacity" class="col-form-label">Capacidad de Asientos:</label>
+            <input type="number" class="form-control" id="seatingCapacity" formControlName="capacity"
+              placeholder="Ej: 4">
+          </div>
+          <div class="mb-3">
+            <label for="section" class="col-form-label">Sección:</label>
+            <input type="text" class="form-control" id="section" formControlName="section" placeholder="Ej: Interior">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          (click)="modal.close('click')">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="createTable()"
+          [disabled]="formGroup.invalid">Guardar</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #rightOffcanvas let-offcanvas class="offcanvas offcanvas-end" tabindex="-1" id="rightOffcanvas"
+    aria-labelledby="rightOffcanvasLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title mt-0" id="rightOffcanvasLabel">Estado de la Mesa</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <!-- Cambiar estado de la mesa -->
+      <form [formGroup]="formGroupStateTable">
+        <div class="mb-3">
+          <label for="tableStatus" class="col-form-label">Estado de la Mesa:</label>
+          <select class="form-select" id="tableStatus" formControlName="status"
+            aria-label="Selecciona el estado de la mesa" style="cursor: pointer;">
+            <option [value]="0">Libre</option>
+            <option [value]="1">Reservada</option>
+            <option [value]="2">Ocupada</option>
+            <!-- <option [value]="3">Esperando Pago</option>
+            <option [value]="4">Pagada pero Ocupada</option> -->
+            <option [value]="5">Fuera de Servicio</option>
+          </select>
+        </div>
+      </form>
+      @if (!tableSelected.order.id) {
+      <div class="mb-3 text-end">
+        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="offcanvas">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="updateTableStatus()"
+          [disabled]="formGroupStateTable.invalid">Guardar</button>
+      </div>
+      }
+      @if ((tableSelected.status == 2 || tableSelected.status == 3) && tableSelected.order) {
+      <app-order-summary [categoriesProducts]="categoriesProducts" [products]="products" [order]="tableSelected.order"
+        (addItemEvent)="handleAddItem($event)" (updateItemInOrder)="handleUpdateItem($event)"
+        [paymentMethods]="paymentMethods" (refreshOrder)="onRefreshOrder()"></app-order-summary>
+      }
+      @else if (tableSelected.status == 4 && tableSelected.order)
+      {
+      <!-- agrergar un boton de liberar mesa y un input para agregar propina a la mesa -->
+      <div class="mb-3">
+        <label for="tipAmount" class="col-form-label">Propina:</label>
+        $ <input type="number" class="form-control" id="tipAmount" [(ngModel)]="tipAmount" placeholder="Ej: 5">
+      </div>
+      <!-- boton de imrpimir ticket -->
+      <div class="mb-3 text-end">
+        <button type="button" class="btn btn-secondary me-2" (click)="printTicket()">Imprimir Ticket</button>
+      </div>
+      <div class="mb-3 text-end">
+        <button type="button" class="btn btn-success" (click)="payAndFreeTable()">Pagar y Liberar Mesa</button>
+      </div>
+
+      }
+    </div>
+  </ng-template>

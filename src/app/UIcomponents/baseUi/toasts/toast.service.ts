@@ -22,7 +22,7 @@ export type Toast = {
 export class ToastService {
   toasts: Toast[] = [];
 
-  constructor(private toastifyService: ToastifyDirective) {}
+  constructor() {}
 
   show(toast: Toast) {
     this.toasts.push(toast);

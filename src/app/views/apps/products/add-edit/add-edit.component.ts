@@ -14,11 +14,5 @@ export class AddEditComponent implements OnInit {
 
   constructor(private categoryProductService: CategoryProductService) {}
 
-  ngOnInit(): void {
-    this.categoryProductService
-      .getCategoryProducts()
-      .subscribe((categories: any) => {
-        this.categories = categories;
-      });
-  }
+  ngOnInit(): void {}
 }

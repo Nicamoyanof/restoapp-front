@@ -15,10 +15,19 @@ import {
   type NgProgressRef,
 } from 'ngx-progressbar';
 import { ToastsContainer } from './UIcomponents/baseUi/toasts/toasts-container.component';
+import { AuthService } from '@auth0/auth0-angular';
+import { ClientService } from './services/client.service';
+import { SelectFormInputDirective } from '@core/directives/select-form-input.directive';
+import { SpinnerService } from './services/spinner.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NgProgressModule, ToastsContainer],
+  imports: [
+    RouterOutlet,
+    NgProgressModule,
+    ToastsContainer,
+    SelectFormInputDirective,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -27,17 +36,26 @@ export class AppComponent {
   private titleService = inject(TitleService);
   progressRef!: NgProgressRef;
   @ViewChild(NgProgressComponent) progressBar!: NgProgressComponent;
+  isLoading = false;
 
   private router = inject(Router);
 
-  constructor() {
+  constructor(
+    private clientService: ClientService,
+    private spinnerService: SpinnerService
+  ) {
     this.router.events.subscribe((event: Event) => {
       this.checkRouteChange(event);
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.titleService.init();
+
+    this.clientService.getClient();
+    this.spinnerService.isLoading.subscribe((loading) => {
+      this.isLoading = loading;
+    });
   }
 
   checkRouteChange(routerEvent: Event) {

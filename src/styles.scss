@@ -30,3 +30,10 @@
 .btn-invalid {
   cursor: not-allowed !important;
 }
+
+::ng-deep .offcanvas.offcanvas-end.show {
+  width: 400px !important;
+}
+.offcanvas {
+  --bs-offcanvas-width: 35%;
+}
