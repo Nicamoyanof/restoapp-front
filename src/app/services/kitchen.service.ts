@@ -32,4 +32,11 @@ export class KitchenService {
     // Lógica para obtener una cocina por su ID
     return this.http.get(`/api/Kitchen/${id}`);
   }
+  updateKitchenShowOnMonitor(kitchenId: number, showOnMonitor: boolean) {
+    // Lógica para actualizar la propiedad showOnMonitor de una cocina
+    return this.http.put(`/api/Kitchen/ShowOnMonitor`, {
+      kitchenId,
+      showOnMonitor,
+    });
+  }
 }

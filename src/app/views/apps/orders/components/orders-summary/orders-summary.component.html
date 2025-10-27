@@ -31,7 +31,6 @@
             <th>Mesa</th>
             <th>Cantidad</th>
             <!-- <th>Precio por Artículo</th> -->
-            <th>Precio Total</th>
             <!-- <th>Método de Pago</th> -->
             <th>Tiempo de Espera</th>
             <th>Estado de Entrega</th>
@@ -59,7 +58,6 @@
               <p class="mb-1">${{item.pricePerItem}}</p>
               }
             </td> -->
-            <td style="text-align: end;">${{ order.subtotal | number:'1.2-2'}}</td>
             <!-- <td>{{ order.paymentMethod }}<i [class]="order.icon"></i></td> -->
             <td>{{ order.tsCreated | timeAgo }}</td>
             <!-- <td>{{ order.address }}</td> -->
@@ -68,7 +66,7 @@
               </span></td>
             <td>
               @if (order.notes) {
-              <button class="btn btn-link" (click)="openNotesModal(notesModal, order)">Ver Notas</button>
+              <p>{{order.notes}}</p>
               }
             </td>
             <td>

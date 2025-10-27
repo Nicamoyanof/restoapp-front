@@ -10,6 +10,23 @@
             <label for="product-name" class="form-label">Nombre del Producto</label>
             <input type="text" id="product-name" class="form-control" placeholder="Nombre del producto"
               formControlName="name">
+            <!-- agregar contador de caracteres (max 150 )-->
+            <div class="form-text text-end"><small>
+                {{ formGroup.get('name')?.value?.length || 0 }}/150
+              </small></div>
+            @if (formGroup.get('name')?.invalid && formGroup.get('name')?.touched) {
+            <div class="invalid-feedback">
+              @if (formGroup.get('name')?.errors?.['required']) {
+              <div>El nombre del producto es obligatorio.</div>
+              }
+              @if (formGroup.values.name.length > 150) {
+
+              <div>El nombre del producto no puede exceder los 150
+                caracteres.</div>
+              }
+            </div>
+            }
+
           </div>
 
         </div>
@@ -42,6 +59,7 @@
               id="product-id" class="form-control" placeholder="0,00" formControlName="price">
           </div>
         </div>
+        <!-- agregar check de trrackeo de stock -->
         @if (kitchens.length > 0) {
         <div class="col-lg-6">
           <div class="mb-3">
@@ -55,12 +73,14 @@
           </div>
         </div>
         }
-        <!-- <div class="col-md-6">
+        <div class="col-md-3">
           <div class="mb-3">
-            <label for="product-stock" class="form-label">Stock</label>
-            <input type="text" id="product-stock" class="form-control" placeholder="0" formControlName="stock">
+            <label for="track-stock" class="form-label d-block">Rastrear Stock</label>
+            <input type="checkbox" id="track-stock" formControlName="trackStock" data-switch="success"
+              (change)="onTrackStockChange($event)">
+            <label for="track-stock" data-off-label="No"></label>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
   </form>

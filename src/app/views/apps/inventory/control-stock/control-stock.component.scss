@@ -1,0 +1,9 @@
+.container-tables-stock {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  .card {
+    width: calc(50% - 1rem);
+  }
+}

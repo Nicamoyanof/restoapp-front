@@ -1,0 +1,114 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Filtros</h5>
+    <form [formGroup]="formGroup" class="row g-3">
+      <div class="mb-3 col-4">
+        <label for="productName" class="form-label">Nombre</label>
+        <input type="text" id="productName" class="form-control" placeholder="Buscar por nombre" formControlName="name">
+      </div>
+      <div class="mb-3 col-4">
+        <label for="category" class="form-label">Categorías de Productos</label>
+        <select id="category" class="form-select" formControlName="categoryProduct">
+          <option value="all">Todas</option>
+          <option *ngFor="let category of categoryProducts" [value]="category.categoryId">{{ category.name }}</option>
+        </select>
+      </div>
+      <div class="mb-3 col-4">
+        <label for="category" class="form-label">Categorías de Ingredientes</label>
+        <select id="category" class="form-select" formControlName="categoryIngredient">
+          <option value="all">Todas</option>
+          <option *ngFor="let category of categoryIngredients" [value]="category">{{ category }}
+          </option>
+        </select>
+      </div>
+      <!-- agrega toggle para ver sin stock o todas -->
+      <div class="mb-3 col-4">
+        <div class="form-check form-switch mt-4">
+          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" formControlName="showAllStock"
+            (change)="onToggleChange($event)">
+          <label class="form-check-label" for="flexSwitchCheckDefault">Ver solo sin stock</label>
+        </div>
+      </div>
+    </form>
+    <button type="submit" class="btn btn-primary col-2">Aplicar Filtros</button>
+  </div>
+</div>
+<div class="row container-tables-stock g-3">
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div>
+        <p class="card-title mb-0">Productos</p>
+      </div>
+    </div>
+    <div class="">
+      <div class="table-responsive">
+        <table class="table align-middle mb-0 table-hover table-centered">
+          <!-- pintame cada fila de verde, amarillo y rojo (todos muy trnslucidos) segundo la catidad de stock -->
+          <thead class="bg-light-subtle fs-12 text-uppercase">
+            <tr>
+              <th class="py-2">Nombre del Producto</th>
+              <th class="py-2">Stock</th>
+              <th class="py-2">Costo Total</th>
+              <th class="py-2">Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of productsFiltered; track $index) {
+            <tr [ngClass]="{
+              'table-success': item.totalQuantity > 5,
+              'table-danger': item.totalQuantity <= 0,
+              'table-warning': item.totalQuantity > 0 && item.totalQuantity <= 5,
+            }">
+              <td><strong>{{item.name}}</strong></td>
+              <td><strong>{{item.totalQuantity | number:'1.0-0'}} u.</strong></td>
+              <td><strong>${{item.priceUnit * item.totalQuantity | number:'1.2-2'}}</strong></td>
+              <td>
+                <div class="d-flex gap-3">
+                  <a href="javascript:void(0);" class="text-muted"><i class="ri-eye-line align-middle fs-20"></i></a>
+                </div>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <!-- end table-responsive -->
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div>
+        <p class="card-title mb-0">Ingredientes</p>
+      </div>
+    </div>
+    <div class="">
+      <div class="table-responsive">
+        <table class="table align-middle mb-0 table-hover table-centered">
+          <thead class="bg-light-subtle fs-12 text-uppercase">
+            <tr>
+              <th class="py-2">Nombre del Ingrediente</th>
+              <th class="py-2">Stock</th>
+              <th class="py-2">Costo Total</th>
+              <th class="py-2">Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of ingredientsFiltered; track $index) {
+            <tr>
+              <td><strong>{{item.name}}</strong></td>
+              <td><strong>{{item.totalQuantity | number:'1.0-0'}} {{getBaseUnit(item.baseUnit)}}</strong></td>
+              <td><strong>${{item.priceUnit * item.totalQuantity | number:'1.2-2'}}</strong></td>
+              <td>
+                <div class="d-flex gap-3">
+                  <a href="javascript:void(0);" class="text-muted"><i class="ri-eye-line align-middle fs-20"></i></a>
+                </div>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <!-- end table-responsive -->
+    </div>
+  </div>
+</div>

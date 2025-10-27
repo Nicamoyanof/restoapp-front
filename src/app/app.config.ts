@@ -1,7 +1,7 @@
 import {
   ApplicationConfig,
   LOCALE_ID,
-  provideZoneChangeDetection,
+  provideZoneChangeDetection, isDevMode,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
@@ -27,6 +27,7 @@ import localeEsAR from '@angular/common/locales/es-AR';
 import { spinnerInterceptor } from './helper/spinner.interceptor';
 import { environment } from '@environment/environment.development';
 import { provideNgxMask } from 'ngx-mask';
+import { provideServiceWorker } from '@angular/service-worker';
 
 registerLocaleData(localeEsAR);
 
@@ -77,6 +78,9 @@ export const appConfig: ApplicationConfig = {
     }),
 
     CookieService,
-    { provide: LOCALE_ID, useValue: 'es-AR' },
+    { provide: LOCALE_ID, useValue: 'es-AR' }, provideServiceWorker('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            registrationStrategy: 'registerWhenStable:30000'
+          }),
   ],
 };

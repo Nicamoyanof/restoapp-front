@@ -25,7 +25,11 @@ import { TimeAgoPipe } from '@/app/pipes/time-ago.pipe';
     TimeAgoPipe,
   ],
   templateUrl: './orders-summary.component.html',
-  styles: ``,
+  styles: `
+  .wrapper .page-content{
+    margin: 0 !important;
+  }
+  `,
 })
 export class OrdersSummaryComponent implements OnChanges {
   number!: number;

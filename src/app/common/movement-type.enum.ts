@@ -1,0 +1,8 @@
+export enum MovementType {
+  PURCHASE,
+  SALE,
+  ADJUSTMENT,
+  PRODUCTION_IN,
+  PRODUCTION_OUT,
+  CANCEL,
+}

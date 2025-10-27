@@ -23,32 +23,35 @@
           <div class="mb-3">
             <label for="base-unit" class="form-label">Unidad</label>
             <select selectFormInput [tigerValue]="resetEmitter" class="form-control" id="base-unit" data-choices
-              data-choices-groups data-placeholder="Select Base Unit" formControlName="baseUnitId">
+              [defaultValue]="formGroup.get('baseUnitId')?.value" data-choices-groups
+              data-placeholder="Select Base Unit" formControlName="baseUnitId">
               @for (item of baseUnits; track $index) {
               <option [value]="item.id">{{ item.name }}</option>
               }
             </select>
           </div>
         </div>
-        <div class="col-sm-3 col-6">
+        <!-- <div class="col-sm-3 col-6">
           <div class="mb-3">
             <label for="cost" class="form-label">Costo</label>
             <input type="text" class="form-control" mask="separator" [thousandSeparator]="'.'" [decimalMarker]="','"
               id="cost" class="form-control" placeholder="0,00" formControlName="cost">
           </div>
-        </div>
-        <div class="col-lg-6 d-flex flex-column gap-2 justify-content-center">
+        </div> -->
+        <div class="col-lg-4 d-flex flex-column gap-2 justify-content-center">
           <p class="form-label">Controlar Stock</p>
 
           <div class="d-flex  gap-4">
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <input #trackStockYes class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                (change)="onTrackStockChange($event, 'yes')">
               <label class="form-check-label" for="flexRadioDefault1">
                 Sí, controlar el stock
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+              <input #trackStockNo class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                checked (change)="onTrackStockChange($event, 'no')">
               <label class="form-check-label" for="flexRadioDefault2">
                 No, no controlar el stock
               </label>
@@ -56,19 +59,21 @@
           </div>
         </div>
         <!-- allowSellWithoutStock similar a controlar stock -->
-        <div class="col-lg-6 d-flex flex-column gap-2 justify-content-center">
+        <div class="col-lg-5 d-flex flex-column gap-2 justify-content-center">
           <p class="form-label">Permitir vender sin stock</p>
-          <div class="d-flex  gap-4">
+          <div class="d-flex  gap-5">
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault3">
+              <input #allowSellWithoutStockYes class="form-check-input" type="radio" name="flexRadioDefault2"
+                id="flexRadioDefault3" (change)="onAllowSellWithoutStockChange($event, 'yes')">
               <label class="form-check-label" for="flexRadioDefault3">
                 Sí, permitir vender sin stock
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault4" checked>
+              <input #allowSellWithoutStockNo class="form-check-input" type="radio" name="flexRadioDefault2"
+                id="flexRadioDefault4" checked (change)="onAllowSellWithoutStockChange($event, 'no')">
               <label class="form-check-label" for="flexRadioDefault4">
-                No, no permitir vender sin stock
+                No permitir vender sin stock
               </label>
             </div>
           </div>

@@ -1,0 +1,114 @@
+<div ngbAccordion [closeOthers]="true" class="accordion" id="accordionExample">
+  <div ngbAccordionItem [collapsed]="false">
+    <h2 ngbAccordionHeader id="headingOne">
+      <button ngbAccordionButton class="fw-medium" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+        aria-expanded="true" aria-controls="collapseOne">
+        <div class="card-header  fw-bold">
+          <i class="bx bx-info-circle text-primary fs-15 me-1"></i> ¿Para qué sirve el conteo de stock?
+        </div>
+      </button>
+    </h2>
+    <div ngbAccordionCollapse id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+      data-bs-parent="#accordionExample">
+      <div ngbAccordionBody class="accordion-body">
+        <p class="text-muted">
+          El conteo de stock te permite <strong>ajustar manualmente</strong> las existencias reales de tus productos
+          cuando detectás diferencias entre el sistema y el inventario físico.
+          No se usa para cargar compras nuevas, ya que eso se gestiona desde la sección <strong>“Agregar
+            gasto”</strong>.
+        </p>
+        <footer class="blockquote-footer mt-2">
+          Herramienta de <cite title="Stock Control">control y verificación de inventario</cite>
+        </footer>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <!-- <div class="col-xl-6 col-lg-8">
+    <app-product-photo />
+  </div> -->
+  <!-- <div class="col-xl-6 col-lg-8"> -->
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title mb-0">Conteo Físico de Stock</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="formGroup">
+          <div class="row">
+            <div class="col-4 row">
+              <!-- quiero un radio button con las opciones producto o ingrediente porfdefult ninguno -->
+              <label class="form-label">Tipo de Stock</label>
+              <div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="isProductTrue" formControlName="isProduct"
+                    [value]="true" />
+                  <label class="form-check-label" for="isProductTrue">Producto</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" id="isProductFalse" formControlName="isProduct"
+                    [value]="false" />
+                  <label class="form-check-label" for="isProductFalse">Ingrediente</label>
+                </div>
+              </div>
+            </div>
+            @if (formGroup.get('isProduct').value) {
+            <div class="col-lg-4">
+              <div class="mb-3">
+                <label for="product" class="form-label">Productos</label>
+                <select selectFormInput [defaultValue]="formGroup.get('itemId').value" [tigerValue]="resetEmitter"
+                  class="form-control" id="product" data-choices data-choices-groups data-placeholder="Select Product"
+                  formControlName="itemId">
+                  @for (item of products; track $index) {
+                  <option [value]="item.productId">{{ item.name }}</option>
+                  }
+                </select>
+              </div>
+            </div>
+            }
+            @else if(formGroup.get('isProduct').value != null) {
+            <div class="col-lg-4">
+              <div class="mb-3">
+                <label for="ingredient" class="form-label">Ingredientes</label>
+                <select selectFormInput [defaultValue]="formGroup.get('itemId').value" [tigerValue]="resetEmitter"
+                  class="form-control" id="ingredient" data-choices data-choices-groups
+                  data-placeholder="Select Ingredient" formControlName="itemId">
+                  @for (item of ingredients; track $index) {
+                  <option [value]="item.id">{{ item.name }}</option>
+                  }
+                </select>
+              </div>
+            </div>
+            }
+            <div class="mb-3 col-4">
+              <label for="quantity" class="form-label">Cantidad</label>
+              <div class="d-flex align-items-center gap-2 ">
+                <input type="number" id="quantity" class="form-control" formControlName="quantity" />
+                <span>{{ getBaseUnitNameById() }}</span>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="reason" class="form-label">Razón</label>
+              <textarea id="reason" class="form-control" formControlName="reason"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="p-3 mb-3 rounded">
+      <div class="row justify-content-end g-2">
+        <div class="col-lg-3">
+          <div class="btn btn-outline-secondary w-100"><i class="ri-close-circle-lineri-save-line"
+              [routerLink]="['/categories/listing']"></i> Cancelar</div>
+        </div>
+        <div class="col-lg-4" (click)="save()">
+          <div class="btn btn-primary w-100" [ngClass]="formGroup.invalid ? 'btn-invalid' : ''"><i
+              class="ri-save-line"></i>
+            Guardar Cambios</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -33,6 +33,11 @@ import { KitchenSettingsComponent } from './apps/settings/kitchen-settings/kitch
 import { IngredientsComponent } from './apps/ingredients/ingredients.component';
 import { AddIngredientsComponent } from './apps/ingredients/add-ingredients/add-ingredients.component';
 import { StoreSettingComponent } from './apps/settings/store-setting/store-setting.component';
+import { ControlStockComponent } from './apps/inventory/control-stock/control-stock.component';
+import { StockMovementComponent } from './apps/inventory/stock-movement/stock-movement.component';
+import { ListSpentComponent } from './apps/spent/list-spent/list-spent.component';
+import { AddSpentComponent } from './apps/spent/add-spent/add-spent.component';
+import { CountStockComponent } from './apps/inventory/count-stock/count-stock.component';
 
 export const VIEWS_ROUTES: Route[] = [
   {
@@ -134,6 +139,36 @@ export const VIEWS_ROUTES: Route[] = [
     path: 'ingredients/edit/:id',
     component: AddIngredientsComponent,
     data: { title: 'Agregar Ingrediente' },
+    canActivate: [clientGuard],
+  },
+  {
+    path: 'stock/control',
+    component: ControlStockComponent,
+    data: { title: 'Control de Stock' },
+    canActivate: [clientGuard],
+  },
+  {
+    path: 'stock/movements',
+    component: StockMovementComponent,
+    data: { title: 'Movimientos de Stock' },
+    canActivate: [clientGuard],
+  },
+  {
+    path: 'spent/list',
+    component: ListSpentComponent,
+    data: { title: 'Movimientos de Gastos' },
+    canActivate: [clientGuard],
+  },
+  {
+    path: 'spent/add',
+    component: AddSpentComponent,
+    data: { title: 'Agregar Gastos' },
+    canActivate: [clientGuard],
+  },
+  {
+    path: 'stock/count',
+    component: CountStockComponent,
+    data: { title: 'Conteo de Stock' },
     canActivate: [clientGuard],
   },
 ];

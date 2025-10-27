@@ -33,7 +33,7 @@ import { KitchenService } from '@/app/services/kitchen.service';
 import { forkJoin, of, take } from 'rxjs';
 import { IngredientsService } from '@/app/services/ingredients.service';
 import { RecipesService } from '@/app/services/recipes.service';
-import { BaseUnitEnum } from '@/app/helper/base-units';
+import { BaseUnitEnum } from '@common/base-units';
 
 @Component({
   selector: 'app-product-general-info',
@@ -52,7 +52,7 @@ import { BaseUnitEnum } from '@/app/helper/base-units';
   styles: ``,
 })
 export class ProductGeneralInfoComponent implements OnInit {
-  formGroup: FormGroup;
+  formGroup: any;
   categories: any[] = [];
   isEdit: boolean = false;
   productId: any;
@@ -62,6 +62,8 @@ export class ProductGeneralInfoComponent implements OnInit {
   formGroupRecipe: FormGroup;
   ingredients: any[] = [];
   baseUnit = BaseUnitEnum;
+  yes: string = 'Sí';
+  no: string = 'No';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -74,7 +76,10 @@ export class ProductGeneralInfoComponent implements OnInit {
     private recipesService: RecipesService
   ) {
     this.formGroup = new FormGroup({
-      name: new FormControl('', [Validators.required]),
+      name: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(150),
+      ]),
       categoryId: new FormControl(null, [Validators.required]),
       description: new FormControl(''),
       price: new FormControl(0, [
@@ -86,6 +91,7 @@ export class ProductGeneralInfoComponent implements OnInit {
         Validators.pattern('^[0-9]+$'),
       ]),
       kitchenId: new FormControl(null, [Validators.required]),
+      trackStock: new FormControl(false),
     });
     this.formGroupRecipe = this.fb.group({
       recipeItems: this.fb.array([]),
@@ -100,7 +106,7 @@ export class ProductGeneralInfoComponent implements OnInit {
       kitchens: this.kitchenService.getKitchens(),
       product: id ? this.productService.getProductById(id) : of(null),
       ingredients: this.ingredientService.getIngredients(),
-      recipes: this.recipesService.getRecipeByProductId(id),
+      recipes: id ? this.recipesService.getRecipeByProductId(id) : of([]),
     })
       .pipe(take(1))
       .subscribe(
@@ -121,6 +127,7 @@ export class ProductGeneralInfoComponent implements OnInit {
               price: product.price,
               stock: product.stock,
               kitchenId: product.kitchenId ?? 0,
+              trackStock: product.trackStock,
               // si el producto aún no tiene cocina, no seteamos nada aquí
             });
           }
@@ -152,9 +159,40 @@ export class ProductGeneralInfoComponent implements OnInit {
         );
         this.productService
           .updateProduct(this.activatedRoute.snapshot.paramMap.get('id'), body)
-          .subscribe((response) => {
+          .subscribe({
+            next: (response) => {
+              Toastify({
+                text: 'Producto actualizado con éxito',
+                duration: 3000,
+                newWindow: true,
+                close: true,
+                gravity: 'top', // `top` or `bottom`
+                position: 'right', // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                  background: '#1BB394',
+                },
+                onClick: function () {}, // Callback after click
+              }).showToast();
+              this.formGroup.reset();
+              this.resetEmitter.emit('reset');
+              this.router.navigate(['/product/listing']);
+            },
+            error: (error) => {
+              Toastify({
+                text: 'Error al actualizar el producto',
+                duration: 3000,
+                newWindow: true,
+                close: true,
+                gravity: 'top', // `top` or `bottom`
+              }).showToast();
+            },
+          });
+      } else {
+        this.productService.createProduct(body).subscribe({
+          next: (response: any) => {
             Toastify({
-              text: 'Producto actualizado con éxito',
+              text: 'Producto creado con éxito',
               duration: 3000,
               newWindow: true,
               close: true,
@@ -168,25 +206,16 @@ export class ProductGeneralInfoComponent implements OnInit {
             }).showToast();
             this.formGroup.reset();
             this.resetEmitter.emit('reset');
-            this.router.navigate(['/product/listing']);
-          });
-      } else {
-        this.productService.createProduct(body).subscribe((response) => {
-          Toastify({
-            text: 'Producto creado con éxito',
-            duration: 3000,
-            newWindow: true,
-            close: true,
-            gravity: 'top', // `top` or `bottom`
-            position: 'right', // `left`, `center` or `right`
-            stopOnFocus: true, // Prevents dismissing of toast on hover
-            style: {
-              background: '#1BB394',
-            },
-            onClick: function () {}, // Callback after click
-          }).showToast();
-          this.formGroup.reset();
-          this.resetEmitter.emit('reset');
+          },
+          error: (error) => {
+            Toastify({
+              text: 'Error al crear el producto',
+              duration: 3000,
+              newWindow: true,
+              close: true,
+              gravity: 'top', // `top` or `bottom`
+            }).showToast();
+          },
         });
       }
       this.sendRecipe();
@@ -262,5 +291,9 @@ export class ProductGeneralInfoComponent implements OnInit {
       return baseUnit ? baseUnit.abbreviation : '';
     }
     return '';
+  }
+  onTrackStockChange(event: any) {
+    const isChecked = event.target.checked;
+    this.formGroup.patchValue({ trackStock: isChecked });
   }
 }

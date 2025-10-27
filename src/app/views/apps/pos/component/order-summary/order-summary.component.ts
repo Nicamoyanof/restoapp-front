@@ -46,7 +46,7 @@ export class OrderSummaryComponent implements OnInit, AfterViewInit {
   @Input() categoriesProducts: any[] = [];
   @Input() products: any[] = [];
   productsFiltered: any[] = [];
-  qty: number = 1;
+  qty: number = 0;
   specialRequest: string = '';
   @Output() addItemEvent = new EventEmitter<any>();
   @Output() updateItemInOrder = new EventEmitter<any>();
@@ -345,5 +345,33 @@ export class OrderSummaryComponent implements OnInit, AfterViewInit {
           });
       }
     });
+  }
+
+  getProdMaxLength(): number {
+    const selectedProduct = this.products.find(
+      (p) => p.productId == this.productSelected
+    );
+    return selectedProduct
+      ? selectedProduct.trackStock
+        ? selectedProduct.stock
+        : 1000000
+      : 0;
+  }
+
+  onQtyChange() {
+    const maxLength = this.getProdMaxLength();
+    if (this.qty > maxLength) {
+      this.zone.run(() => {
+        this.qty = maxLength;
+      });
+    }
+  }
+
+  onSpecialRequestChange() {
+    if (this.specialRequest.length > 300) {
+      this.zone.run(() => {
+        this.specialRequest = this.specialRequest.substring(0, 300);
+      });
+    }
   }
 }

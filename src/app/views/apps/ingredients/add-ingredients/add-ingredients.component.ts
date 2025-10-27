@@ -29,7 +29,7 @@ import { CategoryProductService } from '@/app/services/category-product.service'
 import { NgxMaskDirective } from 'ngx-mask';
 import { KitchenService } from '@/app/services/kitchen.service';
 import { forkJoin, of, take } from 'rxjs';
-import { BaseUnitEnum } from '@/app/helper/base-units';
+import { BaseUnitEnum } from '@common/base-units';
 import { IngredientsService } from '@/app/services/ingredients.service';
 @Component({
   selector: 'app-add-ingredients',
@@ -50,11 +50,16 @@ export class AddIngredientsComponent {
   formGroup: FormGroup;
   categories: any[] = [];
   isEdit: boolean = false;
-  productId: any;
+  ingredientId: any;
   resetEmitter = new EventEmitter<string>();
   categoryId: any;
   kitchens: any[] = [];
   baseUnits = BaseUnitEnum;
+
+  @ViewChild('trackStockYes') trackStockYes!: ElementRef;
+  @ViewChild('trackStockNo') trackStockNo!: ElementRef;
+  @ViewChild('allowSellWithoutStockYes') allowSellWithoutStockYes!: ElementRef;
+  @ViewChild('allowSellWithoutStockNo') allowSellWithoutStockNo!: ElementRef;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -82,28 +87,39 @@ export class AddIngredientsComponent {
 
     forkJoin({
       categories: this.ingredientService.getCategories(),
-      // kitchens: this.kitchenService.getKitchens(),
-      // product: id ? this.productService.getProductById(id) : of(null),
     })
       .pipe(take(1))
-      .subscribe(({ categories, kitchens, product }: any) => {
+      .subscribe(({ categories }: any) => {
         this.categories = categories;
-        this.kitchens = kitchens;
-
-        if (product) {
+        if (id) {
+          this.ingredientId = id;
           this.isEdit = true;
-          this.productId = id!;
-          this.categoryId = product.categoryId;
+          this.ingredientService
+            .getIngredientById(id)
+            .subscribe((ingredient: any) => {
+              this.formGroup.patchValue({
+                name: ingredient.name,
+                category: ingredient.category,
+                baseUnitId: ingredient.baseUnitId,
+                trackStock: ingredient.trackStock,
+                allowSellWithoutStock: ingredient.allowSellWithoutStock,
+                cost: ingredient.avgCost,
+              });
 
-          this.formGroup.patchValue({
-            name: product.name,
-            categoryId: product.categoryId,
-            description: product.description,
-            price: product.price,
-            stock: product.stock,
-            kitchenId: product.kitchenId ?? 0,
-            // si el producto aún no tiene cocina, no seteamos nada aquí
-          });
+              if (ingredient.trackStock) {
+                this.trackStockYes.nativeElement.checked = true;
+              } else {
+                this.trackStockNo.nativeElement.checked = true;
+              }
+
+              if (ingredient.allowSellWithoutStock) {
+                this.allowSellWithoutStockYes.nativeElement.checked = true;
+              } else {
+                this.allowSellWithoutStockNo.nativeElement.checked = true;
+              }
+
+              this.resetEmitter.emit();
+            });
         }
       });
   }
@@ -113,29 +129,66 @@ export class AddIngredientsComponent {
       // Si el formulario es válido, procedemos a guardar con swal
       const ingredientData = this.formGroup.value;
 
-      this.ingredientService.createIngredient(ingredientData).subscribe({
-        next: (res) => {
-          Toastify({
-            text: 'Ingrediente creado con éxito',
-            duration: 3000,
-            close: true,
-            gravity: 'top', // `top` or `bottom`
-            position: 'right', // `left`, `center` or `right`
-            backgroundColor: '#4fbe87',
-          }).showToast();
-          this.router.navigate(['/apps/ingredients/list-ingredients']);
-        },
-        error: (err) => {
-          Toastify({
-            text: 'Error al crear ingrediente',
-            duration: 3000,
-            close: true,
-            gravity: 'top',
-            position: 'right',
-            backgroundColor: '#ff4d4d',
-          }).showToast();
-        },
-      });
+      if (this.isEdit) {
+        this.ingredientService
+          .updateIngredient(this.ingredientId, ingredientData)
+          .subscribe({
+            next: (res) => {
+              Toastify({
+                text: 'Ingrediente actualizado con éxito',
+                duration: 3000,
+                close: true,
+                gravity: 'top', // `top` or `bottom`
+                position: 'right', // `left`, `center` or `right`
+                backgroundColor: '#4fbe87',
+              }).showToast();
+              this.router.navigate(['/apps/ingredients/list-ingredients']);
+            },
+            error: (err) => {
+              Toastify({
+                text: 'Error al actualizar ingrediente',
+                duration: 3000,
+                close: true,
+                gravity: 'top',
+                position: 'right',
+                backgroundColor: '#ff4d4d',
+              }).showToast();
+            },
+          });
+      } else {
+        this.ingredientService.createIngredient(ingredientData).subscribe({
+          next: (res) => {
+            Toastify({
+              text: 'Ingrediente creado con éxito',
+              duration: 3000,
+              close: true,
+              gravity: 'top', // `top` or `bottom`
+              position: 'right', // `left`, `center` or `right`
+              backgroundColor: '#4fbe87',
+            }).showToast();
+            this.router.navigate(['/apps/ingredients/list-ingredients']);
+          },
+          error: (err) => {
+            Toastify({
+              text: 'Error al crear ingrediente',
+              duration: 3000,
+              close: true,
+              gravity: 'top',
+              position: 'right',
+              backgroundColor: '#ff4d4d',
+            }).showToast();
+          },
+        });
+      }
     }
+  }
+  onTrackStockChange(event: any, option: string) {
+    const isChecked = event.target.checked && option === 'yes';
+    this.formGroup.patchValue({ trackStock: isChecked });
+  }
+
+  onAllowSellWithoutStockChange(event: any, option: string) {
+    const isChecked = event.target.checked && option === 'yes';
+    this.formGroup.patchValue({ allowSellWithoutStock: isChecked });
   }
 }

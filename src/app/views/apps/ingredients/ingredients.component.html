@@ -1,4 +1,21 @@
 <div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Filtros</h5>
+    <form [formGroup]="formGroup" class="row g-3">
+      <div class="mb-3 col-4">
+        <label for="productName" class="form-label">Nombre del Ingrediente</label>
+        <input type="text" id="productName" class="form-control" placeholder="Buscar por nombre" formControlName="name">
+      </div>
+      <div class="mb-3 col-4">
+        <label for="category" class="form-label">Categoría</label>
+        <input type="text" id="category" class="form-control" placeholder="Buscar por categoría"
+          formControlName="category">
+      </div>
+    </form>
+    <button type="submit" class="btn btn-primary col-2">Aplicar Filtros</button>
+  </div>
+</div>
+<div class="card">
   <div class="card-header d-flex justify-content-between align-items-center">
     <div>
       <p class="card-title mb-0">Ingredientes</p>
@@ -65,10 +82,10 @@
             <td>
               <div class="d-flex gap-3">
                 <a href="javascript:void(0);" class="text-muted"><i class="ri-eye-line align-middle fs-20"></i></a>
-                <div style="cursor: pointer;" routerLink="../edit/{{item.productId}}" class="link-dark"><i
+                <div style="cursor: pointer;" routerLink="../edit/{{item.id}}" class="link-dark"><i
                     class="ri-edit-line align-middle fs-20"></i>
                 </div>
-                <div style="cursor: pointer;" class="link-danger" (click)="delete(item.productId)"><i
+                <div style="cursor: pointer;" class="link-danger" (click)="delete(item.id)"><i
                     class="ri-delete-bin-5-line align-middle fs-20"></i></div>
               </div>
             </td>

@@ -35,7 +35,7 @@ export const MENU = [
   },
   {
     key: 'orders',
-    label: 'Vista Cocina',
+    label: 'Monitor de Cocina',
     icon: 'ri-mac-line',
     link: '/orders',
   },
@@ -74,6 +74,65 @@ export const MENU = [
         label: 'Agregar Ingrediente',
         link: '/ingredients/add',
         parentKey: 'products',
+      },
+    ],
+  },
+  {
+    key: 'stock',
+    label: 'Inventario',
+    icon: 'bx bx-box',
+    collapsed: true,
+    submenu: [
+      {
+        key: 'control-stock',
+        label: 'Control de Stock',
+        link: '/stock/control',
+        parentKey: 'stock',
+      },
+      {
+        key: 'stock-movements',
+        label: 'Movimientos de Stock',
+        link: '/stock/movements',
+        parentKey: 'stock',
+      },
+      {
+        key: 'count-stock',
+        label: 'Conteo Físico de Stock',
+        link: '/stock/count',
+        parentKey: 'stock',
+      },
+
+      // {
+      //   key: 'suppliers',
+      //   label: 'Proveedores',
+      //   link: '/stock/suppliers',
+      //   parentKey: 'stock',
+      // },
+      // {
+      //   key: 'stock-count',
+      //   label: 'Conteo de Inventario',
+      //   link: '/stock/count',
+      //   parentKey: 'stock',
+      // },
+    ],
+  },
+  {
+    key: 'spent',
+    label: 'Gastos',
+    icon: 'bx bx-money-withdraw',
+    collapsed: true,
+    submenu: [
+      // {
+      //   key: 'control-spent',
+      //   label: 'Control de Gastos',
+      //   link: '/spent/list',
+      //   parentKey: 'spent',
+      // },
+      {
+        key: 'spent-movements',
+        label: 'Agregar Gasto',
+        link: '/spent/add',
+        parentKey: 'spent',
       },
     ],
   },

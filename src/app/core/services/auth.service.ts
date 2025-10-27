@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 
 import { CookieService } from 'ngx-cookie-service';
 import type { Observable } from 'rxjs';
-import { User } from '@/app/helper/fake-backend';
+import { User } from '@common/fake-backend';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Injectable({ providedIn: 'root' })

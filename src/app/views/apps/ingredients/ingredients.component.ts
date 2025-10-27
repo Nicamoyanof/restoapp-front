@@ -1,12 +1,19 @@
 import { IngredientsService } from '@/app/services/ingredients.service';
 import { CommonModule, SlicePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-ingredients',
-  imports: [CommonModule, RouterLink, NgbPagination],
+  imports: [
+    CommonModule,
+    RouterLink,
+    NgbPagination,
+    ReactiveFormsModule,
+    FormsModule,
+  ],
   templateUrl: './ingredients.component.html',
   styleUrl: './ingredients.component.scss',
 })
@@ -16,10 +23,40 @@ export class IngredientsComponent implements OnInit {
   pageSize: number = 10;
   totalItems: number = 10;
   maxSize: number = Math.ceil(this.totalItems / this.pageSize);
+  formGroup: any;
 
-  constructor(private ingredientService: IngredientsService) {}
+  constructor(
+    private ingredientService: IngredientsService,
+    private fb: FormBuilder
+  ) {
+    this.formGroup = this.fb.group({
+      name: [''],
+      category: [''],
+    });
+  }
   ngOnInit(): void {
     this.loadIngredients();
+    this.formGroup.valueChanges.subscribe((values: any) => {
+      this.filterIngredients(values);
+    });
+  }
+  filterIngredients(values: any): void {
+    this.ingredientService.getIngredients().subscribe((data: any) => {
+      let filteredData = data;
+      if (values.name) {
+        filteredData = filteredData.filter((item: any) =>
+          item.name.toLowerCase().includes(values.name.toLowerCase())
+        );
+      }
+      if (values.category) {
+        filteredData = filteredData.filter((item: any) =>
+          item.category.toLowerCase().includes(values.category.toLowerCase())
+        );
+      }
+      this.ingredients = filteredData;
+      this.totalItems = filteredData.length;
+      this.currentPage = 1;
+    });
   }
 
   loadIngredients(): void {
