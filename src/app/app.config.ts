@@ -1,7 +1,8 @@
 import {
   ApplicationConfig,
   LOCALE_ID,
-  provideZoneChangeDetection, isDevMode,
+  provideZoneChangeDetection,
+  isDevMode,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
@@ -33,6 +34,7 @@ registerLocaleData(localeEsAR);
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideServiceWorker('ngsw-worker.js', { enabled: true }),
     provideRouter(routes),
     provideStore(rootReducer, { metaReducers: [localStorageSyncReducer] }),
     provideEffects(AuthenticationEffects),
@@ -78,9 +80,10 @@ export const appConfig: ApplicationConfig = {
     }),
 
     CookieService,
-    { provide: LOCALE_ID, useValue: 'es-AR' }, provideServiceWorker('ngsw-worker.js', {
-            enabled: !isDevMode(),
-            registrationStrategy: 'registerWhenStable:30000'
-          }),
+    { provide: LOCALE_ID, useValue: 'es-AR' },
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
 };
