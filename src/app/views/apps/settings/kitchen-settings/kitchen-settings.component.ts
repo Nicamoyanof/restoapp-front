@@ -31,6 +31,7 @@ export class KitchenSettingsComponent implements OnInit {
     this.formGroup = this.fb.group({
       id: [null],
       name: [null, [Validators.required]],
+      alertTime: [null],
     });
   }
   ngOnInit(): void {
@@ -86,6 +87,7 @@ export class KitchenSettingsComponent implements OnInit {
           kitchenId: this.formGroup.value.id,
           name: this.formGroup.value.name,
           showOnMonitor: false,
+          alertTime: Number(this.formGroup.value.alertTime),
         };
         this.kitchenService
           .updateKitchen(this.formGroup.value.id, updatedKitchen)
@@ -116,6 +118,7 @@ export class KitchenSettingsComponent implements OnInit {
       } else {
         const newKitchen = {
           name: this.formGroup.value.name,
+          alertTime: Number(this.formGroup.value.alertTime),
         };
         this.kitchenService.createKitchen(newKitchen).subscribe(
           (response) => {

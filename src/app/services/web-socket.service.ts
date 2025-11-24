@@ -1,17 +1,22 @@
 import { Injectable, NgZone } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
-import { Observable, Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class WebSocketService {
   private socket?: WebSocket;
-  private messages$ = new Subject<any>(); // 👈 aquí guardamos los mensajes entrantes
+  private messages$ = new ReplaySubject<any>(1); // guarda el último mensaje
+  isConnected = false;
 
   constructor(private auth: AuthService, private zone: NgZone) {}
 
   async connect(): Promise<void> {
-    const token = await this.auth.getAccessTokenSilently().toPromise();
+    if (this.isConnected && this.socket?.readyState === WebSocket.OPEN) {
+      console.log('🔗 WebSocket ya conectado, no se reconecta');
+      return;
+    }
 
+    const token = await this.auth.getAccessTokenSilently().toPromise();
     if (!token) {
       console.error('No hay token disponible');
       return;
@@ -21,18 +26,26 @@ export class WebSocketService {
       `ws://localhost:4100/api/GetAllOrdersActives?token=${token}`
     );
 
-    this.socket.onopen = () => console.log('✅ WebSocket conectado');
-    this.socket.onclose = () => console.log('❌ WebSocket cerrado');
+    this.socket.onopen = () => {
+      this.isConnected = true;
+      console.log('✅ WebSocket conectado');
+    };
+
+    this.socket.onclose = () => {
+      this.isConnected = false;
+      console.warn('❌ WebSocket cerrado, reintentando...');
+      setTimeout(() => this.connect(), 1000);
+    };
+
     this.socket.onerror = (err) => console.error('⚠️ Error en WebSocket:', err);
 
     this.socket.onmessage = (event) => {
-      // Angular necesita run() para detectar cambios fuera de su zona
       this.zone.run(() => {
         try {
           const data = JSON.parse(event.data);
-          this.messages$.next(data); // 🚀 Emitir el mensaje entrante
+          this.messages$.next(data);
         } catch {
-          this.messages$.next(event.data); // si no es JSON, emitir crudo
+          this.messages$.next(event.data);
         }
       });
     };

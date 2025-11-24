@@ -40,7 +40,7 @@
         </thead>
         <tbody>
           @for (order of ordersData; track $index) {
-          <tr>
+          <tr [ngClass]="{ 'blink-row': getAlertClass(order) }">
             <td>#ORD-{{order.orderId}}</td>
             <!-- <td>
               <div class="link-primary fw-medium">{{order.customer}} </div>

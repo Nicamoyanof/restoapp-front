@@ -1,4 +1,11 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import {
   NavigationCancel,
   NavigationEnd,
@@ -31,18 +38,25 @@ import { SpinnerService } from './services/spinner.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnChanges {
   title = 'metor-angular';
   private titleService = inject(TitleService);
   progressRef!: NgProgressRef;
   @ViewChild(NgProgressComponent) progressBar!: NgProgressComponent;
   isLoading = false;
 
+  ngOnChanges(changes: SimpleChanges): void {
+    // Handle changes
+    console.log('Changes detected:', changes);
+    this.cdr.detectChanges();
+  }
+
   private router = inject(Router);
 
   constructor(
     private clientService: ClientService,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private cdr: ChangeDetectorRef
   ) {
     this.router.events.subscribe((event: Event) => {
       this.checkRouteChange(event);

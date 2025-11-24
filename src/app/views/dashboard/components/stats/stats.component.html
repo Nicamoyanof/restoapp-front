@@ -1,110 +1,106 @@
 <div class="row">
-    <div class="col-lg-6 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div>
-                        <p class="mb-3 card-title">Total Revenue</p>
-                        <h4 class="fw-bold text-primary d-flex align-items-center gap-2 mb-0">$35,428.09</h4>
-                    </div>
-                    <div>
-                        <div>
-                            <i class="ri-money-dollar-circle-line fs-32 text-muted"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="row align-items-center mt-5">
-                    <div class="col-12">
-                        <div id="sales_funnel" data-colors="#604ae3" class="apex-charts">
-                            <apx-chart [series]="salesFunnel.series!" [chart]="salesFunnel.chart!"
-                                [colors]="salesFunnel.colors!" [tooltip]="salesFunnel.tooltip!"
-                                [title]="salesFunnel.title!" [markers]="salesFunnel.markers!"
-                                [stroke]="salesFunnel.stroke!" [fill]="salesFunnel.fill!"></apx-chart>
-                        </div>
-                    </div>
-                </div>
+  <div class="col-lg-6 col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <p class="mb-3 card-title">Ingresos Totales</p>
+            <h4 class="fw-bold text-primary d-flex align-items-center gap-2 mb-0">$35,428.09</h4>
+          </div>
+          <div>
+            <div>
+              <i class="ri-money-dollar-circle-line fs-32 text-muted"></i>
             </div>
+          </div>
         </div>
-    </div>
-    <div class="col-lg-6 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div>
-                        <p class="mb-3 card-title">Total Orders</p>
-                        <h4 class="fw-bold d-flex align-items-center gap-2 mb-0">4526</h4>
-                    </div>
-                    <div>
-                        <div>
-                            <i class="ri-restaurant-2-line fs-32 text-muted"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="row align-items-center mt-5">
-                    <div class="col-12">
-                        <div id="order_funnel" data-colors="#604ae3" class="apex-charts">
-                            <apx-chart [series]="orderFunnel.series!" [chart]="orderFunnel.chart!"
-                                [colors]="orderFunnel.colors!" [tooltip]="orderFunnel.tooltip!"
-                                [title]="orderFunnel.title!" [markers]="orderFunnel.markers!"
-                                [stroke]="orderFunnel.stroke!" [plotOptions]="orderFunnel.plotOptions!"></apx-chart>
-                        </div>
-                    </div>
-                </div>
+        <div class="row align-items-center mt-5">
+          <div class="col-12">
+            <div id="sales_funnel" data-colors="#604ae3" class="apex-charts">
+              <apx-chart [series]="salesFunnel.series!" [chart]="salesFunnel.chart!" [colors]="salesFunnel.colors!"
+                [tooltip]="salesFunnel.tooltip!" [title]="salesFunnel.title!" [markers]="salesFunnel.markers!"
+                [stroke]="salesFunnel.stroke!" [fill]="salesFunnel.fill!"></apx-chart>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="col-lg-6 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div>
-                        <p class="mb-3 card-title">Total Customers</p>
-                        <h4 class="fw-bold d-flex align-items-center gap-2 mb-0">5736</h4>
-                    </div>
-                    <div>
-                        <div>
-                            <i class="ri-group-2-line fs-32 text-muted"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="row align-items-center mt-5">
-                    <div class="col-12">
-                        <div id="customer_funnel" data-colors="#604ae3" class="apex-charts">
-                            <apx-chart [series]="orderFunnel.series!" [chart]="orderFunnel.chart!"
-                                [colors]="orderFunnel.colors!" [tooltip]="orderFunnel.tooltip!"
-                                [title]="orderFunnel.title!" [markers]="orderFunnel.markers!"
-                                [stroke]="orderFunnel.stroke!" [plotOptions]="orderFunnel.plotOptions!"></apx-chart>
-                        </div>
-                    </div>
-                </div>
+  </div>
+  <div class="col-lg-6 col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <p class="mb-3 card-title">Total Orders</p>
+            <h4 class="fw-bold d-flex align-items-center gap-2 mb-0">4526</h4>
+          </div>
+          <div>
+            <div>
+              <i class="ri-restaurant-2-line fs-32 text-muted"></i>
             </div>
+          </div>
         </div>
-    </div>
-    <div class="col-lg-6 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div>
-                        <p class="mb-3 card-title">Cancelled Orders</p>
-                        <h4 class="fw-bold text-primary d-flex align-items-center gap-2 mb-0">1310</h4>
-                    </div>
-                    <div>
-                        <div>
-                            <i class="ri-calendar-close-line fs-32 text-muted"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="row align-items-center mt-5">
-                    <div class="col-12">
-                        <div id="cancel_funnel" data-colors="#604ae3" class="apex-charts">
-                            <apx-chart [series]="cancelFunnel.series!" [chart]="cancelFunnel.chart!"
-                                [colors]="cancelFunnel.colors!" [tooltip]="cancelFunnel.tooltip!"
-                                [title]="cancelFunnel.title!" [markers]="cancelFunnel.markers!"
-                                [stroke]="cancelFunnel.stroke!" [plotOptions]="cancelFunnel.plotOptions!"></apx-chart>
-                        </div>
-                    </div>
-                </div>
+        <div class="row align-items-center mt-5">
+          <div class="col-12">
+            <div id="order_funnel" data-colors="#604ae3" class="apex-charts">
+              <apx-chart [series]="orderFunnel.series!" [chart]="orderFunnel.chart!" [colors]="orderFunnel.colors!"
+                [tooltip]="orderFunnel.tooltip!" [title]="orderFunnel.title!" [markers]="orderFunnel.markers!"
+                [stroke]="orderFunnel.stroke!" [plotOptions]="orderFunnel.plotOptions!"></apx-chart>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+  <div class="col-lg-6 col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <p class="mb-3 card-title">Total Customers</p>
+            <h4 class="fw-bold d-flex align-items-center gap-2 mb-0">5736</h4>
+          </div>
+          <div>
+            <div>
+              <i class="ri-group-2-line fs-32 text-muted"></i>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-center mt-5">
+          <div class="col-12">
+            <div id="customer_funnel" data-colors="#604ae3" class="apex-charts">
+              <apx-chart [series]="orderFunnel.series!" [chart]="orderFunnel.chart!" [colors]="orderFunnel.colors!"
+                [tooltip]="orderFunnel.tooltip!" [title]="orderFunnel.title!" [markers]="orderFunnel.markers!"
+                [stroke]="orderFunnel.stroke!" [plotOptions]="orderFunnel.plotOptions!"></apx-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <p class="mb-3 card-title">Cancelled Orders</p>
+            <h4 class="fw-bold text-primary d-flex align-items-center gap-2 mb-0">1310</h4>
+          </div>
+          <div>
+            <div>
+              <i class="ri-calendar-close-line fs-32 text-muted"></i>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-center mt-5">
+          <div class="col-12">
+            <div id="cancel_funnel" data-colors="#604ae3" class="apex-charts">
+              <apx-chart [series]="cancelFunnel.series!" [chart]="cancelFunnel.chart!" [colors]="cancelFunnel.colors!"
+                [tooltip]="cancelFunnel.tooltip!" [title]="cancelFunnel.title!" [markers]="cancelFunnel.markers!"
+                [stroke]="cancelFunnel.stroke!" [plotOptions]="cancelFunnel.plotOptions!"></apx-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

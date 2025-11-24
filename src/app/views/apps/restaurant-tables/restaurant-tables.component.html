@@ -12,7 +12,7 @@
   <div class="card-body">
     <div class="row">
       @for (table of tables; track $index) {
-      <div class="col-md-3 mb-4" (click)="openEnd(rightOffcanvas, table)">
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-4" (click)="openEnd(rightOffcanvas, table)">
         <div class="card text-center table-card" [ngClass]="{
        'bg-success':   table.status === 0,
        'bg-warning':   table.status === 1,
@@ -82,7 +82,8 @@
     aria-labelledby="rightOffcanvasLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title mt-0" id="rightOffcanvasLabel">Estado de la Mesa</h5>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+        (click)="closeModal(rightOffcanvas)"></button>
     </div>
     <div class="offcanvas-body">
       <!-- Cambiar estado de la mesa -->

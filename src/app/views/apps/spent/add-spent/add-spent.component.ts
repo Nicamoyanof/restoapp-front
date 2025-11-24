@@ -60,13 +60,17 @@ export class AddSpentComponent implements OnInit {
   loadProducts() {
     this.productService.getProducts().subscribe((data: any) => {
       this.products = data.filter((p: any) => !p.hasRecipe);
-      this.resetEmitter.emit('product');
+      setTimeout(() => {
+        this.resetEmitter.emit('product');
+      }, 1000);
     });
   }
   loadIngredients() {
     this.ingredientService.getIngredients().subscribe((data: any) => {
       this.ingredients = data;
-      this.resetEmitter.emit('ingredient');
+      setTimeout(() => {
+        this.resetEmitter.emit('ingredient');
+      }, 1000);
     });
   }
 

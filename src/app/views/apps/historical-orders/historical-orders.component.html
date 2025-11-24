@@ -163,6 +163,9 @@
   }">
             {{ getOrderStatusName(selectedOrder?.status) }}
           </span></p>
+        <strong>Propina: ${{ selectedOrder?.tip | number:'1.2-2' }}</strong>
+        <br>
+        <br>
         <strong>Total: ${{ selectedOrder?.total | number:'1.2-2' }}</strong>
         <br>
         <br>

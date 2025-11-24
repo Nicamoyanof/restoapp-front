@@ -8,7 +8,8 @@
     <table class="table">
       <thead>
         <tr class="row col-12">
-          <th class="col-7">Nombre</th>
+          <th class="col-5">Nombre</th>
+          <th class="col-2">Tiempo de Alerta</th>
           <th class="col-2">Mostrar en Monitor</th>
           <th class="col-3">Acciones</th>
         </tr>
@@ -17,7 +18,8 @@
         @if (kitchens && kitchens.length) {
         @for (kitchen of kitchens; track kitchen.id; let i = $index) {
         <tr class="row col-12">
-          <td class="col-7">{{kitchen.name}}</td>
+          <td class="col-5">{{kitchen.name}}</td>
+          <td class="col-2">{{kitchen.alertTime}} min</td>
           <td class="col-2">
             <input class="form-check-input me-1" style="cursor: pointer;" type="checkbox"
               [(ngModel)]="kitchen.showOnMonitor"
@@ -56,12 +58,19 @@
           <input type="text" class="form-control" id="kitchenName" formControlName="name"
             placeholder="Ej: Cocina Principal">
         </div>
+        <div class="mb-3">
+          <label for="kitchenAlert" class="col-form-label">Tiempo de Alerta de Pendiente:</label>
+          <!-- agrega un sufijo de minutos -->
+          <span class="input-group-text">Minutos</span>
+          <input type="text" class="form-control" id="kitchenAlert" formControlName="alertTime" placeholder="Ej: 5">
+        </div>
       </form>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
         (click)="modal.close('click')">Cancelar</button>
-      <button type="button" class="btn btn-primary" (click)="createKitchen()">Agregar</button>
+      <button [disabled]="formGroup.invalid" type="button" class="btn btn-primary"
+        (click)="createKitchen()">Agregar</button>
     </div>
   </div>
 </ng-template>

@@ -1,4 +1,6 @@
 import {
+  AfterViewInit,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -26,23 +28,37 @@ import { TimeAgoPipe } from '@/app/pipes/time-ago.pipe';
   ],
   templateUrl: './orders-summary.component.html',
   styles: `
-  .wrapper .page-content{
-    margin: 0 !important;
-  }
+    .blink-row {
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% {
+        background-color: #f8d7da; /* color base de 'table-danger' */
+      }
+      50% {
+        background-color: #ffffff; /* color al que "parpadea" */
+      }
+    }
   `,
 })
-export class OrdersSummaryComponent implements OnChanges {
+export class OrdersSummaryComponent implements OnChanges, AfterViewInit {
   number!: number;
   @Input() ordersData: any[] = [];
   totalItems = 3;
   pageSize = 1;
   currentPage = 1;
 
+  ngAfterViewInit(): void {
+    this.cdr.detectChanges();
+    console.log('AfterViewInit - ordersData:', this.ordersData);
+  }
+
   maxSize = 3;
   orderSelected: any = null;
   @Output() changeStatus = new EventEmitter<any>();
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private cdr: ChangeDetectorRef) {}
 
   ngOnChanges(changes: any): void {
     console.log('Cambios detectados en ordersData:', changes);
@@ -91,5 +107,20 @@ export class OrdersSummaryComponent implements OnChanges {
   openNotesModal(content: any, order: any) {
     this.orderSelected = order;
     this.modalService.open(content, { centered: true });
+  }
+
+  getAlertClass(order: any): boolean {
+    if (!order.alertTime || order.status !== 0) {
+      return false;
+    }
+
+    // Ejemplo: order.createdAt = "2025-11-09T11:00:00"
+    const createdAt = new Date(order.tsCreated);
+    const alertTimeMs = order.alertTime * 60 * 1000; // convertir minutos a milisegundos
+
+    const alertDate = new Date(createdAt.getTime() + alertTimeMs);
+    const now = new Date();
+
+    return now >= alertDate; // true cuando ya pasó el tiempo de alerta
   }
 }

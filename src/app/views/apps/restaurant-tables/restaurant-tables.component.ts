@@ -163,7 +163,7 @@ export class RestaurantTablesComponent implements OnInit {
         next: (response) => {
           Swal.fire('Éxito', 'Estado de la mesa actualizado', 'success').then(
             () => {
-              this.offcanvasService.dismiss();
+              // this.offcanvasService.dismiss();
               this.loadTables();
             }
           );
@@ -177,7 +177,7 @@ export class RestaurantTablesComponent implements OnInit {
         next: (response) => {
           Swal.fire('Éxito', 'Estado de la mesa actualizado', 'success').then(
             () => {
-              this.offcanvasService.dismiss();
+              // this.offcanvasService.dismiss();
               this.loadTables();
             }
           );
@@ -191,7 +191,7 @@ export class RestaurantTablesComponent implements OnInit {
         next: (response) => {
           Swal.fire('Éxito', 'Estado de la mesa actualizado', 'success').then(
             () => {
-              this.offcanvasService.dismiss();
+              // this.offcanvasService.dismiss();
               this.loadTables();
             }
           );
@@ -286,5 +286,9 @@ export class RestaurantTablesComponent implements OnInit {
         Swal.fire('Error', 'Hubo un error al imprimir el ticket', 'error');
       },
     });
+  }
+
+  closeModal(content: any) {
+    this.offcanvasService.dismiss(content);
   }
 }

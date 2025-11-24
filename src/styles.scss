@@ -35,5 +35,27 @@
   width: 400px !important;
 }
 .offcanvas {
-  --bs-offcanvas-width: 35%;
+  --bs-offcanvas-width: 100%;
+
+  @media (min-width: 768px) {
+    --bs-offcanvas-width: 70%;
+  }
+
+  @media (min-width: 992px) {
+    --bs-offcanvas-width: 50%;
+  }
+}
+
+.blink-row {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    background-color: #f8d7da; /* color base de 'table-danger' */
+  }
+  50% {
+    background-color: #ffffff; /* color al que "parpadea" */
+  }
 }

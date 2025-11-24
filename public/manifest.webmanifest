@@ -1,6 +1,7 @@
 {
   "name": "Mi App de Comandas",
   "short_name": "Comandas",
+  "description": "App offline para comandas",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

@@ -1,4 +1,5 @@
 {
+  "$schema": "./node_modules/@angular/service-worker/config/schema.json",
   "index": "/index.html",
   "assetGroups": [
     {
@@ -12,7 +13,21 @@
       "name": "assets",
       "installMode": "lazy",
       "updateMode": "prefetch",
-      "resources": { "files": ["/assets/**", "/public/**"] }
+      "resources": {
+        "files": ["/assets/**", "/public/**"]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "api-pedidos",
+      "urls": ["/api/**"],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 50,
+        "maxAge": "6h",
+        "timeout": "10s"
+      }
     }
   ]
 }
