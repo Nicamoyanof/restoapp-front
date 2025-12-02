@@ -27,6 +27,10 @@ jobs:
         run: npm run build -- --configuration production
         # Si usás otro script, sería algo tipo:
         # run: npm run build
+      - name: List dist output
+        run: |
+          echo "Contenido de dist:"
+          ls -R dist || echo "NO EXISTE dist"
 
       - name: Copy files to server via SSH
         uses: appleboy/scp-action@v0.1.1
@@ -35,9 +39,10 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT }}
-          # OJO con la ruta: ajustá el nombre del proyecto dentro de dist
-          source: "dist/mentor-angular/browser/*"
+          # fíjate: metor-angular, sin 'n' y sin /browser
+          source: "dist/metor-angular/*"
           target: "/var/www/mesero-front"
+          overwrite: true
 
       # Opcional: limpiar antes de copiar para evitar basura vieja
       - name: Clean target folder (optional but recommended)
