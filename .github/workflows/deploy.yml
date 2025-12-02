@@ -1,0 +1,51 @@
+name: Deploy Front App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build frontend
+        # Para Angular
+        run: npm run build -- --configuration production
+        # Si usás otro script, sería algo tipo:
+        # run: npm run build
+
+      - name: Copy files to server via SSH
+        uses: appleboy/scp-action@v0.1.1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          # OJO con la ruta: ajustá el nombre del proyecto dentro de dist
+          source: "dist/mentor-angular/browser/*"
+          target: "/var/www/mesero-front"
+
+      # Opcional: limpiar antes de copiar para evitar basura vieja
+      - name: Clean target folder (optional but recommended)
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: |
+            sudo rm -rf /var/www/mesero-front/*
