@@ -23,29 +23,15 @@ jobs:
         run: npm ci
 
       - name: Build frontend
-        # Para Angular
         run: npm run build -- --configuration production
-        # Si usás otro script, sería algo tipo:
-        # run: npm run build
+
       - name: List dist output
-        run: |
-          echo "Contenido de dist:"
-          ls -R dist || echo "NO EXISTE dist"
+        run: ls -R dist
 
-      - name: Copy files to server via SSH
-        uses: appleboy/scp-action@v0.1.1
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          port: ${{ secrets.SERVER_PORT }}
-          # fíjate: metor-angular, sin 'n' y sin /browser
-          source: "dist/metor-angular/*"
-          target: "/var/www/mesero-front"
-          overwrite: true
-
-      # Opcional: limpiar antes de copiar para evitar basura vieja
-      - name: Clean target folder (optional but recommended)
+      ## =====================================
+      ## 1️⃣ BACKUP DEL ÚLTIMO DEPLOY
+      ## =====================================
+      - name: Backup old front
         uses: appleboy/ssh-action@v0.1.5
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -53,4 +39,41 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
+            echo "Backup del front anterior..."
+            if [ -d "/var/www/mesero-front" ]; then
+              sudo rm -rf /var/www/mesero-front-backup
+              sudo mkdir -p /var/www/mesero-front-backup
+              sudo cp -r /var/www/mesero-front/* /var/www/mesero-front-backup/ || true
+              echo "Backup creado en /var/www/mesero-front-backup"
+            else
+              echo "No existe /var/www/mesero-front (primer deploy?)"
+            fi
+
+      ## =====================================
+      ## 2️⃣ LIMPIAR CARPETA DEL FRONT
+      ## =====================================
+      - name: Clean target folder
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          script: |
+            echo "Limpiando carpeta del front..."
             sudo rm -rf /var/www/mesero-front/*
+            echo "Carpeta limpia."
+
+      ## =====================================
+      ## 3️⃣ SUBIR LA NUEVA BUILD
+      ## =====================================
+      - name: Copy files to server via SSH
+        uses: appleboy/scp-action@v0.1.1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          source: "dist/metor-angular/browser/*"
+          target: "/var/www/mesero-front"
+          overwrite: true
