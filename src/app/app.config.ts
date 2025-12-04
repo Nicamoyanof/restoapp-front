@@ -26,7 +26,7 @@ import { AuthHttpInterceptor, provideAuth0 } from '@auth0/auth0-angular';
 import { registerLocaleData } from '@angular/common';
 import localeEsAR from '@angular/common/locales/es-AR';
 import { spinnerInterceptor } from './helper/spinner.interceptor';
-import { environment } from '@environment/environment.development';
+import { environment } from '@environment/environment';
 import { provideNgxMask } from 'ngx-mask';
 import { provideServiceWorker } from '@angular/service-worker';
 
