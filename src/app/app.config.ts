@@ -59,7 +59,7 @@ export const appConfig: ApplicationConfig = {
     // 👉 Config Auth0 (con cache y refresh token)
     provideAuth0({
       domain: 'dev-w1bl5owcn51l2yqv.us.auth0.com',
-      clientId: 'svFOPUICh7c5ch0VmVHoZvumsEant9Ic',
+      clientId: environment.auth0ClientId,
       authorizationParams: {
         redirect_uri: window.location.origin,
         audience: environment.audience, // <-- tu audience real
