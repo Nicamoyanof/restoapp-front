@@ -34,6 +34,7 @@ import { forkJoin, of, take } from 'rxjs';
 import { IngredientsService } from '@/app/services/ingredients.service';
 import { RecipesService } from '@/app/services/recipes.service';
 import { BaseUnitEnum } from '@common/base-units';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-general-info',
@@ -114,6 +115,9 @@ export class ProductGeneralInfoComponent implements OnInit {
           this.categories = categories;
           this.kitchens = kitchens;
           this.ingredients = ingredients;
+
+          this.goToKitchenConfig();
+          this.gotToCategoryConfig();
 
           if (product) {
             this.isEdit = true;
@@ -226,6 +230,20 @@ export class ProductGeneralInfoComponent implements OnInit {
   }
 
   addRecipeItem(): void {
+    if (this.ingredients.length === 0) {
+      Swal.fire({
+        title: 'No hay ingredientes disponibles',
+        text: 'Debe agregar al menos un ingrediente antes de agregar una receta.',
+        icon: 'warning',
+        confirmButtonText: 'Ir a configuración de ingredientes',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/settings/ingredient']);
+        }
+      });
+      return;
+    }
+
     this.recipeItems.push(
       this.fb.group({
         ingredientId: [null, Validators.required],
@@ -295,5 +313,35 @@ export class ProductGeneralInfoComponent implements OnInit {
   onTrackStockChange(event: any) {
     const isChecked = event.target.checked;
     this.formGroup.patchValue({ trackStock: isChecked });
+  }
+
+  goToKitchenConfig() {
+    if (!this.kitchens || this.kitchens.length == 0) {
+      Swal.fire({
+        title: 'No hay cocinas configuradas',
+        text: 'Debe configurar al menos una cocina antes de asignar productos a una cocina.',
+        icon: 'warning',
+        confirmButtonText: 'Ir a configuración de cocinas',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/settings/kitchen']);
+        }
+      });
+    }
+  }
+
+  gotToCategoryConfig() {
+    if (!this.categories || this.categories.length == 0) {
+      Swal.fire({
+        title: 'No hay categorías de productos configuradas',
+        text: 'Debe configurar al menos una categoría de productos antes de asignar productos a una categoría.',
+        icon: 'warning',
+        confirmButtonText: 'Ir a configuración de categorías',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/settings/category-product']);
+        }
+      });
+    }
   }
 }

@@ -120,9 +120,9 @@ export class ControlStockComponent implements OnInit {
   loadCategoryIngredients() {
     this.ingredientService.getIngredients().subscribe((data: any) => {
       this.allIngredients = data;
-      this.categoryIngredients = data.map(
-        (ingredient: any) => ingredient.category
-      );
+      this.categoryIngredients = [...new Set(
+        data.map((ingredient: any) => ingredient.category)
+      )];
     });
   }
 

@@ -3,7 +3,12 @@ import { ProductService } from '@/app/services/product.service';
 import { StockMovementService } from '@/app/services/stock-movement.service';
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { BaseUnitEnum } from '@common/base-units';
 import { SelectFormInputDirective } from '@core/directives/select-form-input.directive';
@@ -37,10 +42,10 @@ export class CountStockComponent implements OnInit {
     private stockMovementService: StockMovementService
   ) {
     this.formGroup = fb.group({
-      itemId: [0],
-      quantity: [0],
-      isProduct: [null],
-      reason: [''],
+      itemId: [0, Validators.required],
+      quantity: [0, Validators.required],
+      isProduct: [null, Validators.required],
+      reason: ['', Validators.required],
     });
   }
 
@@ -56,7 +61,7 @@ export class CountStockComponent implements OnInit {
   }
 
   loadIngredients() {
-    this.ingredientService.getCategories().subscribe((data: any) => {
+    this.ingredientService.getIngredients().subscribe((data: any) => {
       this.ingredients = data;
     });
   }
@@ -97,5 +102,10 @@ export class CountStockComponent implements OnInit {
         }
       });
     }
+  }
+
+  getName(item: any): string {
+    console.log(item);
+    return item.name ? item.name : item.description;
   }
 }
