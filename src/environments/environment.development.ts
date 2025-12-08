@@ -4,4 +4,5 @@ export const environment = {
   audience: 'https://dev-w1bl5owcn51l2yqv.us.auth0.com/api/v2/',
   auth0ClientId: 'svFOPUICh7c5ch0VmVHoZvumsEant9Ic',
   production: false,
+  websocketUrl: 'ws://localhost:4100',
 };

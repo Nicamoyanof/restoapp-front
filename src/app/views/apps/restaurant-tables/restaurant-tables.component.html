@@ -87,6 +87,8 @@
     </div>
     <div class="offcanvas-body">
       <!-- Cambiar estado de la mesa -->
+      @if (!(tableSelected.status == 2 || tableSelected.status == 4)) {
+
       <form [formGroup]="formGroupStateTable">
         <div class="mb-3">
           <label for="tableStatus" class="col-form-label">Estado de la Mesa:</label>
@@ -101,6 +103,7 @@
           </select>
         </div>
       </form>
+      }
       @if (!tableSelected.order.id) {
       <div class="mb-3 text-end">
         <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="offcanvas">Cancelar</button>

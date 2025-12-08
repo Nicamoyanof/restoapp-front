@@ -358,6 +358,16 @@ export class OrderSummaryComponent implements OnInit, AfterViewInit {
       : 0;
   }
 
+  getStockStatus(): string {
+    const selectedProduct = this.products.find(
+      (p) => p.productId == this.productSelected
+    );
+    if (!selectedProduct) return 'No seleccionado';
+    if (selectedProduct.stock <= 0) return 'Sin stock';
+    if (selectedProduct.stock < 5) return 'Bajo stock';
+    return 'En stock';
+  }
+
   onQtyChange() {
     const maxLength = this.getProdMaxLength();
     if (this.qty > maxLength) {

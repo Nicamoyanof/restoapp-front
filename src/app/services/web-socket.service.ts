@@ -1,5 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
+import { environment } from '@environment/environment';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -23,7 +24,7 @@ export class WebSocketService {
     }
 
     this.socket = new WebSocket(
-      `ws://localhost:4100/api/GetAllOrdersActives?token=${token}`
+      `${environment.websocketUrl}/api/GetAllOrdersActives?token=${token}`
     );
 
     this.socket.onopen = () => {
