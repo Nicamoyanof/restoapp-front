@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { orderStatusData, ordersData } from './data';
 import {
   NgbDropdownModule,
@@ -13,6 +13,8 @@ import { ProductService } from '@/app/services/product.service';
 import { PaymentMethodService } from '@/app/services/payment-method.service';
 import { RestaurantTablesService } from '@/app/services/restaurant-tables.service';
 import { RouterLink, RouterModule } from '@angular/router';
+import { DialogPrintTicketComponent } from '@views/common/dialog-print-ticket/dialog-print-ticket.component';
+import { PrinterService } from '@/app/services/printer.service';
 
 @Component({
   selector: 'app-historical-orders',
@@ -25,6 +27,7 @@ import { RouterLink, RouterModule } from '@angular/router';
     RouterLink,
     RouterModule,
     SlicePipe,
+    DialogPrintTicketComponent,
   ],
   templateUrl: './historical-orders.component.html',
   styleUrl: './historical-orders.component.scss',
@@ -62,13 +65,15 @@ export class HistoricalOrdersComponent implements OnInit {
   paymentMethods: any[] = [];
   tables: any[] = [];
   selectedOrder: any = null;
+  @ViewChild('ticket') ticketModalRef!: TemplateRef<any>;
 
   constructor(
     private orderService: OrdersService,
     private productService: ProductService,
     private paymentMethodService: PaymentMethodService,
     private tableRestaurantService: RestaurantTablesService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private printService: PrinterService
   ) {}
 
   ngOnInit(): void {
@@ -177,6 +182,9 @@ export class HistoricalOrdersComponent implements OnInit {
     this.selectedOrder = order;
     this.modalService.open(content, options);
   }
+  openModalTicket(content: TemplateRef<HTMLElement>, options: NgbModalOptions) {
+    this.modalService.open(content, options);
+  }
 
   printTicket() {
     // Aquí puedes implementar la lógica para imprimir el ticket
@@ -185,5 +193,20 @@ export class HistoricalOrdersComponent implements OnInit {
     this.orderService.print(this.selectedOrder.id).subscribe((response) => {
       console.log('Ticket printed successfully', response);
     });
+  }
+
+  closeModalFunc(event: string) {
+    if (event !== 'close') {
+      let body = {
+        printerName: event,
+        order: this.selectedOrder,
+      };
+      this.printService.postTicket(body).subscribe((response) => {
+        console.log('Ticket printed successfully', response);
+        this.modalService.dismissAll();
+      });
+    } else {
+      this.modalService.dismissAll();
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { RestaurantTablesService } from '@/app/services/restaurant-tables.service';
 import { NgClass } from '@angular/common';
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import {
   Form,
   FormBuilder,
@@ -21,6 +21,7 @@ import { ProductService } from '@/app/services/product.service';
 import { CategoryProductService } from '@/app/services/category-product.service';
 import { OrdersService } from '@/app/services/orders.service';
 import { PaymentMethodService } from '@/app/services/payment-method.service';
+import { DialogPrintTicketComponent } from '@views/common/dialog-print-ticket/dialog-print-ticket.component';
 
 @Component({
   selector: 'app-restaurant-tables',
@@ -30,6 +31,7 @@ import { PaymentMethodService } from '@/app/services/payment-method.service';
     NgbModalModule,
     NgClass,
     OrderSummaryComponent,
+    DialogPrintTicketComponent,
   ],
   templateUrl: './restaurant-tables.component.html',
   styleUrl: './restaurant-tables.component.scss',
@@ -43,6 +45,7 @@ export class RestaurantTablesComponent implements OnInit {
   tableSelected: any = null;
   paymentMethods: any[] = []; // Aquí puedes almacenar los métodos de pago obtenidos de la API
   tipAmount: number = 0;
+  @ViewChild('ticket') ticketModalRef!: TemplateRef<any>;
 
   constructor(
     private readonly restaurantTablesService: RestaurantTablesService,

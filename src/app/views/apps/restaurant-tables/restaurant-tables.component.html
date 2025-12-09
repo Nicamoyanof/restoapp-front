@@ -125,7 +125,8 @@
       </div>
       <!-- boton de imrpimir ticket -->
       <div class="mb-3 text-end">
-        <button type="button" class="btn btn-secondary me-2" (click)="printTicket()">Imprimir Ticket</button>
+        <button type="button" class="btn btn-secondary me-2" (click)="openModal(ticket, { centered: true }) ">Imprimir
+          Ticket</button>
       </div>
       <div class="mb-3 text-end">
         <button type="button" class="btn btn-success" (click)="payAndFreeTable()">Pagar y Liberar Mesa</button>
@@ -134,3 +135,10 @@
       }
     </div>
   </ng-template>
+
+  <ng-template #ticket let-modal class="modal fade" id="exampleModalCenter" tabindex="-1"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <app-dialog-print-ticket (modal)="modal" (closeModal)="modal.close('click')"></app-dialog-print-ticket>
+  </ng-template>
+
+  <!-- printTicket() -->
