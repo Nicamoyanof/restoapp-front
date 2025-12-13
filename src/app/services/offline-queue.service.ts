@@ -2,10 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from '@auth0/auth0-angular';
+
 import {
   getPendingReady,
   OfflineRequest,
   putRequest,
+  updateRequest,
+  deleteRequest,
 } from '../helper/offline-queue.db';
 
 function uuid(): string {
@@ -15,7 +18,6 @@ function uuid(): string {
 }
 
 function backoffMs(retry: number): number {
-  // 1s, 5s, 15s, 30s, 60s, 5m (cap)
   const seq = [1000, 5000, 15000, 30000, 60000, 300000];
   return seq[Math.min(retry, seq.length - 1)];
 }
@@ -40,6 +42,7 @@ export class OfflineQueueService {
       status: 'PENDING',
       ...req,
     };
+
     await putRequest(item);
     return item.id;
   }
@@ -49,22 +52,24 @@ export class OfflineQueueService {
     if (!navigator.onLine) return;
 
     this.syncing = true;
+
     try {
       const items = await getPendingReady(Date.now());
+      console.log('Processing offline queue...', items);
 
       for (const item of items) {
         // lock por item
         await updateRequest(item.id, { status: 'SENDING' });
 
         try {
-          // ⚠️ Importante: NO guardes token en IndexedDB; pedilo al momento de enviar
+          // token fresco (NO lo guardes en IndexedDB)
           const token = await firstValueFrom(
             this.auth.getAccessTokenSilently()
           );
+
           const headers = new HttpHeaders({
             ...item.headers,
             Authorization: `Bearer ${token}`,
-            // recomendado para evitar duplicados del lado backend
             'Idempotency-Key': item.id,
           });
 
@@ -76,15 +81,19 @@ export class OfflineQueueService {
             })
           );
 
-          // enviado OK -> eliminamos de la cola
+          // OK -> eliminamos de la cola
           await deleteRequest(item.id);
         } catch (err: any) {
           const retryCount = (item.retryCount ?? 0) + 1;
           const nextRetryAt = Date.now() + backoffMs(retryCount);
-          const msg = err?.message ?? JSON.stringify(err);
 
-          // Si es 4xx típico de validación, quizás no conviene reintentar infinito.
           const status = err?.status;
+          const msg =
+            err?.error?.message ??
+            err?.message ??
+            (typeof err === 'string' ? err : JSON.stringify(err));
+
+          // 4xx no reintentable (excepto 408 / 429)
           const nonRetryable =
             status >= 400 && status < 500 && status !== 408 && status !== 429;
 
@@ -100,11 +109,4 @@ export class OfflineQueueService {
       this.syncing = false;
     }
   }
-}
-function updateRequest(id: string, arg1: any) {
-  throw new Error('Function not implemented.');
-}
-
-function deleteRequest(id: string) {
-  throw new Error('Function not implemented.');
 }

@@ -87,7 +87,7 @@
     </div>
     <div class="offcanvas-body">
       <!-- Cambiar estado de la mesa -->
-      @if (!(tableSelected.status == 2 || tableSelected.status == 4)) {
+      @if (!(tableSelected?.status == 2 || tableSelected?.status == 4)) {
 
       <form [formGroup]="formGroupStateTable">
         <div class="mb-3">
@@ -104,19 +104,19 @@
         </div>
       </form>
       }
-      @if (!tableSelected.order.id) {
+      @if (!tableSelected?.order.id) {
       <div class="mb-3 text-end">
         <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="offcanvas">Cancelar</button>
         <button type="button" class="btn btn-primary" (click)="updateTableStatus()"
           [disabled]="formGroupStateTable.invalid">Guardar</button>
       </div>
       }
-      @if ((tableSelected.status == 2 || tableSelected.status == 3) && tableSelected.order) {
-      <app-order-summary [categoriesProducts]="categoriesProducts" [products]="products" [order]="tableSelected.order"
+      @if ((tableSelected?.status == 2 || tableSelected?.status == 3) && tableSelected?.order) {
+      <app-order-summary [categoriesProducts]="categoriesProducts" [products]="products" [order]="tableSelected?.order"
         (addItemEvent)="handleAddItem($event)" (updateItemInOrder)="handleUpdateItem($event)"
         [paymentMethods]="paymentMethods" (refreshOrder)="onRefreshOrder()"></app-order-summary>
       }
-      @else if (tableSelected.status == 4 && tableSelected.order)
+      @else if (tableSelected?.status == 4 && tableSelected?.order)
       {
       <!-- agrergar un boton de liberar mesa y un input para agregar propina a la mesa -->
       <div class="mb-3">

@@ -14,6 +14,13 @@ export const apiUrlInterceptor: HttpInterceptorFn = (req, next) => {
     const apiReq = req.clone({
       url: `${API_URL}${req.url}`,
     });
+
+    if (req.method != 'GET') {
+      // console.log('API URL Interceptor - Modifying request:', apiReq);
+      apiReq.headers.append('ngsw-bypass', 'true');
+      // headers: req.headers.set('ngsw-bypass', 'true'),
+    }
+
     return next(apiReq);
   }
   return next(req);

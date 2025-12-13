@@ -79,18 +79,25 @@ export async function updateRequest(
   patch: Partial<OfflineRequest>
 ): Promise<void> {
   const db = await openDb();
+
   await new Promise<void>((resolve, reject) => {
     const tx = db.transaction(STORE, 'readwrite');
     const store = tx.objectStore(STORE);
+
     const getReq = store.get(id);
+
     getReq.onsuccess = () => {
       const current = getReq.result as OfflineRequest | undefined;
-      if (!current) return resolve();
-      store.put({ ...current, ...patch });
+      if (!current) return; // no existe, no hacemos nada
+
+      const updated: OfflineRequest = { ...current, ...patch };
+      store.put(updated);
     };
+
     tx.oncomplete = () => resolve();
     tx.onerror = () => reject(tx.error);
   });
+
   db.close();
 }
 

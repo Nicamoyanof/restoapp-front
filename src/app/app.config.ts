@@ -55,8 +55,8 @@ export const appConfig: ApplicationConfig = {
     ),
 
     // 👉 Registrar el interceptor de Auth0 por DI
-    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: OfflineInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
 
     // 👉 Config Auth0 (con cache y refresh token)
     provideAuth0({
