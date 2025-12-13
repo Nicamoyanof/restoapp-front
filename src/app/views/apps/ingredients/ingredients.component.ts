@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ingredients',
@@ -66,5 +67,25 @@ export class IngredientsComponent implements OnInit {
     });
   }
 
-  delete(ingredientId: number): void {}
+  delete(ingredientId: any): void {
+    //agregar Swal para vlaidar la eliminacion
+    Swal.fire({
+      title: 'Estás seguro de eliminar este ingrediente?',
+      text: 'No podrás revertir esto!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminarlo!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.ingredientService.deleteIngredient(ingredientId).subscribe(() => {
+          Swal.fire(
+            'Eliminado!',
+            'Tu ingrediente ha sido eliminado.',
+            'success'
+          );
+          this.loadIngredients();
+        });
+      }
+    });
+  }
 }

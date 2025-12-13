@@ -23,11 +23,11 @@ export class IngredientsService {
     return this.http.put(`/api/Ingredients/${id}`, ingredient);
   }
 
-  deleteIngredient(id: string) {
+  deleteIngredient(id: any) {
     return this.http.delete(`/api/Ingredients/${id}`);
   }
 
-  getIngredientById(id: string) {
+  getIngredientById(id: any) {
     return this.http.get(`/api/Ingredients/${id}`);
   }
 }
