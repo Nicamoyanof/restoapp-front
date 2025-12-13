@@ -26,6 +26,8 @@ import { AuthService } from '@auth0/auth0-angular';
 import { ClientService } from './services/client.service';
 import { SelectFormInputDirective } from '@core/directives/select-form-input.directive';
 import { SpinnerService } from './services/spinner.service';
+import { OfflineQueueService } from './services/offline-queue.service';
+import { debounceTime, fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -56,11 +58,21 @@ export class AppComponent implements OnChanges {
   constructor(
     private clientService: ClientService,
     private spinnerService: SpinnerService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private queue: OfflineQueueService
   ) {
     this.router.events.subscribe((event: Event) => {
       this.checkRouteChange(event);
     });
+
+    this.queue.processQueue();
+
+    // cuando vuelve la red (debounce para evitar spam)
+    fromEvent(window, 'online')
+      .pipe(debounceTime(500))
+      .subscribe(() => {
+        this.queue.processQueue();
+      });
   }
 
   async ngOnInit() {

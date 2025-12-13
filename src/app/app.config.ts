@@ -29,6 +29,7 @@ import { spinnerInterceptor } from './helper/spinner.interceptor';
 import { environment } from '@environment/environment';
 import { provideNgxMask } from 'ngx-mask';
 import { provideServiceWorker } from '@angular/service-worker';
+import { OfflineInterceptor } from './helper/offline.interceptor';
 
 registerLocaleData(localeEsAR);
 
@@ -55,6 +56,7 @@ export const appConfig: ApplicationConfig = {
 
     // 👉 Registrar el interceptor de Auth0 por DI
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: OfflineInterceptor, multi: true },
 
     // 👉 Config Auth0 (con cache y refresh token)
     provideAuth0({
