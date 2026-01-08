@@ -138,7 +138,7 @@
 
   <ng-template #ticket let-modal class="modal fade" id="exampleModalCenter" tabindex="-1"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <app-dialog-print-ticket (modal)="modal" (closeModal)="modal.close('click')"></app-dialog-print-ticket>
+    <app-dialog-print-ticket (modal)="modal" (closeModal)="closeModalFunc($event)"></app-dialog-print-ticket>
   </ng-template>
 
   <!-- printTicket() -->

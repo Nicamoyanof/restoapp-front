@@ -22,6 +22,7 @@ import { CategoryProductService } from '@/app/services/category-product.service'
 import { OrdersService } from '@/app/services/orders.service';
 import { PaymentMethodService } from '@/app/services/payment-method.service';
 import { DialogPrintTicketComponent } from '@views/common/dialog-print-ticket/dialog-print-ticket.component';
+import { PrinterService } from '@/app/services/printer.service';
 
 @Component({
   selector: 'app-restaurant-tables',
@@ -55,7 +56,8 @@ export class RestaurantTablesComponent implements OnInit {
     private readonly productsService: ProductService,
     private readonly categoryProductsService: CategoryProductService,
     private readonly ordersService: OrdersService,
-    private readonly paymentMethodService: PaymentMethodService
+    private readonly paymentMethodService: PaymentMethodService,
+    private readonly printService: PrinterService
   ) {
     this.formGroup = this.fb.group({
       // Define your form controls and validation here
@@ -293,5 +295,20 @@ export class RestaurantTablesComponent implements OnInit {
 
   closeModal(content: any) {
     this.offcanvasService.dismiss(content);
+  }
+
+  closeModalFunc(event: string) {
+    if (event !== 'close') {
+      let body = {
+        printerName: event,
+        order: this.tableSelected?.order,
+      };
+      this.printService.postTicket(body).subscribe((response) => {
+        console.log('Ticket printed successfully', response);
+        this.modalService.dismissAll();
+      });
+    } else {
+      this.modalService.dismissAll();
+    }
   }
 }
