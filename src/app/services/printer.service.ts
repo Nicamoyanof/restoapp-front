@@ -9,12 +9,12 @@ export class PrinterService {
 
   getPrinters() {
     return this.http.get(
-      'http://localhost:4100/api/InstaladorRestoApp/Printers'
+      'https://localhost:5100/api/InstaladorRestoApp/Printers'
     );
   }
   postTicket(body: any) {
     return this.http.post(
-      'http://localhost:4100/api/InstaladorRestoApp/PrintOrder',
+      'https://localhost:5100/api/InstaladorRestoApp/PrintOrder',
       body
     );
   }
