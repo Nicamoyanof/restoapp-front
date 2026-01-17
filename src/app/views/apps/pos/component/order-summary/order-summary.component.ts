@@ -218,11 +218,6 @@ export class OrderSummaryComponent implements OnInit, AfterViewInit {
     this.discount =
       this.paymentMethods.find((method) => method.name === event)
         ?.discountPercent || 0;
-    console.log(
-      'Selected Payment Method:',
-      this.selectedPayment,
-      this.paymentMethods
-    );
   }
 
   closeOrder() {
@@ -238,8 +233,6 @@ export class OrderSummaryComponent implements OnInit, AfterViewInit {
     var paymentMethodId = this.paymentMethods.find(
       (method) => method.name === this.selectedPayment
     )?.paymentMethodId;
-
-    console.log('Payment Method ID:', paymentMethodId);
 
     if (this.isEditing) {
       this.orderService

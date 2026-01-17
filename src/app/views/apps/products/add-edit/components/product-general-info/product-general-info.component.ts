@@ -283,7 +283,6 @@ export class ProductGeneralInfoComponent implements OnInit {
   }
 
   sendRecipe() {
-    console.log(this.formGroupRecipe.value, this.productId);
     if (this.formGroupRecipe.valid && this.productId) {
       const body = this.formGroupRecipe.value;
       body.lines = body.recipeItems.map((item: any) => ({
@@ -293,9 +292,7 @@ export class ProductGeneralInfoComponent implements OnInit {
 
       this.recipesService
         .createRecipe(body, parseInt(this.productId))
-        .subscribe((response) => {
-          console.log(response);
-        });
+        .subscribe((response) => {});
     }
   }
 

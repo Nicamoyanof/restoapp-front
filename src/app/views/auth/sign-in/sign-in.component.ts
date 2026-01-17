@@ -53,7 +53,6 @@ export class SignInComponent implements OnInit {
 
     this.authService.getAccessTokenSilently().subscribe((token) => {
       // this.service.saveSession(token);
-      console.log('Token', token);
     });
   }
 

@@ -1,41 +1,47 @@
 import { Component } from '@angular/core';
 import { ChartOptions } from '@common/apexchart.model';
-import { gradientDonutChartOpts, imagePieChartOpts, monochromePieChartOpts, patternedDonutChartOpts, simpleDonutChartOpts, simplePieChartOpts } from './data';
+import {
+  gradientDonutChartOpts,
+  imagePieChartOpts,
+  monochromePieChartOpts,
+  patternedDonutChartOpts,
+  simpleDonutChartOpts,
+  simplePieChartOpts,
+} from './data';
 import { NgApexchartsModule } from 'ng-apexcharts';
 export const donutUpdateOpts: Partial<ChartOptions> = {
   chart: {
-  height: 320,
-  type: 'donut',
+    height: 320,
+    type: 'donut',
   },
   dataLabels: {
-  enabled: false,
+    enabled: false,
   },
   series: [44, 55, 13, 33],
-  colors: ["#727cf5", "#6c757d", "#0acf97", "#fa5c7c"],
+  colors: ['#727cf5', '#6c757d', '#0acf97', '#fa5c7c'],
   legend: {
-  show: true,
-  position: 'bottom',
-  horizontalAlign: 'center',
-  floating: false,
-  fontSize: '14px',
-  offsetX: 0,
-  offsetY: 7,
+    show: true,
+    position: 'bottom',
+    horizontalAlign: 'center',
+    floating: false,
+    fontSize: '14px',
+    offsetX: 0,
+    offsetY: 7,
   },
-  };
+};
 @Component({
   selector: 'app-pie',
   imports: [NgApexchartsModule],
   templateUrl: './pie.component.html',
-  styles: ``
+  styles: ``,
 })
 export class PieComponent {
-  simplePieChart = simplePieChartOpts
-  simpleDonutChart = simpleDonutChartOpts
-  monochromePieChart = monochromePieChartOpts
-  gradientDonutChart = gradientDonutChartOpts
-  patternedDonutChart = patternedDonutChartOpts
-  imagePieChart = imagePieChartOpts
-
+  simplePieChart = simplePieChartOpts;
+  simpleDonutChart = simpleDonutChartOpts;
+  monochromePieChart = monochromePieChartOpts;
+  gradientDonutChart = gradientDonutChartOpts;
+  patternedDonutChart = patternedDonutChartOpts;
+  imagePieChart = imagePieChartOpts;
 
   chart!: ApexCharts;
   series: number[] = [44, 55, 13, 33];
@@ -48,22 +54,34 @@ export class PieComponent {
   renderChart() {
     const options = {
       ...donutUpdateOpts,
-      series: this.series
+      series: this.series,
     };
-    this.chart = new ApexCharts(document.querySelector("#update-donut"), options);
+    this.chart = new ApexCharts(
+      document.querySelector('#update-donut'),
+      options
+    );
     this.chart.render();
-    console.log(this.chart);
   }
 
   addEventListeners() {
-    document.getElementById('randomize')?.addEventListener('click', () => this.randomizeChart());
-    document.getElementById('add')?.addEventListener('click', () => this.addData());
-    document.getElementById('remove')?.addEventListener('click', () => this.removeData());
-    document.getElementById('reset')?.addEventListener('click', () => this.resetChart());
+    document
+      .getElementById('randomize')
+      ?.addEventListener('click', () => this.randomizeChart());
+    document
+      .getElementById('add')
+      ?.addEventListener('click', () => this.addData());
+    document
+      .getElementById('remove')
+      ?.addEventListener('click', () => this.removeData());
+    document
+      .getElementById('reset')
+      ?.addEventListener('click', () => this.resetChart());
   }
 
   randomizeChart() {
-    this.series = Array.from({ length: 4 }, () => Math.floor(Math.random() * 100));
+    this.series = Array.from({ length: 4 }, () =>
+      Math.floor(Math.random() * 100)
+    );
     this.chart.updateSeries(this.series);
   }
   addData() {

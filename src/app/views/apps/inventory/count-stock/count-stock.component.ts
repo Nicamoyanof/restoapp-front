@@ -105,7 +105,6 @@ export class CountStockComponent implements OnInit {
   }
 
   getName(item: any): string {
-    console.log(item);
     return item.name ? item.name : item.description;
   }
 }

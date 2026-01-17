@@ -100,7 +100,6 @@ export class OrdersComponent implements OnInit, AfterViewInit {
     ).length;
 
     this.orderStatusData = this.orderStatusData.map((status) => {
-      console.log(status);
       switch (status.id) {
         case 1:
           status.count = totalOrders;
@@ -139,7 +138,6 @@ export class OrdersComponent implements OnInit, AfterViewInit {
   onRefreshOrder() {}
 
   onStatusChange(statusIds: number[]) {
-    console.log(statusIds);
     if (statusIds.length === 0) {
       this.orders = [...this.auxOrders];
       return;
@@ -171,7 +169,6 @@ export class OrdersComponent implements OnInit, AfterViewInit {
   }
 
   connect() {
-    console.log('Connecting to WebSocket...', this.wsService.isConnected);
     if (this.wsService.isConnected) {
       this.wsService.sendMessage({ type: 0, content: 'Hola WS' });
     }
@@ -179,10 +176,8 @@ export class OrdersComponent implements OnInit, AfterViewInit {
     this.wsService.messages
       .pipe(filter((msg) => msg !== null))
       .subscribe((msg) => {
-        console.log('Mensaje WS recibido en OrdersComponent:', msg);
         switch (msg.type) {
           case 1:
-            console.log('Orders updated via WS:', this.orders);
             this.auxOrders = msg.body.flatMap(
               (o: { items: any[]; tableId: any; id: any }) =>
                 (o.items ?? []).map((it: any) => ({
@@ -215,6 +210,7 @@ export class OrdersComponent implements OnInit, AfterViewInit {
               return 0;
             });
             this.orders = [...this.auxOrders];
+            console.log('Updated orders list:', this.orders);
             this.calcLengthByStatus();
             // this.cdr.detectChanges();
             break;

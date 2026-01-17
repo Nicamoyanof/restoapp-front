@@ -35,7 +35,6 @@ export class TopbarComponent {
       this.color = data.LAYOUT_THEME;
     });
     this.auth.user$.subscribe((profile: any) => {
-      // console.log(profile);
       this.name = profile.name;
       this.picture = profile.picture;
     });

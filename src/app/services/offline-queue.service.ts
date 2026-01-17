@@ -55,7 +55,6 @@ export class OfflineQueueService {
 
     try {
       const items = await getPendingReady(Date.now());
-      console.log('Processing offline queue...', items);
 
       for (const item of items) {
         // lock por item

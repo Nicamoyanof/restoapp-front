@@ -188,11 +188,8 @@ export class HistoricalOrdersComponent implements OnInit {
 
   printTicket() {
     // Aquí puedes implementar la lógica para imprimir el ticket
-    console.log('Imprimiendo ticket para el pedido:', this.selectedOrder);
     // Por ejemplo, podrías abrir una nueva ventana con el contenido del ticket y llamar a window.print()
-    this.orderService.print(this.selectedOrder.id).subscribe((response) => {
-      console.log('Ticket printed successfully', response);
-    });
+    this.orderService.print(this.selectedOrder.id).subscribe((response) => {});
   }
 
   closeModalFunc(event: string) {
@@ -202,7 +199,6 @@ export class HistoricalOrdersComponent implements OnInit {
         order: this.selectedOrder,
       };
       this.printService.postTicket(body).subscribe((response) => {
-        console.log('Ticket printed successfully', response);
         this.modalService.dismissAll();
       });
     } else {

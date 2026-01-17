@@ -51,7 +51,6 @@ export class OrdersSummaryComponent implements OnChanges, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.cdr.detectChanges();
-    console.log('AfterViewInit - ordersData:', this.ordersData);
   }
 
   maxSize = 3;

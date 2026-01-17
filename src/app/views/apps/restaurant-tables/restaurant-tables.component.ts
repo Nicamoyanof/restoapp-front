@@ -87,13 +87,11 @@ export class RestaurantTablesComponent implements OnInit {
     this.categoryProductsService
       .getCategoryProducts()
       .subscribe((data: any) => {
-        console.log(data);
         this.categoriesProducts = data;
       });
   }
   loadProducts() {
     this.productsService.getProducts().subscribe((data: any) => {
-      console.log(data);
       this.products = data;
     });
   }
@@ -209,7 +207,6 @@ export class RestaurantTablesComponent implements OnInit {
   }
 
   handleAddItem(event: any) {
-    console.log(event, this.tableSelected);
     if (this.tableSelected && this.tableSelected.order) {
       const orderId = this.tableSelected.order.id;
       this.ordersService.addItemToOrder(orderId, event).subscribe({
@@ -228,7 +225,6 @@ export class RestaurantTablesComponent implements OnInit {
   }
 
   handleUpdateItem(event: any) {
-    console.log(event, this.tableSelected);
     if (this.tableSelected && this.tableSelected.order) {
       const orderId = this.tableSelected.order.id;
       this.ordersService
@@ -304,7 +300,6 @@ export class RestaurantTablesComponent implements OnInit {
         order: this.tableSelected?.order,
       };
       this.printService.postTicket(body).subscribe((response) => {
-        console.log('Ticket printed successfully', response);
         this.modalService.dismissAll();
       });
     } else {

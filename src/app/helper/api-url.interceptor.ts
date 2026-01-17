@@ -16,7 +16,6 @@ export const apiUrlInterceptor: HttpInterceptorFn = (req, next) => {
     });
 
     if (req.method != 'GET') {
-      // console.log('API URL Interceptor - Modifying request:', apiReq);
       apiReq.headers.append('ngsw-bypass', 'true');
       // headers: req.headers.set('ngsw-bypass', 'true'),
     }

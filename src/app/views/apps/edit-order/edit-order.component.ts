@@ -50,10 +50,8 @@ export class EditOrderComponent implements OnInit {
     // Handle add item event
     if (this.order) {
       const orderId = this.order.id;
-      console.log('Adding item to order', orderId, event);
       this.orderService.addItemToOrder(orderId, event).subscribe({
         next: (response) => {
-          console.log('Item added successfully', response);
           Swal.fire('Éxito', 'Ítem agregado correctamente', 'success').then(
             () => {
               this.orderService

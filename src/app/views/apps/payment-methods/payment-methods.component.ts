@@ -57,7 +57,6 @@ export class PaymentMethodsComponent implements OnInit {
   }
 
   onSave(i: number) {
-    console.log('Guardando índice:', i);
     const fg = this.formArray.at(i) as FormGroup;
     if (fg.invalid || fg.pristine) return;
 

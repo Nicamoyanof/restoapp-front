@@ -49,7 +49,6 @@ export class AppComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     // Handle changes
-    console.log('Changes detected:', changes);
     this.cdr.detectChanges();
   }
 
