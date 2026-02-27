@@ -23,6 +23,15 @@
        'text-white':   table.status !== 1,
        'text-dark':    table.status === 1,
      }">
+
+          <div class="card-header d-flex justify-content-end">
+            <button class="btn btn-sm btn-light me-1" (click)=" editTable(table); $event.stopPropagation();">
+              <i class="bx bx-pencil"></i>
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="deleteTable(table.id); $event.stopPropagation();">
+              <i class="bx bx-trash"></i>
+            </button>
+          </div>
           <div class="card-body">
             <h5 class="card-title">Mesa {{ table.number }}</h5>
             <p class="card-text">Capacidad: {{ table.capacity }}</p>
@@ -38,6 +47,7 @@
               'Fuera de Servicio'
               }}</p>
           </div>
+
         </div>
       </div>
       }
@@ -48,7 +58,7 @@
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Agregar Mesa</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle">{{isEditing ? "Editar" : "Agregar"}} Mesa</h5>
         <button type="button" (click)="modal.close('click')" class="btn-close" data-bs-dismiss="modal"
           aria-label="Close"></button>
       </div>

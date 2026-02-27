@@ -47,6 +47,8 @@ export class RestaurantTablesComponent implements OnInit {
   paymentMethods: any[] = []; // Aquí puedes almacenar los métodos de pago obtenidos de la API
   tipAmount: number = 0;
   @ViewChild('ticket') ticketModalRef!: TemplateRef<any>;
+  @ViewChild('centered') centeredModalRef!: TemplateRef<any>;
+  isEditing: boolean = false;
 
   constructor(
     private readonly restaurantTablesService: RestaurantTablesService,
@@ -57,7 +59,7 @@ export class RestaurantTablesComponent implements OnInit {
     private readonly categoryProductsService: CategoryProductService,
     private readonly ordersService: OrdersService,
     private readonly paymentMethodService: PaymentMethodService,
-    private readonly printService: PrinterService
+    private readonly printService: PrinterService,
   ) {
     this.formGroup = this.fb.group({
       // Define your form controls and validation here
@@ -105,7 +107,7 @@ export class RestaurantTablesComponent implements OnInit {
           status: this.tableSelected.status,
         });
         this.tableSelected = this.tables.find(
-          (t) => t.id === this.tableSelected.id
+          (t) => t.id === this.tableSelected.id,
         );
       }
     });
@@ -116,6 +118,26 @@ export class RestaurantTablesComponent implements OnInit {
   }
 
   createTable() {
+    if (this.isEditing) {
+      this.restaurantTablesService.updateTable(this.formGroup.value).subscribe({
+        next: (response) => {
+          Swal.fire('Éxito', 'Mesa actualizada correctamente', 'success').then(
+            () => {
+              this.modalService.dismissAll();
+              this.formGroup.reset();
+              this.loadTables();
+              this.isEditing = false;
+            },
+          );
+        },
+        error: (error) => {
+          Swal.fire('Error', 'Hubo un error al actualizar la mesa', 'error');
+        },
+      });
+      this.isEditing = false;
+      return;
+    }
+
     // Logic to open a modal for adding a new table agregar sweet alert
     this.restaurantTablesService.addTable(this.formGroup.value).subscribe({
       next: (response) => {
@@ -125,7 +147,7 @@ export class RestaurantTablesComponent implements OnInit {
             this.modalService.dismissAll();
             this.formGroup.reset();
             this.loadTables();
-          }
+          },
         );
       },
       error: (error) => {
@@ -168,7 +190,7 @@ export class RestaurantTablesComponent implements OnInit {
             () => {
               // this.offcanvasService.dismiss();
               this.loadTables();
-            }
+            },
           );
         },
         error: (error) => {
@@ -182,7 +204,7 @@ export class RestaurantTablesComponent implements OnInit {
             () => {
               // this.offcanvasService.dismiss();
               this.loadTables();
-            }
+            },
           );
         },
         error: (error) => {
@@ -196,7 +218,7 @@ export class RestaurantTablesComponent implements OnInit {
             () => {
               // this.offcanvasService.dismiss();
               this.loadTables();
-            }
+            },
           );
         },
         error: (error) => {
@@ -214,7 +236,7 @@ export class RestaurantTablesComponent implements OnInit {
           Swal.fire('Éxito', 'Ítem agregado correctamente', 'success').then(
             () => {
               this.loadTables();
-            }
+            },
           );
         },
         error: (error) => {
@@ -262,7 +284,7 @@ export class RestaurantTablesComponent implements OnInit {
           Swal.fire(
             'Éxito',
             'Mesa liberada y propina registrada',
-            'success'
+            'success',
           ).then(() => {
             this.offcanvasService.dismiss();
             this.loadTables();
@@ -305,5 +327,44 @@ export class RestaurantTablesComponent implements OnInit {
     } else {
       this.modalService.dismissAll();
     }
+  }
+
+  deleteTable(id: number) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción no se puede deshacer',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.restaurantTablesService.deleteTable(id).subscribe({
+          next: (response) => {
+            Swal.fire('Eliminada', 'La mesa ha sido eliminada', 'success').then(
+              () => {
+                this.loadTables();
+              },
+            );
+          },
+          error: (error) => {
+            Swal.fire('Error', 'Hubo un error al eliminar la mesa', 'error');
+          },
+        });
+      }
+    });
+  }
+
+  editTable(table: any) {
+    this.formGroup.patchValue({
+      id: table.id,
+      number: table.number,
+      capacity: table.capacity,
+      section: table.section,
+    });
+
+    this.isEditing = true;
+
+    this.openModal(this.centeredModalRef, { size: 'lg' });
   }
 }

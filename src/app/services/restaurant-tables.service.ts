@@ -30,7 +30,7 @@ export class RestaurantTablesService {
     } else if (table.status === 1) {
       return this.http.put(`/api/Table/${table.id}/Reserve`, {});
     }
-    return this.http.put(`/api/Table/${table.id}/Release`, {});
+    return this.http.put(`/api/Table/${table.id}`, table);
   }
 
   deleteTable(id: number) {
