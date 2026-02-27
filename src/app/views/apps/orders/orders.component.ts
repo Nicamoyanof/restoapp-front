@@ -1,10 +1,8 @@
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
-  OnChanges,
+  OnDestroy,
   OnInit,
-  SimpleChanges,
 } from '@angular/core';
 import { OrdersStatusComponent } from './components/orders-status/orders-status.component';
 import { OrdersSummaryComponent } from './components/orders-summary/orders-summary.component';
@@ -23,7 +21,7 @@ import { KitchenService } from '@/app/services/kitchen.service';
   templateUrl: './orders.component.html',
   styles: ``,
 })
-export class OrdersComponent implements OnInit, AfterViewInit {
+export class OrdersComponent implements OnInit, OnDestroy {
   orders: any;
   products: any;
   tables: any[] = [];
@@ -55,6 +53,8 @@ export class OrdersComponent implements OnInit, AfterViewInit {
     },
   ];
   allKitchen: any[] = [];
+  private wsSubscription?: Subscription;
+  private lastStatusIds: number[] = [];
 
   constructor(
     private ordersService: OrdersService,
@@ -81,14 +81,46 @@ export class OrdersComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.connect();
-    }, 2000);
+  private applyStatusFilter(): void {
+    if (!this.auxOrders) {
+      this.orders = [];
+      return;
+    }
+    if (this.lastStatusIds.length === 0) {
+      this.orders = [...this.auxOrders];
+      return;
+    }
+    this.orders = [];
+    this.lastStatusIds.forEach((element: number) => {
+      switch (element) {
+        case 2:
+          this.orders.push(
+            ...this.auxOrders.filter((o: { status: number }) => o.status === 1)
+          );
+          break;
+        case 3:
+          this.orders.push(
+            ...this.auxOrders.filter((o: { status: number }) => o.status === 0)
+          );
+          break;
+        case 4:
+          this.orders.push(
+            ...this.auxOrders.filter((o: { status: number }) => o.status === 2)
+          );
+          break;
+        default:
+          this.orders = [...this.auxOrders];
+          break;
+      }
+    });
   }
 
   calcLengthByStatus() {
-    const totalOrders = [...this.auxOrders].length;
+    if (!this.auxOrders?.length) {
+      this.orderStatusData.forEach((s) => (s.count = 0));
+      return;
+    }
+    const totalOrders = this.auxOrders.length;
     const preparingOrders = [...this.auxOrders].filter(
       (o: { status: number }) => o.status === 1
     ).length;
@@ -138,42 +170,43 @@ export class OrdersComponent implements OnInit, AfterViewInit {
   onRefreshOrder() {}
 
   onStatusChange(statusIds: number[]) {
+    this.lastStatusIds = statusIds;
     if (statusIds.length === 0) {
-      this.orders = [...this.auxOrders];
+      this.orders = this.auxOrders ? [...this.auxOrders] : [];
       return;
-    } else {
-      this.orders = [];
     }
-    statusIds.forEach((element: any) => {
+    this.orders = [];
+    statusIds.forEach((element: number) => {
       switch (element) {
         case 2:
           this.orders.push(
-            ...this.auxOrders.filter((o: { status: number }) => o.status == 1)
+            ...(this.auxOrders || []).filter((o: { status: number }) => o.status === 1)
           );
           break;
         case 3:
           this.orders.push(
-            ...this.auxOrders.filter((o: { status: number }) => o.status == 0)
+            ...(this.auxOrders || []).filter((o: { status: number }) => o.status === 0)
           );
           break;
         case 4:
           this.orders.push(
-            ...this.auxOrders.filter((o: { status: number }) => o.status == 2)
+            ...(this.auxOrders || []).filter((o: { status: number }) => o.status === 2)
           );
           break;
         default:
-          this.orders = [...this.auxOrders];
+          this.orders = this.auxOrders ? [...this.auxOrders] : [];
           break;
       }
     });
   }
 
   connect() {
+    this.wsSubscription?.unsubscribe();
     if (this.wsService.isConnected) {
       this.wsService.sendMessage({ type: 0, content: 'Hola WS' });
     }
     this.wsService.connect();
-    this.wsService.messages
+    this.wsSubscription = this.wsService.messages
       .pipe(filter((msg) => msg !== null))
       .subscribe((msg) => {
         switch (msg.type) {
@@ -201,7 +234,6 @@ export class OrdersComponent implements OnInit, AfterViewInit {
                   )?.alertTime,
                 }))
             );
-            // quiero ordenar el auxOrdes porel orden que viene poor defecto pero si el status es 2 o 3 que vaya al ultimo
             this.auxOrders.sort((a: any, b: any) => {
               if (a.status !== b.status) {
                 if (a.status === 2 || a.status === 3) return 1;
@@ -209,10 +241,9 @@ export class OrdersComponent implements OnInit, AfterViewInit {
               }
               return 0;
             });
-            this.orders = [...this.auxOrders];
-            console.log('Updated orders list:', this.orders);
+            this.applyStatusFilter();
             this.calcLengthByStatus();
-            // this.cdr.detectChanges();
+            this.cdr.detectChanges();
             break;
         }
       });
@@ -223,6 +254,7 @@ export class OrdersComponent implements OnInit, AfterViewInit {
   }
 
   ngOnDestroy() {
+    this.wsSubscription?.unsubscribe();
     this.wsService.close();
   }
 }
