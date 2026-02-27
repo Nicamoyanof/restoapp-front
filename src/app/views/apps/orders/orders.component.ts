@@ -1,9 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { OrdersStatusComponent } from './components/orders-status/orders-status.component';
 import { OrdersSummaryComponent } from './components/orders-summary/orders-summary.component';
 import { OrdersService } from '@/app/services/orders.service';
@@ -63,7 +58,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
     private wsService: WebSocketService,
     private auth: AuthService,
     private kitchenService: KitchenService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -95,17 +90,17 @@ export class OrdersComponent implements OnInit, OnDestroy {
       switch (element) {
         case 2:
           this.orders.push(
-            ...this.auxOrders.filter((o: { status: number }) => o.status === 1)
+            ...this.auxOrders.filter((o: { status: number }) => o.status === 1),
           );
           break;
         case 3:
           this.orders.push(
-            ...this.auxOrders.filter((o: { status: number }) => o.status === 0)
+            ...this.auxOrders.filter((o: { status: number }) => o.status === 0),
           );
           break;
         case 4:
           this.orders.push(
-            ...this.auxOrders.filter((o: { status: number }) => o.status === 2)
+            ...this.auxOrders.filter((o: { status: number }) => o.status === 2),
           );
           break;
         default:
@@ -122,13 +117,13 @@ export class OrdersComponent implements OnInit, OnDestroy {
     }
     const totalOrders = this.auxOrders.length;
     const preparingOrders = [...this.auxOrders].filter(
-      (o: { status: number }) => o.status === 1
+      (o: { status: number }) => o.status === 1,
     ).length;
     const pendingOrders = [...this.auxOrders].filter(
-      (o: { status: number }) => o.status === 0
+      (o: { status: number }) => o.status === 0,
     ).length;
     const deliveredOrders = [...this.auxOrders].filter(
-      (o: { status: number }) => o.status === 2
+      (o: { status: number }) => o.status === 2,
     ).length;
 
     this.orderStatusData = this.orderStatusData.map((status) => {
@@ -180,17 +175,23 @@ export class OrdersComponent implements OnInit, OnDestroy {
       switch (element) {
         case 2:
           this.orders.push(
-            ...(this.auxOrders || []).filter((o: { status: number }) => o.status === 1)
+            ...(this.auxOrders || []).filter(
+              (o: { status: number }) => o.status === 1,
+            ),
           );
           break;
         case 3:
           this.orders.push(
-            ...(this.auxOrders || []).filter((o: { status: number }) => o.status === 0)
+            ...(this.auxOrders || []).filter(
+              (o: { status: number }) => o.status === 0,
+            ),
           );
           break;
         case 4:
           this.orders.push(
-            ...(this.auxOrders || []).filter((o: { status: number }) => o.status === 2)
+            ...(this.auxOrders || []).filter(
+              (o: { status: number }) => o.status === 2,
+            ),
           );
           break;
         default:
@@ -221,7 +222,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
                     this.tables.find((t) => t.id === o.tableId)?.number ?? null,
                   tsCreated: it.tsCreated,
                   product: this.products.find(
-                    (p: { productId: any }) => p.productId === it.productId
+                    (p: { productId: any }) => p.productId === it.productId,
                   )?.name,
                   quantity: it.quantity,
                   unitPrice: it.unitPrice,
@@ -230,9 +231,9 @@ export class OrdersComponent implements OnInit, OnDestroy {
                   isCanceled: it.isCanceled,
                   status: it.status,
                   alertTime: this.allKitchen.find(
-                    (k) => k.kitchenId === it.kitchenId
+                    (k) => k.kitchenId === it.kitchenId,
                   )?.alertTime,
-                }))
+                })),
             );
             this.auxOrders.sort((a: any, b: any) => {
               if (a.status !== b.status) {

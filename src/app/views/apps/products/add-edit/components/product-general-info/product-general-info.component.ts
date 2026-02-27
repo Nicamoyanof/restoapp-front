@@ -74,7 +74,7 @@ export class ProductGeneralInfoComponent implements OnInit {
     private kitchenService: KitchenService,
     private ingredientService: IngredientsService,
     private fb: FormBuilder,
-    private recipesService: RecipesService
+    private recipesService: RecipesService,
   ) {
     this.formGroup = new FormGroup({
       name: new FormControl('', [
@@ -93,6 +93,7 @@ export class ProductGeneralInfoComponent implements OnInit {
       ]),
       kitchenId: new FormControl(null, [Validators.required]),
       trackStock: new FormControl(false),
+      sendWithoutStock: new FormControl(false),
     });
     this.formGroupRecipe = this.fb.group({
       recipeItems: this.fb.array([]),
@@ -132,6 +133,7 @@ export class ProductGeneralInfoComponent implements OnInit {
               stock: product.stock,
               kitchenId: product.kitchenId ?? 0,
               trackStock: product.trackStock,
+              sendWithoutStock: product.sendWithoutStock,
               // si el producto aún no tiene cocina, no seteamos nada aquí
             });
           }
@@ -141,11 +143,11 @@ export class ProductGeneralInfoComponent implements OnInit {
                 this.fb.group({
                   ingredientId: [recipe.ingredientId, Validators.required],
                   quantity: [recipe.qtyNet, [Validators.required]],
-                })
+                }),
               );
             });
           }
-        }
+        },
       );
   }
 
@@ -159,7 +161,7 @@ export class ProductGeneralInfoComponent implements OnInit {
 
       if (this.isEdit) {
         body.productId = Number(
-          this.activatedRoute.snapshot.paramMap.get('id')
+          this.activatedRoute.snapshot.paramMap.get('id'),
         );
         this.productService
           .updateProduct(this.activatedRoute.snapshot.paramMap.get('id'), body)
@@ -248,7 +250,7 @@ export class ProductGeneralInfoComponent implements OnInit {
       this.fb.group({
         ingredientId: [null, Validators.required],
         quantity: [null, [Validators.required]],
-      })
+      }),
     );
   }
 
@@ -301,7 +303,7 @@ export class ProductGeneralInfoComponent implements OnInit {
     const ingredient = this.ingredients.find((ing) => ing.id == ingredientId);
     if (ingredient) {
       const baseUnit = this.baseUnit.find(
-        (bu) => bu.id == ingredient.baseUnitId
+        (bu) => bu.id == ingredient.baseUnitId,
       );
       return baseUnit ? baseUnit.abbreviation : '';
     }
@@ -310,6 +312,11 @@ export class ProductGeneralInfoComponent implements OnInit {
   onTrackStockChange(event: any) {
     const isChecked = event.target.checked;
     this.formGroup.patchValue({ trackStock: isChecked });
+  }
+
+  onSendWithoutStockChange(event: any) {
+    const isChecked = event.target.checked;
+    this.formGroup.patchValue({ sendWithoutStock: isChecked });
   }
 
   goToKitchenConfig() {

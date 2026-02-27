@@ -64,7 +64,7 @@ export class OrderSummaryComponent implements OnInit, AfterViewInit {
   constructor(
     private modalService: NgbModal,
     private orderService: OrdersService,
-    private zone: NgZone
+    private zone: NgZone,
   ) {
     this.productsFiltered = this.products;
   }
@@ -77,12 +77,12 @@ export class OrderSummaryComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     if (this.order.paymentMethod) {
       this.selectedPayment = this.paymentMethods.find(
-        (p) => p.paymentMethodId === this.order.paymentMethod
+        (p) => p.paymentMethodId === this.order.paymentMethod,
       )?.name;
       this.discount =
         this.order.discount ??
         this.paymentMethods.find(
-          (p) => p.paymentMethodId === this.order.paymentMethod
+          (p) => p.paymentMethodId === this.order.paymentMethod,
         )?.discountPercent;
     }
   }
@@ -188,7 +188,7 @@ export class OrderSummaryComponent implements OnInit, AfterViewInit {
   }
   getProductName(item: any): string {
     const product = this.products.find(
-      (prod) => prod.productId === item.productId
+      (prod) => prod.productId === item.productId,
     );
     return product ? product.name : 'Unknown Product';
   }
@@ -202,14 +202,14 @@ export class OrderSummaryComponent implements OnInit, AfterViewInit {
   getQtyItems(order: any): number {
     return order.items.reduce(
       (total: number, item: any) => total + item.quantity,
-      0
+      0,
     );
   }
 
   getSubtotal(order: any): number {
     return order.items.reduce(
       (total: number, item: any) => total + item.unitPrice * item.quantity,
-      0
+      0,
     );
   }
 
@@ -231,7 +231,7 @@ export class OrderSummaryComponent implements OnInit, AfterViewInit {
     }
 
     var paymentMethodId = this.paymentMethods.find(
-      (method) => method.name === this.selectedPayment
+      (method) => method.name === this.selectedPayment,
     )?.paymentMethodId;
 
     if (this.isEditing) {
@@ -342,10 +342,13 @@ export class OrderSummaryComponent implements OnInit, AfterViewInit {
 
   getProdMaxLength(): number {
     const selectedProduct = this.products.find(
-      (p) => p.productId == this.productSelected
+      (p) => p.productId == this.productSelected,
     );
+    // If the product allows selling without stock, length is virtually unlimited
     return selectedProduct
-      ? selectedProduct.trackStock
+      ? selectedProduct.sendWithoutStock
+        ? 1000000
+        : selectedProduct.trackStock
         ? selectedProduct.stock
         : 1000000
       : 0;
@@ -353,7 +356,7 @@ export class OrderSummaryComponent implements OnInit, AfterViewInit {
 
   getStockStatus(): string {
     const selectedProduct = this.products.find(
-      (p) => p.productId == this.productSelected
+      (p) => p.productId == this.productSelected,
     );
     if (!selectedProduct) return 'No seleccionado';
     if (selectedProduct.stock <= 0) return 'Sin stock';
@@ -362,6 +365,13 @@ export class OrderSummaryComponent implements OnInit, AfterViewInit {
   }
 
   onQtyChange() {
+    if (this.qty < 0) {
+      this.zone.run(() => {
+        this.qty = 0;
+      });
+      return;
+    }
+    
     const maxLength = this.getProdMaxLength();
     if (this.qty > maxLength) {
       this.zone.run(() => {

@@ -81,6 +81,14 @@
             <label for="track-stock" data-off-label="No"></label>
           </div>
         </div>
+        <div class="col-md-3">
+          <div class="mb-3">
+            <label for="send-without-stock" class="form-label d-block">Vender sin Stock</label>
+            <input type="checkbox" id="send-without-stock" formControlName="sendWithoutStock" data-switch="success"
+              (change)="onSendWithoutStockChange($event)">
+            <label for="send-without-stock" data-off-label="No"></label>
+          </div>
+        </div>
       </div>
     </div>
   </form>
