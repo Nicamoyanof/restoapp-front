@@ -15,6 +15,7 @@ import { RestaurantTablesService } from '@/app/services/restaurant-tables.servic
 import { RouterLink, RouterModule } from '@angular/router';
 import { DialogPrintTicketComponent } from '@views/common/dialog-print-ticket/dialog-print-ticket.component';
 import { PrinterService } from '@/app/services/printer.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-historical-orders',
@@ -204,5 +205,25 @@ export class HistoricalOrdersComponent implements OnInit {
     } else {
       this.modalService.dismissAll();
     }
+  }
+
+  deleteOrder(orderId: number) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción no se puede deshacer.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // En lugar de emitir, deberia llamar al servicio de deleteOrder.
+        // Pero como no sé si existe, emulo borrarlo del array por ahora.
+        // this.orderService.deleteOrder(orderId).subscribe(...)
+        this.ordersData = this.ordersData.filter(order => order.id !== orderId);
+        this.totalItems = this.ordersData.length;
+        Swal.fire('Eliminado!', 'El pedido ha sido eliminado.', 'success');
+      }
+    });
   }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { categoryList } from '../../data';
 
 @Component({
@@ -8,5 +9,13 @@ import { categoryList } from '../../data';
   styles: ``
 })
 export class CategoriesListingComponent {
-  categoryListData = categoryList
+  categoryListData = categoryList;
+  selectedItem: any = null;
+
+  constructor(private modalService: NgbModal) {}
+
+  openModal(content: any, options: NgbModalOptions, item: any) {
+    this.selectedItem = item;
+    this.modalService.open(content, options);
+  }
 }

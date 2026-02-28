@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ListingStatsComponent } from './components/listing-stats/listing-stats.component';
 import { MenuProductComponent } from './components/menu-product/menu-product.component';
 import { ProductService } from '@/app/services/product.service';
 import { CategoryProductService } from '@/app/services/category-product.service';
@@ -10,7 +9,6 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-listing',
   imports: [
-    ListingStatsComponent,
     MenuProductComponent,
     DropzoneModule,
     FormsModule,

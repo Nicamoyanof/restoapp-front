@@ -1,9 +1,9 @@
 <div class="card">
-  <div class="card-header d-flex justify-content-between align-items-center">
-    <div>
-      <p class="card-title mb-0">Productos</p>
-    </div>
-    <!-- <div class="dropdown">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+            <p class="card-title mb-0">Productos</p>
+        </div>
+        <!-- <div class="dropdown">
             <a href="#" class="dropdown-toggle btn btn-sm btn-outline-light rounded" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Reports
@@ -15,48 +15,49 @@
     <a href="javascript:void(0);" class="dropdown-item">Import</a>
   </div>
 </div> -->
-  </div>
-  <div class="">
-    <div class="table-responsive">
-      <table class="table align-middle mb-0 table-hover table-centered">
-        <thead class="bg-light-subtle fs-12 text-uppercase">
-          <tr>
-            <!-- <th class="py-2">Photo</th> -->
-            <th class="py-2">Nombre del Producto</th>
-            <th class="w-25 py-2">Descripción</th>
-            <!-- <th class="w-25 py-2">Ingredientes</th> -->
-            <th class="py-2">Precio</th>
-            <!-- <th class="py-2">Calificación</th> -->
-            <th class="py-2">Categoría</th>
-            <!-- <th class="py-2">Tipo de Comida</th> -->
-            <th class="py-2">Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (item of menuProductData | slice: (currentPage-1) * pageSize : currentPage * pageSize; track $index) {
-          <tr>
-            <!-- <td>
+    </div>
+    <div class="">
+        <div class="table-responsive">
+            <table class="table align-middle mb-0 table-hover table-centered">
+                <thead class="bg-light-subtle fs-12 text-uppercase">
+                    <tr>
+                        <!-- <th class="py-2">Photo</th> -->
+                        <th class="py-2">Nombre del Producto</th>
+                        <th class="w-25 py-2">Descripción</th>
+                        <!-- <th class="w-25 py-2">Ingredientes</th> -->
+                        <th class="py-2">Precio</th>
+                        <!-- <th class="py-2">Calificación</th> -->
+                        <th class="py-2">Categoría</th>
+                        <!-- <th class="py-2">Tipo de Comida</th> -->
+                        <th class="py-2">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of menuProductData | slice: (currentPage-1) * pageSize : currentPage * pageSize; track
+                    $index) {
+                    <tr>
+                        <!-- <td>
                             <a href="assets/images/food-icon/pic12.png">
                                 <img [src]="item.image" alt="" class="avatar-lg">
                             </a>
                         </td> -->
-            <td>
-              <div class="d-flex align-items-center gap-1">
+                        <td>
+                            <div class="d-flex align-items-center gap-1">
 
-                <div>
-                  <a href="javascript:void(0);" class="link-dark fw-semibold fs-15">{{item.name}}</a>
-                  <!-- <p class="mb-0 mt-1">{{item.size}}</p> -->
-                </div>
-              </div>
-            </td>
-            <td>{{item.description ? item.description : 'Sin descripción'}} </td>
-            <!-- <td>{{item.ingredients}}</td> -->
-            <td><strong>${{item.price | number:'1.2-2'}}</strong></td>
-            <!-- <td>
+                                <div>
+                                    <a href="javascript:void(0);" class="link-dark fw-semibold fs-15">{{item.name}}</a>
+                                    <!-- <p class="mb-0 mt-1">{{item.size}}</p> -->
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{item.description ? item.description : 'Sin descripción'}} </td>
+                        <!-- <td>{{item.ingredients}}</td> -->
+                        <td><strong>${{item.price | number:'1.2-2'}}</strong></td>
+                        <!-- <td>
               <p class="mb-0"><i class="ri-star-fill text-warning me-1 fs-16"></i>{{item.rating}}</p>
             </td> -->
-            <td>{{item.category}}</td>
-            <!-- <td>
+                        <td>{{item.category}}</td>
+                        <!-- <td>
             <div class="avatar-sm">
               <span class="avatar-title rounded-2 fw-semibold border "
                 [ngClass]="item.status =='veg'? 'border-success text-success':'border-danger text-danger'">
@@ -64,29 +65,54 @@
               </span>
             </div>
           </td> -->
-            <td>
-              <div class="d-flex gap-3">
-                <a href="javascript:void(0);" class="text-muted"><i class="ri-eye-line align-middle fs-20"></i></a>
-                <div style="cursor: pointer;" routerLink="../edit/{{item.productId}}" class="link-dark"><i
-                    class="ri-edit-line align-middle fs-20"></i>
-                </div>
-                <div style="cursor: pointer;" class="link-danger" (click)="deleteProduct(item.productId)"><i
-                    class="ri-delete-bin-5-line align-middle fs-20"></i></div>
-              </div>
-            </td>
-          </tr>
-          }
-        </tbody>
-      </table>
+                        <td>
+                            <div class="d-flex gap-3">
+                                <a href="javascript:void(0);" class="text-muted"
+                                    (click)="openModal(viewModal, { centered: true }, item)"><i
+                                        class="ri-eye-line align-middle fs-20"></i></a>
+                                <div style="cursor: pointer;" routerLink="../edit/{{item.productId}}" class="link-dark">
+                                    <i class="ri-edit-line align-middle fs-20"></i>
+                                </div>
+                                <div style="cursor: pointer;" class="link-danger"
+                                    (click)="deleteProduct(item.productId)"><i
+                                        class="ri-delete-bin-5-line align-middle fs-20"></i></div>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- end table-responsive -->
     </div>
-    <!-- end table-responsive -->
-  </div>
-  <div class="card-footer border-0">
-    <ngb-pagination class="pagination justify-content-end mb-0" [collectionSize]="totalItems" [(page)]="currentPage"
-      [pageSize]="pageSize" [maxSize]="maxSize" [rotate]="true" [ellipses]="false" [boundaryLinks]="false"
-      aria-label="Page navigation example">
-      <ng-template ngbPaginationPrevious> <i class="ri-arrow-left-s-line"></i></ng-template>
-      <ng-template ngbPaginationNext> <i class="ri-arrow-right-s-line"></i></ng-template>
-    </ngb-pagination>
-  </div>
+    <div class="card-footer border-0">
+        <ngb-pagination class="pagination justify-content-end mb-0" [collectionSize]="totalItems" [(page)]="currentPage"
+            [pageSize]="pageSize" [maxSize]="maxSize" [rotate]="true" [ellipses]="false" [boundaryLinks]="false"
+            aria-label="Page navigation example">
+            <ng-template ngbPaginationPrevious> <i class="ri-arrow-left-s-line"></i></ng-template>
+            <ng-template ngbPaginationNext> <i class="ri-arrow-right-s-line"></i></ng-template>
+        </ngb-pagination>
+    </div>
 </div>
+
+<ng-template #viewModal let-modal class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewModalLabel">Detalles del Producto</h5>
+                <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Nombre:</strong> {{ selectedItem?.name }}</p>
+                <p><strong>Descripción:</strong> {{ selectedItem?.description ? selectedItem.description : 'Sin
+                    descripción' }}</p>
+                <p><strong>Precio:</strong> ${{ selectedItem?.price | number:'1.2-2' }}</p>
+                <p><strong>Categoría:</strong> {{ selectedItem?.category }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

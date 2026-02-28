@@ -1,5 +1,5 @@
 import { OrdersService } from '@/app/services/orders.service';
-import { CurrencyPipe, DecimalPipe, NgClass } from '@angular/common';
+import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -20,7 +20,6 @@ import {
   NgbTooltip,
 } from '@ng-bootstrap/ng-bootstrap';
 import { NouisliderModule } from 'ng2-nouislider';
-import { take } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -28,11 +27,9 @@ import Swal from 'sweetalert2';
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    CurrencyPipe,
     NouisliderModule,
     NgbRatingModule,
     SelectFormInputDirective,
-    NgClass,
     NgbTooltip,
     DecimalPipe,
   ],

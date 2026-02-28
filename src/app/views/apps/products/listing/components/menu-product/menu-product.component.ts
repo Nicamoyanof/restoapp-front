@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { RouterLink } from '@angular/router';
+import { NgbModal, NgbModalOptions, NgbPagination } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-menu-product',
@@ -17,8 +18,27 @@ export class MenuProductComponent {
   pageSize = 10;
   currentPage = 1;
   maxSize = Math.ceil(this.totalItems / this.pageSize);
+  selectedItem: any = null;
+
+  constructor(private modalService: NgbModal) {}
 
   deleteProduct(productId: number) {
-    this.delete.emit(productId);
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción no se puede deshacer.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.delete.emit(productId);
+      }
+    });
+  }
+
+  openModal(content: any, options: NgbModalOptions, item: any) {
+    this.selectedItem = item;
+    this.modalService.open(content, options);
   }
 }

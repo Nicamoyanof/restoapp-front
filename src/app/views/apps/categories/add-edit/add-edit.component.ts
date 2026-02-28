@@ -22,8 +22,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-add-edit',
   imports: [
-    ProductPhotoComponent,
-    ProductGeneralInfoComponent,
+        
     FormsModule,
     ReactiveFormsModule,
     DropzoneModule,

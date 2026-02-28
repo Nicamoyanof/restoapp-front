@@ -8,7 +8,6 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { SimplebarAngularModule } from 'simplebar-angular';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-topbar',
@@ -16,8 +15,6 @@ import { AsyncPipe } from '@angular/common';
     LogoBoxComponent,
     NgbDropdownModule,
     SimplebarAngularModule,
-    RouterLink,
-    AsyncPipe,
   ],
   templateUrl: './topbar.component.html',
   styles: ``,

@@ -41,7 +41,6 @@ import { IngredientsService } from '@/app/services/ingredients.service';
     ReactiveFormsModule,
     RouterLink,
     NgClass,
-    NgxMaskDirective,
   ],
   templateUrl: './add-ingredients.component.html',
   styleUrl: './add-ingredients.component.scss',

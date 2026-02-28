@@ -10,7 +10,7 @@
                         <p class="mb-0">{{item.description}}</p>
                     </div>
                     <div class="ms-auto">
-                        <a href="javascript:void(0);"
+                        <a href="javascript:void(0);" (click)="openModal(viewCategoryModal, { centered: true }, item)"
                             class="btn btn-primary avatar-sm rounded-circle d-flex align-items-center justify-content-center"><i
                                 class="ri-eye-line align-middle fs-16 text-white"></i></a>
                     </div>
@@ -20,3 +20,23 @@
     </div>
     }
 </div>
+
+<ng-template #viewCategoryModal let-modal class="modal fade" id="viewCategoryModal" tabindex="-1"
+    aria-labelledby="viewCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewCategoryModalLabel">Detalles de la Categoría</h5>
+                <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img [src]="selectedItem?.image" alt="" class="img-fluid rounded mb-3" style="max-height: 200px;">
+                <h4>{{ selectedItem?.name }}</h4>
+                <p class="text-muted">{{ selectedItem?.description }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -7,6 +7,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IngredientsService } from '@/app/services/ingredients.service';
 import { CategoryProductService } from '@/app/services/category-product.service';
 import { ProductService } from '@/app/services/product.service';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-control-stock',
@@ -31,7 +32,8 @@ export class ControlStockComponent implements OnInit {
     private fb: FormBuilder,
     private ingredientService: IngredientsService,
     private categoryProductService: CategoryProductService,
-    private productService: ProductService
+    private productService: ProductService,
+    private modalService: NgbModal
   ) {
     this.formGroup = this.fb.group({
       name: [''],
@@ -137,5 +139,11 @@ export class ControlStockComponent implements OnInit {
 
   getBaseUnit(unit: any) {
     return this.baseUnit.find((b) => b.id == unit)?.abbreviation;
+  }
+
+  selectedItem: any = null;
+  openModal(content: any, options: NgbModalOptions, item: any) {
+    this.selectedItem = item;
+    this.modalService.open(content, options);
   }
 }

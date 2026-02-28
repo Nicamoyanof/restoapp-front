@@ -38,23 +38,26 @@
                             @for (item of ridersData; track $index) {
                             <tr>
                                 <td>{{item.rider_id}}</td>
-                                <td><img [src]="item.avatar" class="avatar-sm rounded-circle me-2"
-                                        alt="..."><a href="javascript:void(0);" class="link-dark fw-semibold">{{item.name}}</a> </td>
+                                <td><img [src]="item.avatar" class="avatar-sm rounded-circle me-2" alt="..."><a
+                                        href="javascript:void(0);" class="link-dark fw-semibold">{{item.name}}</a> </td>
                                 <td>{{item.contact}}</td>
-                             <td>{{item.vehicle_type}}</td>
-                           <td>{{item.delivery_area}}</td>
+                                <td>{{item.vehicle_type}}</td>
+                                <td>{{item.delivery_area}}</td>
                                 <td>{{item.status}}</td>
                                 <td>{{item.shift_time}}</td>
                                 <td>
-                                    <p class="mb-0"><i class="ri-star-fill text-warning me-1 fs-16"></i>{{item.ratings}}</p>
+                                    <p class="mb-0"><i class="ri-star-fill text-warning me-1 fs-16"></i>{{item.ratings}}
+                                    </p>
                                 </td>
                                 <td>
                                     <div class="d-flex gap-3">
-                                        <a href="javascript:void(0);" class="text-muted"><i
+                                        <a href="javascript:void(0);" class="text-muted"
+                                            (click)="openModal(viewRiderModal, { centered: true }, item)"><i
                                                 class="ri-eye-line align-middle fs-20"></i></a>
                                         <a href="javascript:void(0);" class="link-dark"><i
                                                 class="ri-edit-line align-middle fs-20"></i></a>
-                                        <a href="javascript:void(0);" class="link-danger"><i
+                                        <a href="javascript:void(0);" class="link-danger"
+                                            (click)="deleteItem($index)"><i
                                                 class="ri-delete-bin-5-line align-middle fs-20"></i></a>
                                     </div>
                                 </td>
@@ -79,5 +82,34 @@
             </div>
         </div>
     </div>
-
 </div>
+
+<ng-template #viewRiderModal let-modal class="modal fade" id="viewRiderModal" tabindex="-1"
+    aria-labelledby="viewRiderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewRiderModalLabel">Detalles del Rider</h5>
+                <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img [src]="selectedItem?.avatar" alt="Avatar" class="avatar-lg rounded-circle mb-3">
+                <h4 class="mb-1">{{ selectedItem?.name }}</h4>
+                <p class="text-muted mb-3">{{ selectedItem?.contact }}</p>
+
+                <div class="text-start">
+                    <p><strong>ID:</strong> {{ selectedItem?.rider_id }}</p>
+                    <p><strong>Vehículo:</strong> {{ selectedItem?.vehicle_type }}</p>
+                    <p><strong>Área de Reparto:</strong> {{ selectedItem?.delivery_area }}</p>
+                    <p><strong>Estado:</strong> {{ selectedItem?.status }}</p>
+                    <p><strong>Turno:</strong> {{ selectedItem?.shift_time }}</p>
+                    <p><strong>Calificación:</strong> <i class="ri-star-fill text-warning me-1"></i>{{
+                        selectedItem?.ratings }}</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

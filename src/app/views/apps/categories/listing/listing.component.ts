@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-listing',
-  imports: [CategoriesListingComponent, TotalCategoriesComponent],
+  imports: [ TotalCategoriesComponent],
   templateUrl: './listing.component.html',
   styles: ``,
 })

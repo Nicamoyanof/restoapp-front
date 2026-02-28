@@ -1,9 +1,9 @@
-import { NgClass, NgStyle } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-orders-status',
-  imports: [NgClass, NgStyle],
+  imports: [NgClass],
   templateUrl: './orders-status.component.html',
   styleUrls: ['./orders-status.component.scss'],
 })

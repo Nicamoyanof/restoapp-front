@@ -1,5 +1,4 @@
 import { KitchenService } from '@/app/services/kitchen.service';
-import { NgClass } from '@angular/common';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import {
   FormBuilder,
@@ -12,7 +11,7 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-kitchen-settings',
-  imports: [NgClass, ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './kitchen-settings.component.html',
   styleUrl: './kitchen-settings.component.scss',
 })

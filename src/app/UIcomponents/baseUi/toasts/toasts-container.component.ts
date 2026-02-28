@@ -4,15 +4,13 @@ import {
   TemplateRef,
   inject,
 } from '@angular/core';
-import { ToastService } from './toast.service';
-import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastyfyComponent } from '../../advanceUI/toastyfy/toastyfy.component';
 import { ToastifyDirective } from '@core/directives/toastify.diretive';
 
 @Component({
   selector: 'app-toast-container',
   standalone: true,
-  imports: [ToastyfyComponent, ToastifyDirective],
+  imports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   styles: ``,
   template: `

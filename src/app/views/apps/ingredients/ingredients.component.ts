@@ -3,7 +3,7 @@ import { CommonModule, SlicePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
+import { NgbPagination, NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -25,10 +25,12 @@ export class IngredientsComponent implements OnInit {
   totalItems: number = 10;
   maxSize: number = Math.ceil(this.totalItems / this.pageSize);
   formGroup: any;
+  selectedItem: any = null;
 
   constructor(
     private ingredientService: IngredientsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private modalService: NgbModal
   ) {
     this.formGroup = this.fb.group({
       name: [''],
@@ -87,5 +89,10 @@ export class IngredientsComponent implements OnInit {
         });
       }
     });
+  }
+
+  openModal(content: any, options: NgbModalOptions, item: any) {
+    this.selectedItem = item;
+    this.modalService.open(content, options);
   }
 }

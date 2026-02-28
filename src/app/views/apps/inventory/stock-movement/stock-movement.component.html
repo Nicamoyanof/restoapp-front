@@ -1,9 +1,9 @@
 <div class="card">
-  <div class="card-header d-flex justify-content-between align-items-center">
-    <div>
-      <p class="card-title mb-0">Movimientos de Stock</p>
-    </div>
-    <!-- <div class="dropdown">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+            <p class="card-title mb-0">Movimientos de Stock</p>
+        </div>
+        <!-- <div class="dropdown">
             <a href="#" class="dropdown-toggle btn btn-sm btn-outline-light rounded" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Reports
@@ -15,66 +15,68 @@
     <a href="javascript:void(0);" class="dropdown-item">Import</a>
   </div>
 </div> -->
-  </div>
-  <div class="">
-    <div class="table-responsive">
-      <table class="table align-middle mb-0 table-hover table-centered">
-        <thead class="bg-light-subtle fs-12 text-uppercase">
-          <tr>
-            <!-- <th class="py-2">Photo</th> -->
-            <th class="py-2">Nombre del Producto</th>
-            <th class="py-2">Tipo</th>
-            <th class="py-2">Tipo de Movimiento</th>
-            <!-- <th class="w-25 py-2">Ingredientes</th> -->
-            <th class="py-2">Precio Por Unidad</th>
-            <th class="py-2">Precio Total</th>
-            <!-- <th class="py-2">Calificación</th> -->
-            <th class="py-2">Stock Anterior</th>
-            <th class="py-2">Stock Actual</th>
-            <th class="py-2">Diferencia</th>
-            <th class="py-2">Fecha</th>
-            <!-- <th class="py-2">Tipo de Comida</th> -->
-            <th class="py-2">Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (item of stockMovementData | slice: (currentPage-1) * pageSize : currentPage * pageSize; track $index) {
-          <tr>
-            <!-- <td>
+    </div>
+    <div class="">
+        <div class="table-responsive">
+            <table class="table align-middle mb-0 table-hover table-centered">
+                <thead class="bg-light-subtle fs-12 text-uppercase">
+                    <tr>
+                        <!-- <th class="py-2">Photo</th> -->
+                        <th class="py-2">Nombre del Producto</th>
+                        <th class="py-2">Tipo</th>
+                        <th class="py-2">Tipo de Movimiento</th>
+                        <!-- <th class="w-25 py-2">Ingredientes</th> -->
+                        <th class="py-2">Precio Por Unidad</th>
+                        <th class="py-2">Precio Total</th>
+                        <!-- <th class="py-2">Calificación</th> -->
+                        <th class="py-2">Stock Anterior</th>
+                        <th class="py-2">Stock Actual</th>
+                        <th class="py-2">Diferencia</th>
+                        <th class="py-2">Fecha</th>
+                        <!-- <th class="py-2">Tipo de Comida</th> -->
+                        <th class="py-2">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (item of stockMovementData | slice: (currentPage-1) * pageSize : currentPage * pageSize; track
+                    $index) {
+                    <tr>
+                        <!-- <td>
                             <a href="assets/images/food-icon/pic12.png">
                                 <img [src]="item.image" alt="" class="avatar-lg">
                             </a>
                         </td> -->
-            <td>
-              <div class="d-flex align-items-center gap-1">
+                        <td>
+                            <div class="d-flex align-items-center gap-1">
 
-                <div>
-                  <a href="javascript:void(0);" class="link-dark fw-semibold fs-15">{{getMovedItemName(item)}}</a>
-                  <!-- <p class="mb-0 mt-1">{{item.size}}</p> -->
-                </div>
-              </div>
-            </td>
-            <td>{{item.itemId > 0 ? 'Ingrediente' : 'Producto'}}</td>
-            <td
-              [ngClass]="{'text-success': item.movementType == '0', 'text-danger': item.movementType == '1' || item.movementType == '3', 'text-warning': item.movementType == '2', 'text-primary': item.movementType === '4', 'text-secondary': item.movementType === '5'}">
-              <strong>
-                {{translateMovementType(item.movementType)}}
-              </strong>
-            </td>
-            <!-- <td>{{item.ingredients}}</td> -->
-            <td><strong>${{item.unitCost | number:'1.2-2'}}/{{getBaseUnit(item)}}.</strong></td>
-            <td><strong>${{item.unitCost * item.qtyBase | number:'1.2-2'}}</strong></td>
-            <!-- <td>
+                                <div>
+                                    <a href="javascript:void(0);"
+                                        class="link-dark fw-semibold fs-15">{{getMovedItemName(item)}}</a>
+                                    <!-- <p class="mb-0 mt-1">{{item.size}}</p> -->
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{item.itemId > 0 ? 'Ingrediente' : 'Producto'}}</td>
+                        <td
+                            [ngClass]="{'text-success': item.movementType == '0', 'text-danger': item.movementType == '1' || item.movementType == '3', 'text-warning': item.movementType == '2', 'text-primary': item.movementType === '4', 'text-secondary': item.movementType === '5'}">
+                            <strong>
+                                {{translateMovementType(item.movementType)}}
+                            </strong>
+                        </td>
+                        <!-- <td>{{item.ingredients}}</td> -->
+                        <td><strong>${{item.unitCost | number:'1.2-2'}}/{{getBaseUnit(item)}}.</strong></td>
+                        <td><strong>${{item.unitCost * item.qtyBase | number:'1.2-2'}}</strong></td>
+                        <!-- <td>
               <p class="mb-0"><i class="ri-star-fill text-warning me-1 fs-16"></i>{{item.rating}}</p>
             </td> -->
-            <td>{{item.lastQuantity}} {{getBaseUnit(item)}}.</td>
-            <td>{{getCurrentStock(item)}} {{getBaseUnit(item)}}.</td>
-            <td
-              [ngClass]="{'text-success': (getCurrentStock(item) - item.lastQuantity) > 0, 'text-danger': (getCurrentStock(item) - item.lastQuantity) < 0, 'text-secondary': (getCurrentStock(item) - item.lastQuantity) === 0 }">
-              {{getCurrentStock(item) - item.lastQuantity}} {{getBaseUnit(item)}}.</td>
-            <!-- fecha con horas y minutos -->
-            <td>{{ getDate(item.createdAt) | date:'short' }}</td>
-            <!-- <td>
+                        <td>{{item.lastQuantity}} {{getBaseUnit(item)}}.</td>
+                        <td>{{getCurrentStock(item)}} {{getBaseUnit(item)}}.</td>
+                        <td
+                            [ngClass]="{'text-success': (getCurrentStock(item) - item.lastQuantity) > 0, 'text-danger': (getCurrentStock(item) - item.lastQuantity) < 0, 'text-secondary': (getCurrentStock(item) - item.lastQuantity) === 0 }">
+                            {{getCurrentStock(item) - item.lastQuantity}} {{getBaseUnit(item)}}.</td>
+                        <!-- fecha con horas y minutos -->
+                        <td>{{ getDate(item.createdAt) | date:'short' }}</td>
+                        <!-- <td>
             <div class="avatar-sm">
               <span class="avatar-title rounded-2 fw-semibold border "
                 [ngClass]="item.status =='veg'? 'border-success text-success':'border-danger text-danger'">
@@ -82,29 +84,60 @@
               </span>
             </div>
           </td> -->
-            <td>
-              <div class="d-flex gap-3">
-                <a href="javascript:void(0);" class="text-muted"><i class="ri-eye-line align-middle fs-20"></i></a>
-                <!-- <div style="cursor: pointer;" routerLink="../edit/{{item.productId}}" class="link-dark"><i
+                        <td>
+                            <div class="d-flex gap-3">
+                                <a href="javascript:void(0);" class="text-muted"
+                                    (click)="openModal(viewStockMovementModal, { centered: true }, item)"><i
+                                        class="ri-eye-line align-middle fs-20"></i></a>
+                                <!-- <div style="cursor: pointer;" routerLink="../edit/{{item.productId}}" class="link-dark"><i
                     class="ri-edit-line align-middle fs-20"></i>
                 </div>
                 <div style="cursor: pointer;" class="link-danger"><i
                     class="ri-delete-bin-5-line align-middle fs-20"></i></div> -->
-              </div>
-            </td>
-          </tr>
-          }
-        </tbody>
-      </table>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- end table-responsive -->
     </div>
-    <!-- end table-responsive -->
-  </div>
-  <div class="card-footer border-0">
-    <ngb-pagination class="pagination justify-content-end mb-0" [collectionSize]="totalItems" [(page)]="currentPage"
-      [pageSize]="pageSize" [maxSize]="maxSize" [rotate]="true" [ellipses]="false" [boundaryLinks]="false"
-      aria-label="Page navigation example">
-      <ng-template ngbPaginationPrevious> <i class="ri-arrow-left-s-line"></i></ng-template>
-      <ng-template ngbPaginationNext> <i class="ri-arrow-right-s-line"></i></ng-template>
-    </ngb-pagination>
-  </div>
+    <div class="card-footer border-0">
+        <ngb-pagination class="pagination justify-content-end mb-0" [collectionSize]="totalItems" [(page)]="currentPage"
+            [pageSize]="pageSize" [maxSize]="maxSize" [rotate]="true" [ellipses]="false" [boundaryLinks]="false"
+            aria-label="Page navigation example">
+            <ng-template ngbPaginationPrevious> <i class="ri-arrow-left-s-line"></i></ng-template>
+            <ng-template ngbPaginationNext> <i class="ri-arrow-right-s-line"></i></ng-template>
+        </ngb-pagination>
+    </div>
 </div>
+
+<ng-template #viewStockMovementModal let-modal class="modal fade" id="viewStockMovementModal" tabindex="-1"
+    aria-labelledby="viewStockMovementModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewStockMovementModalLabel">Detalles Movimiento de Stock</h5>
+                <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Ítem:</strong> {{ getMovedItemName(selectedItem) }} ({{ selectedItem?.itemId > 0 ?
+                    'Ingrediente' : 'Producto' }})</p>
+                <p><strong>Tipo de Movimiento:</strong> {{ translateMovementType(selectedItem?.movementType) }}</p>
+                <p><strong>Precio del Movimiento:</strong> ${{ selectedItem?.unitCost * selectedItem?.qtyBase |
+                    number:'1.2-2' }}</p>
+                <p><strong>Stock Anterior:</strong> {{ selectedItem?.lastQuantity }} {{getBaseUnit(selectedItem)}}.</p>
+                <p><strong>Stock Actual:</strong> {{ getCurrentStock(selectedItem) }} {{getBaseUnit(selectedItem)}}.</p>
+                <p><strong>Diferencia:</strong> <span
+                        [ngClass]="{'text-success': (getCurrentStock(selectedItem) - selectedItem?.lastQuantity) > 0, 'text-danger': (getCurrentStock(selectedItem) - selectedItem?.lastQuantity) < 0, 'text-secondary': (getCurrentStock(selectedItem) - selectedItem?.lastQuantity) === 0 }">{{
+                        getCurrentStock(selectedItem) - selectedItem?.lastQuantity }}
+                        {{getBaseUnit(selectedItem)}}.</span></p>
+                <p><strong>Fecha:</strong> {{ getDate(selectedItem?.createdAt) | date:'short' }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

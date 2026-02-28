@@ -1,11 +1,10 @@
 import { PrinterService } from '@/app/services/printer.service';
-import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dialog-print-ticket',
-  imports: [DatePipe, ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './dialog-print-ticket.component.html',
   styleUrl: './dialog-print-ticket.component.scss',
 })

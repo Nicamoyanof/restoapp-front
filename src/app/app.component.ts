@@ -35,7 +35,6 @@ import { debounceTime, fromEvent } from 'rxjs';
     RouterOutlet,
     NgProgressModule,
     ToastsContainer,
-    SelectFormInputDirective,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

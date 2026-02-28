@@ -3,15 +3,14 @@ import { ProductService } from '@/app/services/product.service';
 import { StockMovementService } from '@/app/services/stock-movement.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { BaseUnitEnum } from '@common/base-units';
 import { MovementType } from '@common/movement-type.enum';
-import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
+import { NgbPagination, NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-stock-movement',
-  imports: [CommonModule, RouterLink, NgbPagination],
+  imports: [CommonModule, NgbPagination],
   templateUrl: './stock-movement.component.html',
   styleUrl: './stock-movement.component.scss',
 })
@@ -28,7 +27,8 @@ export class StockMovementComponent implements OnInit {
   constructor(
     private readonly stockMovementService: StockMovementService,
     private readonly ingredientService: IngredientsService,
-    private readonly productService: ProductService
+    private readonly productService: ProductService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -111,5 +111,11 @@ export class StockMovementComponent implements OnInit {
       default:
         return 0;
     }
+  }
+
+  selectedItem: any = null;
+  openModal(content: any, options: NgbModalOptions, item: any) {
+    this.selectedItem = item;
+    this.modalService.open(content, options);
   }
 }
